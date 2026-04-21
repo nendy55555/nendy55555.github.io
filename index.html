@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Thomas Nendick — Technology Strategy Manager at Deloitte Consulting. Aspiring forward deployed engineer. An index of tools, apps, and experiments.">
+  <meta name="description" content="Workshop Notes, Volume One. An index of tools, apps, and experiments built by Thomas Nendick.">
   <meta name="theme-color" content="#F3ECE0">
-  <title>Thomas Nendick — Strategy, built.</title>
+  <title>Thomas Nendick — Workshop Notes, Vol. 01</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -342,26 +342,58 @@
     .cta-ghost:hover::after,
     .cta-ghost:focus-visible::after { background: var(--accent); }
 
-    /* Colophon on right of hero */
-    .colophon {
+    /* Hero bio on right of hero — portrait + brief serif bio */
+    .hero-bio {
       border-left: 1px solid var(--rule);
-      padding: 6px 0 6px 20px;
+      padding: 4px 0 4px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      align-self: end;
+    }
+    .hero-portrait {
+      position: relative;
+      width: 100%;
+      max-width: 200px;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      background: #eae3d9;
+      box-shadow:
+        inset 0 0 0 1px rgba(44,40,37,0.08),
+        0 1px 2px rgba(44,40,37,0.04),
+        0 12px 28px -18px rgba(44,40,37,0.28);
+    }
+    .hero-portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(0.92) contrast(1.02);
+    }
+    .hero-bio-text {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 0.98rem;
+      line-height: 1.5;
+      color: var(--text-secondary);
+      letter-spacing: 0.005em;
+      max-width: 200px;
+      text-align: center;
+    }
+    .hero-bio-text p {
+      margin: 0 0 6px 0;
+    }
+    .hero-bio-text p:last-child { margin-bottom: 0; }
+    .hero-bio-meta {
       font-family: var(--mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.1em;
+      font-style: normal;
+      font-size: 0.66rem;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--text-muted);
-      line-height: 2;
-    }
-    .colophon strong {
-      font-weight: 500;
-      color: var(--text);
-      letter-spacing: 0.08em;
-    }
-    .colophon-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
+      padding-top: 8px;
+      margin-top: 4px;
+      border-top: 1px solid var(--rule);
     }
 
     /* ============================================================
@@ -569,6 +601,501 @@
       margin: 0 auto;
       padding: 32px var(--gutter-lg) 0;
     }
+    /* About tab overrides the project grid */
+    #tab-about.active {
+      display: block;
+      padding-top: 40px;
+    }
+
+    /* ============================================================
+       ABOUT TAB — portrait + bio + editorial resume
+       ============================================================ */
+    .about-tab-hero {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 56px;
+      align-items: center;
+      margin-bottom: 72px;
+    }
+    .about-tab-portrait {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .about-tab-portrait::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0) 65%, rgba(30,26,22,0.12) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .about-tab-portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(0.96) contrast(1.02);
+    }
+    .about-tab-portrait .portrait-corner {
+      position: absolute;
+      z-index: 2;
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #FBF7EF;
+      mix-blend-mode: difference;
+    }
+    .about-tab-portrait .pc-tl { top: 18px; left: 20px; }
+    .about-tab-portrait .pc-br { bottom: 18px; right: 20px; }
+
+    .about-tab-body .about-tab-lede {
+      font-family: var(--serif);
+      font-size: 2.6rem;
+      line-height: 1.05;
+      letter-spacing: -0.018em;
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+    .about-tab-body .about-tab-lede em {
+      font-style: italic;
+      color: var(--accent-deep);
+    }
+    .about-tab-body p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      max-width: 56ch;
+    }
+    .about-tab-body p em { color: var(--text); font-style: italic; }
+
+    .about-meta-row {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+      padding-top: 22px;
+      border-top: 1px solid var(--rule);
+    }
+    .about-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .about-meta-item .label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .about-meta-item .value {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      color: var(--text);
+      font-style: italic;
+    }
+
+    /* ===== RESUME ===== */
+    .resume-wrap {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0;
+    }
+    .resume-head {
+      display: flex;
+      align-items: baseline;
+      gap: 20px;
+      margin-bottom: 36px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .resume-head .kicker {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent-deep);
+    }
+    .resume-head .title {
+      font-family: var(--serif);
+      font-size: 2.2rem;
+      color: var(--text);
+      letter-spacing: -0.015em;
+    }
+    .resume-head .title em { font-style: italic; color: var(--accent-deep); }
+    .resume-head .rule {
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+      margin: 0 8px;
+      align-self: center;
+    }
+    .resume-head .year {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
+    }
+
+    /* metric strip */
+    .resume-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin-bottom: 64px;
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+    .resume-metric {
+      padding: 22px 20px;
+      border-right: 1px solid var(--rule);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .resume-metric:last-child { border-right: none; }
+    .resume-metric .n {
+      font-family: var(--serif);
+      font-size: 2.2rem;
+      color: var(--accent-deep);
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    .resume-metric .n sup {
+      font-size: 0.9rem;
+      font-family: var(--sans);
+      font-weight: 600;
+      vertical-align: 0.6em;
+      color: var(--accent);
+    }
+    .resume-metric .l {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* section label inside resume */
+    .resume-section-label {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .resume-section-label::before {
+      content: '';
+      width: 22px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    /* experience timeline — collapsible */
+    .resume-exp {
+      margin-bottom: 64px;
+    }
+    .exp-item {
+      border-top: 1px solid var(--rule-soft);
+      overflow: hidden;
+    }
+    .exp-item:last-child { border-bottom: 1px solid var(--rule-soft); }
+    .exp-item[open] { background: linear-gradient(180deg, rgba(194,97,58,0.02) 0%, transparent 100%); }
+
+    /* summary is the clickable row */
+    .exp-summary {
+      display: grid;
+      grid-template-columns: 96px 1fr auto;
+      gap: 32px;
+      align-items: center;
+      padding: 24px 8px 24px 0;
+      cursor: pointer;
+      list-style: none;
+      user-select: none;
+      transition: background 0.2s ease;
+    }
+    .exp-summary::-webkit-details-marker { display: none; }
+    .exp-summary:hover { background: rgba(194,97,58,0.025); }
+    .exp-summary:focus-visible {
+      outline: 2px solid var(--accent-ring);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+
+    .exp-summary-head {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+    }
+    .exp-summary-head .exp-role {
+      margin: 0;
+    }
+    .exp-summary-meta {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      flex-wrap: wrap;
+      font-family: var(--sans);
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+    }
+    .exp-summary-meta .co { color: var(--text); font-weight: 500; }
+    .exp-summary-meta .sep { color: var(--text-muted); }
+    .exp-summary-meta .dates {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    /* chevron */
+    .exp-chevron {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid var(--rule);
+      background: var(--bg-card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), background 0.2s, border-color 0.2s;
+      flex-shrink: 0;
+    }
+    .exp-chevron svg { width: 12px; height: 12px; stroke: var(--text-secondary); }
+    .exp-item[open] .exp-chevron {
+      transform: rotate(180deg);
+      background: var(--accent-wash);
+      border-color: var(--accent-ring);
+    }
+    .exp-item[open] .exp-chevron svg { stroke: var(--accent-deep); }
+
+    .exp-logo {
+      width: 72px;
+      height: 72px;
+      border-radius: 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    .exp-logo img {
+      max-width: 78%;
+      max-height: 78%;
+      object-fit: contain;
+    }
+
+    /* expanded body */
+    .exp-detail {
+      padding: 4px 8px 28px 128px;
+      animation: expSlide 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    @keyframes expSlide {
+      from { opacity: 0; transform: translateY(-4px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .exp-logo .fallback {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-style: italic;
+      color: var(--accent-deep);
+      letter-spacing: -0.02em;
+    }
+    .exp-role {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+    .exp-role em { font-style: italic; color: var(--accent-deep); }
+    .exp-bullets {
+      list-style: none;
+      padding: 0;
+      margin: 4px 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .exp-bullets li {
+      position: relative;
+      padding-left: 18px;
+      font-size: 0.94rem;
+      line-height: 1.55;
+      color: var(--text-secondary);
+    }
+    .exp-bullets li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 11px;
+      width: 6px;
+      height: 1px;
+      background: var(--accent);
+    }
+    .exp-bullets li strong { color: var(--accent-deep); font-weight: 600; }
+
+    /* Education */
+    .resume-edu {
+      margin-bottom: 56px;
+    }
+    .edu-card {
+      display: grid;
+      grid-template-columns: 96px 1fr auto;
+      gap: 32px;
+      align-items: center;
+      padding: 24px 28px;
+      background: var(--bg-card);
+      border: 1px solid var(--rule-soft);
+      border-radius: 14px;
+    }
+    .edu-logo {
+      width: 72px;
+      height: 72px;
+      border-radius: 12px;
+      background: #FFFBF3;
+      border: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .edu-logo img { max-width: 64%; max-height: 64%; object-fit: contain; }
+    .edu-logo .fallback {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-style: italic;
+      color: var(--accent-deep);
+    }
+    .edu-body { display: flex; flex-direction: column; gap: 4px; }
+    .edu-school {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+    .edu-school em { font-style: italic; color: var(--accent-deep); }
+    .edu-degree {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+    }
+    .edu-spec {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+    .edu-location {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-align: right;
+      letter-spacing: 0.08em;
+    }
+
+    /* Skills */
+    .resume-skills { margin-bottom: 24px; }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    .skill-col {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .skill-col-title {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--rule-soft);
+    }
+    .skill-col-title em { font-style: italic; color: var(--accent-deep); }
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .skill-tag {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      padding: 4px 10px;
+      border: 1px solid var(--rule);
+      border-radius: 99px;
+      color: var(--text-secondary);
+      background: var(--bg-card);
+      transition: all 0.2s ease;
+    }
+    .skill-tag:hover {
+      border-color: var(--accent-ring);
+      color: var(--accent-deep);
+      background: var(--accent-wash);
+    }
+
+    /* company wall at bottom of resume */
+    .company-wall {
+      margin-top: 40px;
+      padding: 28px 0;
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+    .company-wall-label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+      text-align: center;
+    }
+    .company-wall-logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 56px;
+      flex-wrap: wrap;
+      opacity: 0.78;
+    }
+    .company-wall-logos .wall-logo {
+      height: 34px;
+      display: flex;
+      align-items: center;
+      filter: grayscale(1) contrast(1.05);
+      transition: filter 0.3s ease, opacity 0.3s ease;
+    }
+    .company-wall-logos .wall-logo:hover {
+      filter: grayscale(0);
+    }
+    .company-wall-logos .wall-logo img {
+      max-height: 100%;
+      max-width: 140px;
+      object-fit: contain;
+    }
+    .company-wall-logos .wall-logo .wall-fallback {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--text-secondary);
+      letter-spacing: 0.01em;
+    }
 
     .project-card {
       background: var(--bg-card);
@@ -762,6 +1289,24 @@
       transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
     .project-link:hover svg { transform: translate(3px, -3px); }
+
+    /* Pre-launch marker — reads as status, not a link */
+    .project-soon {
+      display: inline-flex;
+      align-items: center;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      white-space: nowrap;
+      align-self: flex-start;
+      margin-top: 18px;
+      padding-bottom: 1px;      /* visual parity with underlined link slot */
+      border-bottom: 1px dashed var(--rule);
+      cursor: default;
+    }
 
     /* Secondary link — Technical Jargon */
     .project-link.secondary {
@@ -1128,15 +1673,17 @@
         grid-template-columns: 1fr;
         gap: 40px;
       }
-      .colophon {
+      .hero-bio {
         border-left: none;
         border-top: 1px solid var(--rule);
-        padding: 18px 0 0 0;
+        padding: 24px 0 0 0;
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 6px 16px;
-        line-height: 1.8;
+        grid-template-columns: 140px 1fr;
+        align-items: center;
+        gap: 20px;
       }
+      .hero-portrait { max-width: 140px; }
+      .hero-bio-text { max-width: none; }
       .about-grid,
       .contact-grid {
         grid-template-columns: 1fr;
@@ -1170,6 +1717,29 @@
       }
       .project-card { padding: 24px 24px 22px; min-height: 0; }
       #tab-active .project-card:last-child:nth-child(odd) { max-width: 100%; }
+
+      /* About tab mobile */
+      .about-tab-hero { grid-template-columns: 1fr; gap: 32px; margin-bottom: 56px; }
+      .about-tab-body .about-tab-lede { font-size: 1.9rem; }
+      .resume-metrics { grid-template-columns: repeat(2, 1fr); }
+      .resume-metric { border-right: none; border-bottom: 1px solid var(--rule-soft); }
+      .resume-metric:nth-child(2n) { border-right: none; }
+      .resume-metric:nth-last-child(-n+2) { border-bottom: none; }
+      .exp-summary { grid-template-columns: 48px 1fr auto; gap: 16px; padding: 18px 4px 18px 0; }
+      .exp-logo { width: 48px; height: 48px; border-radius: 10px; }
+      .exp-role { font-size: 1.1rem; }
+      .exp-summary-meta { font-size: 0.82rem; gap: 8px; }
+      .exp-summary-meta .dates { font-size: 0.68rem; }
+      .exp-detail { padding: 0 4px 22px 4px; }
+      .exp-chevron { width: 24px; height: 24px; }
+      .edu-card { grid-template-columns: 56px 1fr; padding: 20px; gap: 18px; }
+      .edu-logo { width: 56px; height: 56px; }
+      .edu-location { grid-column: 1 / -1; text-align: left; margin-top: 4px; }
+      .skills-grid { grid-template-columns: 1fr; gap: 20px; }
+      .resume-head { flex-wrap: wrap; gap: 10px; }
+      .resume-head .title { font-size: 1.7rem; }
+      .resume-head .rule { display: none; }
+      .company-wall-logos { gap: 28px; }
       .project-name { font-size: 1.6rem; }
       .contact-row {
         grid-template-columns: 100px 1fr auto;
@@ -1217,33 +1787,20 @@
 
   <div class="ambient" aria-hidden="true"></div>
 
-  <!-- ======================== MASTHEAD ======================== -->
-  <div class="masthead" aria-label="Site masthead">
-    <div class="masthead-left">
-      <span class="live-indicator"><span class="live-dot" aria-hidden="true"></span>Currently Shipping</span>
-      <span class="masthead-rule" aria-hidden="true"></span>
-    </div>
-    <div class="masthead-right">
-      <span>Vol. 01</span>
-      <span>Edition 2026</span>
-      <span id="clock" aria-live="polite">—</span>
-    </div>
-  </div>
-
   <!-- ======================== HERO ======================== -->
   <header class="hero" id="top">
     <div>
       <p class="hero-kicker">
-        <span>Tech · Data · AI Strategy</span>
+        <span>Workshop Notes</span>
         <span class="kicker-rule" aria-hidden="true"></span>
-        <span class="kicker-muted">Deloitte Consulting</span>
+        <span class="kicker-muted">Volume One</span>
       </p>
 
-      <h1 class="hero-headline">Strategy, <em>built</em><span class="amp">.</span></h1>
+      <h1 class="hero-headline">Everything <em>shipped</em><span class="amp">.</span></h1>
 
-      <p class="hero-byline">Thomas Nendick</p>
+      <p class="hero-byline">The tools I actually use, the ones I built to replace something worse.</p>
 
-      <p class="hero-sub">Technology Strategy Manager at Deloitte. Aspiring Forward Deployed Engineer. Most people in my practice stop at the deck — <em>I build</em>. This is the working index of the tools, apps, and experiments I'm shipping to keep the gap between the slide and the repo as small as possible.</p>
+      <p class="hero-sub">An index of the tools, apps, and experiments I'm <em>building</em>. Some are live, some are still in the repo.</p>
 
       <div class="hero-cta">
         <a href="#work" class="cta cta-primary">
@@ -1254,54 +1811,33 @@
       </div>
     </div>
 
-    <aside class="colophon" aria-label="Colophon">
-      <div class="colophon-row"><span>Volume</span><strong>01</strong></div>
-      <div class="colophon-row"><span>Works</span><strong>08</strong></div>
-      <div class="colophon-row"><span>Updated</span><strong>APR 2026</strong></div>
-      <div class="colophon-row"><span>Author</span><strong>T.N.</strong></div>
+    <aside class="hero-bio" aria-label="About the author">
+      <figure class="hero-portrait">
+        <img src="assets/portrait.jpg" alt="Thomas Nendick with his partner and two dogs" loading="lazy">
+      </figure>
+      <div class="hero-bio-text">
+        <p>Thomas Nendick. Based in Los Angeles.</p>
+        <p>Strategist by day. Aspiring FDE by night.</p>
+        <p class="hero-bio-meta">Vol. 01 · MMXXVI</p>
+      </div>
     </aside>
   </header>
 
   <main id="main">
 
-    <!-- ======================== ABOUT ======================== -->
-    <section class="section" id="about" aria-labelledby="about-label">
-      <div class="section-masthead">
-        <span class="section-label" id="about-label">— About</span>
-        <span class="section-rule" aria-hidden="true"></span>
-        <span class="section-label-sub">Bio / Issue 01</span>
-      </div>
-
-      <div class="about-wrap">
-        <div class="about-grid">
-          <figure class="portrait reveal">
-            <span class="portrait-corner tl" aria-hidden="true">Fig. 01</span>
-            <img class="portrait-img" src="assets/headshot.jpg" alt="Portrait of Thomas Nendick" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='';">
-            <span class="portrait-monogram" aria-hidden="true" style="display:none">T<span class="mono-ampersand">N</span></span>
-            <span class="portrait-corner br" aria-hidden="true">MMXXVI</span>
-          </figure>
-
-          <div class="about-body reveal">
-            <p class="about-lede">I sit at the intersection of <em>strategy</em> and <em>execution</em>.</p>
-            <p>In Deloitte's Tech, Data &amp; AI Strategy practice, I help Fortune 500 clients turn ambitious technology bets into programs that actually ship. The edge isn't the frameworks — it's that I write code. Prototypes, internal tools, weekend experiments.</p>
-            <p>This site is the index of those experiments. Each one started as a problem I ran into myself and grew into something I could point at. <em>Strategy is more honest when the strategist has shipped.</em></p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ======================== WORK ======================== -->
+    <!-- ======================== INDEX ======================== -->
     <section class="section" id="work" aria-labelledby="work-label">
       <div class="section-masthead">
-        <span class="section-label" id="work-label">— Index of Works</span>
+        <span class="section-label" id="work-label">— The Index</span>
         <span class="section-rule" aria-hidden="true"></span>
         <span class="section-label-sub">2026 / Ongoing</span>
       </div>
 
-      <nav class="tabs-wrapper" aria-label="Project categories">
-        <div class="tab-bar" role="tablist" aria-label="Filter projects">
+      <nav class="tabs-wrapper" aria-label="Sections">
+        <div class="tab-bar" role="tablist" aria-label="Switch section">
           <button class="tab-btn" role="tab" aria-selected="true" aria-controls="tab-active" id="tabbtn-active" data-tab="active">Active <span class="tab-count">(8)</span></button>
           <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-old" id="tabbtn-old" data-tab="old" tabindex="-1">Archive <span class="tab-count">(1)</span></button>
+          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-about" id="tabbtn-about" data-tab="about" tabindex="-1">About</button>
         </div>
       </nav>
 
@@ -1353,10 +1889,7 @@
             </div>
           </div>
           <div class="project-links">
-            <a href="#" class="project-link" target="_blank" rel="noopener" aria-label="Housing Finder — coming soon">
-              Open project
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M7 7h10v10"/></svg>
-            </a>
+            <span class="project-soon" aria-label="Housing Finder — not yet launched">Coming soon.....</span>
             <a href="docs/architecture/housing-finder.html" class="project-link secondary" aria-label="Technical Jargon — Housing Finder architecture">
               Technical Jargon
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
@@ -1398,22 +1931,22 @@
           </div>
           <div class="project-meta">
             <span class="project-number">№ 04</span>
-            <span class="project-status wip">In Build</span>
+            <span class="project-status shipped">Live</span>
           </div>
           <div class="project-info">
-            <h3 class="project-name">Concert Finder</h3>
-            <p class="project-desc">Surfaces live shows near you based on artists you actually listen to. Stop missing gigs because you didn't check the right site at the right time.</p>
+            <h3 class="project-name">LA Concert Tracker</h3>
+            <p class="project-desc">Surfaces live shows in LA based on artists you actually listen to. Stop missing gigs because you didn't check the right site at the right time.</p>
             <div class="project-tags">
               <span class="tag">Music</span>
               <span class="tag">Discovery</span>
             </div>
           </div>
           <div class="project-links">
-            <a href="#" class="project-link" target="_blank" rel="noopener" aria-label="Concert Finder — coming soon">
+            <a href="https://nendy55555.github.io/la-concert-tracker/" class="project-link" target="_blank" rel="noopener" aria-label="Open LA Concert Tracker">
               Open project
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M7 7h10v10"/></svg>
             </a>
-            <a href="docs/architecture/concert-finder.html" class="project-link secondary" aria-label="Technical Jargon — Concert Finder architecture">
+            <a href="docs/architecture/concert-finder.html" class="project-link secondary" aria-label="Technical Jargon — LA Concert Tracker architecture">
               Technical Jargon
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
             </a>
@@ -1437,10 +1970,7 @@
             </div>
           </div>
           <div class="project-links">
-            <a href="#" class="project-link" target="_blank" rel="noopener">
-              Open project
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M7 7h10v10"/></svg>
-            </a>
+            <span class="project-soon" aria-label="Betting Tracker — not yet launched">Coming soon.....</span>
             <a href="docs/architecture/betting-tracker.html" class="project-link secondary" aria-label="Technical Jargon — Betting Tracker architecture">
               Technical Jargon
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
@@ -1471,10 +2001,7 @@
             </div>
           </div>
           <div class="project-links">
-            <a href="#" class="project-link" target="_blank" rel="noopener">
-              Open project
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M7 7h10v10"/></svg>
-            </a>
+            <span class="project-soon" aria-label="Betting Model — not yet launched">Coming soon.....</span>
             <a href="docs/architecture/betting-model.html" class="project-link secondary" aria-label="Technical Jargon — Betting Model architecture">
               Technical Jargon
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
@@ -1549,6 +2076,267 @@
         </article>
       </section>
 
+      <!-- ===== ABOUT ===== -->
+      <section class="tab-panel" id="tab-about" role="tabpanel" aria-labelledby="tabbtn-about" hidden>
+
+        <!-- Bio block -->
+        <div class="about-tab-hero">
+          <figure class="about-tab-portrait">
+            <span class="portrait-corner pc-tl">Fig. 01</span>
+            <img src="assets/leahsofiaphoto-11416.jpg" alt="Thomas Nendick professional portrait" loading="lazy">
+            <span class="portrait-corner pc-br">MMXXVI</span>
+          </figure>
+
+          <div class="about-tab-body">
+            <p class="about-tab-lede">I sit at the intersection of <em>strategy</em> and <em>execution</em>.</p>
+            <p>In Deloitte's Tech, Data &amp; AI Strategy practice, I help Fortune 500 clients turn ambitious technology bets into programs that actually ship. The edge isn't the frameworks — it's that I write code. Prototypes, internal tools, weekend experiments.</p>
+            <p>This site is the index of those experiments. Each one started as a problem I ran into myself and grew into something I could point at. <em>Strategy is more honest when the strategist has shipped.</em></p>
+
+            <div class="about-meta-row">
+              <div class="about-meta-item">
+                <span class="label">Based</span>
+                <span class="value">Los Angeles</span>
+              </div>
+              <div class="about-meta-item">
+                <span class="label">Role</span>
+                <span class="value">Tech &amp; AI Strategy</span>
+              </div>
+              <div class="about-meta-item">
+                <span class="label">Practice</span>
+                <span class="value">Deloitte Consulting</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Resume -->
+        <div class="resume-wrap">
+          <div class="resume-head">
+            <span class="kicker">Ref. 02</span>
+            <span class="title">The <em>résumé</em></span>
+            <span class="rule" aria-hidden="true"></span>
+            <span class="year">2016 — Present</span>
+          </div>
+
+          <!-- Key metrics strip -->
+          <div class="resume-metrics">
+            <div class="resume-metric">
+              <span class="n">$10M<sup>+</sup></span>
+              <span class="l">Annual OPEX Saved</span>
+            </div>
+            <div class="resume-metric">
+              <span class="n">$25M</span>
+              <span class="l">Tech Debt Reduced</span>
+            </div>
+            <div class="resume-metric">
+              <span class="n">400<sup>+</sup></span>
+              <span class="l">IT Org Transformed</span>
+            </div>
+            <div class="resume-metric">
+              <span class="n">100<sup>+</sup></span>
+              <span class="l">AI Agents Deployed</span>
+            </div>
+          </div>
+
+          <!-- Experience -->
+          <div class="resume-exp">
+            <p class="resume-section-label">Experience</p>
+
+            <details class="exp-item">
+              <summary class="exp-summary">
+                <div class="exp-logo">
+                  <img src="assets/logos/deloitte-mark.svg" alt="Deloitte" loading="lazy">
+                </div>
+                <div class="exp-summary-head">
+                  <h4 class="exp-role">Technology Strategy &amp; AI <em>Manager</em></h4>
+                  <div class="exp-summary-meta">
+                    <span class="co">Deloitte Consulting</span>
+                    <span class="sep">·</span>
+                    <span>Tech, Data &amp; AI Strategy</span>
+                    <span class="sep">·</span>
+                    <span class="dates">Apr 2026 — Present</span>
+                  </div>
+                </div>
+                <span class="exp-chevron" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                </span>
+              </summary>
+              <div class="exp-detail">
+                <ul class="exp-bullets">
+                  <li>Helping Fortune 500 clients translate ambitious <strong>tech, data, and AI bets</strong> into programs that actually ship — combining strategy rigor with hands-on prototyping.</li>
+                  <li>Building internal tooling and agentic workflows to accelerate engagement delivery.</li>
+                </ul>
+              </div>
+            </details>
+
+            <details class="exp-item">
+              <summary class="exp-summary">
+                <div class="exp-logo">
+                  <img src="assets/logos/accenture-mark.svg" alt="Accenture" loading="lazy">
+                </div>
+                <div class="exp-summary-head">
+                  <h4 class="exp-role">Technology Strategy &amp; Advisory <em>Manager</em></h4>
+                  <div class="exp-summary-meta">
+                    <span class="co">Accenture</span>
+                    <span class="sep">·</span>
+                    <span>Media &amp; Technology</span>
+                    <span class="sep">·</span>
+                    <span class="dates">Nov 2021 — Apr 2026</span>
+                  </div>
+                </div>
+                <span class="exp-chevron" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                </span>
+              </summary>
+              <div class="exp-detail">
+                <ul class="exp-bullets">
+                  <li>Partnered with a CTO to build an <strong>enterprise-wide AI strategy</strong> — governance, use-case triage, operational frameworks — standardizing how the org capitalizes on innovation.</li>
+                  <li>Delivered <strong>$10M annual OPEX savings</strong> by restructuring the digital content supply chain: new operating model, tech rationalization, redesigned org, and process standardization.</li>
+                  <li>Led <strong>$25M tech-debt reduction</strong> across a 400+ member IT org with the CIO — pivoted from project-based to product-centric delivery, reengineered workflows end to end.</li>
+                  <li>Designed and shipped an <strong>agentic AI solution</strong> using LLMs, tools, and orchestrated agents — accelerated product time-to-market by <strong>60%</strong>.</li>
+                  <li>Architected 100+ agents across largest clients; built rollout playbook and business cases driving productivity gains across SDLC and app maintenance.</li>
+                  <li>Drove <strong>$20M in revenue</strong> by leading development of ML, APIs, and scraping to enrich customer data — led cross-functional team of 15+ on/offshore.</li>
+                </ul>
+              </div>
+            </details>
+
+            <details class="exp-item">
+              <summary class="exp-summary">
+                <div class="exp-logo">
+                  <img src="assets/logos/clearsulting-mark.svg" alt="Clearsulting" loading="lazy">
+                </div>
+                <div class="exp-summary-head">
+                  <h4 class="exp-role">Senior Technology Strategy <em>Consultant</em></h4>
+                  <div class="exp-summary-meta">
+                    <span class="co">Clearsulting</span>
+                    <span class="sep">·</span>
+                    <span>Technology</span>
+                    <span class="sep">·</span>
+                    <span class="dates">Dec 2019 — Feb 2021</span>
+                  </div>
+                </div>
+                <span class="exp-chevron" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                </span>
+              </summary>
+              <div class="exp-detail">
+                <ul class="exp-bullets">
+                  <li>Led financial transformation consolidating AP, AR, P2P, O2C into a shared service center — <strong>$3M OPEX reduction</strong> year over year.</li>
+                  <li>Automated <strong>65% of manual accounting activities</strong> for a global ecommerce client by building tailored integrations; captured 150+ requirements across 50+ interviews.</li>
+                  <li>Ran end-to-end SaaS implementations — planning, scoping, system/integration/UAT testing, training, and hypercare.</li>
+                </ul>
+              </div>
+            </details>
+
+            <details class="exp-item">
+              <summary class="exp-summary">
+                <div class="exp-logo">
+                  <img src="assets/logos/ey-mark.svg" alt="Ernst &amp; Young" loading="lazy">
+                </div>
+                <div class="exp-summary-head">
+                  <h4 class="exp-role">IT Advisory <em>Senior Consultant</em></h4>
+                  <div class="exp-summary-meta">
+                    <span class="co">Ernst &amp; Young</span>
+                    <span class="sep">·</span>
+                    <span>Media &amp; Technology</span>
+                    <span class="sep">·</span>
+                    <span class="dates">Aug 2016 — Oct 2019</span>
+                  </div>
+                </div>
+                <span class="exp-chevron" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                </span>
+              </summary>
+              <div class="exp-detail">
+                <ul class="exp-bullets">
+                  <li>Restructured and integrated companies from a <strong>multi-billion-dollar media acquisition</strong> — identified tech and vendor synergies, recommended consolidation vs. spin-off.</li>
+                  <li>Ran product management and system architecture: assessed current state, redesigned future state against complex integration requirements.</li>
+                </ul>
+              </div>
+            </details>
+          </div>
+
+          <!-- Education -->
+          <div class="resume-edu">
+            <p class="resume-section-label">Education</p>
+            <div class="edu-card">
+              <div class="edu-logo">
+                <img src="assets/logos/usc-mark.svg" alt="University of Southern California" loading="lazy">
+              </div>
+              <div class="edu-body">
+                <h4 class="edu-school">University of Southern California <em>·</em> Marshall School of Business</h4>
+                <p class="edu-degree">Bachelor's Degree in Business Administration</p>
+                <p class="edu-spec">Viterbi School of Engineering — Innovation Specialization</p>
+              </div>
+              <div class="edu-location">Los Angeles, CA</div>
+            </div>
+          </div>
+
+          <!-- Skills -->
+          <div class="resume-skills">
+            <p class="resume-section-label">Skills</p>
+            <div class="skills-grid">
+              <div class="skill-col">
+                <h5 class="skill-col-title"><em>Technical</em></h5>
+                <div class="skill-tags">
+                  <span class="skill-tag">Agentic AI</span>
+                  <span class="skill-tag">Gen AI</span>
+                  <span class="skill-tag">Prompt Engineering</span>
+                  <span class="skill-tag">System Architecture</span>
+                  <span class="skill-tag">Data Viz</span>
+                  <span class="skill-tag">Agile</span>
+                  <span class="skill-tag">Cloud</span>
+                  <span class="skill-tag">Automation</span>
+                </div>
+              </div>
+              <div class="skill-col">
+                <h5 class="skill-col-title"><em>Business</em></h5>
+                <div class="skill-tags">
+                  <span class="skill-tag">Operating Models</span>
+                  <span class="skill-tag">IT Strategy</span>
+                  <span class="skill-tag">AI Strategy</span>
+                  <span class="skill-tag">Data Strategy</span>
+                  <span class="skill-tag">Roadmapping</span>
+                  <span class="skill-tag">Vendor Mgmt</span>
+                  <span class="skill-tag">M&amp;A Integration</span>
+                </div>
+              </div>
+              <div class="skill-col">
+                <h5 class="skill-col-title"><em>Leadership</em></h5>
+                <div class="skill-tags">
+                  <span class="skill-tag">Exec Communication</span>
+                  <span class="skill-tag">Storytelling</span>
+                  <span class="skill-tag">Data-driven Decisions</span>
+                  <span class="skill-tag">Engagement Economics</span>
+                  <span class="skill-tag">Program Delivery</span>
+                  <span class="skill-tag">Sales</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Company wall -->
+          <div class="company-wall">
+            <div class="company-wall-label">Where I've built · 2016 → 2026</div>
+            <div class="company-wall-logos">
+              <div class="wall-logo" title="Ernst &amp; Young">
+                <img src="assets/logos/ey.svg" alt="Ernst &amp; Young" loading="lazy">
+              </div>
+              <div class="wall-logo" title="Clearsulting">
+                <img src="assets/logos/clearsulting.svg" alt="Clearsulting" loading="lazy">
+              </div>
+              <div class="wall-logo" title="Accenture">
+                <img src="assets/logos/accenture.svg" alt="Accenture" loading="lazy">
+              </div>
+              <div class="wall-logo" title="Deloitte">
+                <img src="assets/logos/deloitte.svg" alt="Deloitte" loading="lazy">
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
     </section>
 
     <!-- ======================== CONTACT ======================== -->
@@ -1596,7 +2384,7 @@
     <div class="footer-rule"></div>
     <div class="footer-grid">
       <div class="footer-left">© Thomas Nendick · 2026</div>
-      <div class="footer-sig">— Strategy, built —</div>
+      <div class="footer-sig">— Workshop Notes, Vol. 01 —</div>
       <div class="footer-right">Set in Instrument Serif &amp; DM Sans</div>
     </div>
   </footer>
@@ -1623,29 +2411,13 @@
     const PROTECTED_PASSWORD = 'nendick';
 
     // ==========================================================
-    // LIVE CLOCK
-    // ==========================================================
-    const clockEl = document.getElementById('clock');
-    function tickClock() {
-      const d = new Date();
-      const hh = String(d.getHours()).padStart(2, '0');
-      const mm = String(d.getMinutes()).padStart(2, '0');
-      let tz = 'Local';
-      try {
-        tz = Intl.DateTimeFormat().resolvedOptions().timeZone.split('/').pop().replace(/_/g, ' ');
-      } catch (e) { /* fallback stays 'Local' */ }
-      clockEl.textContent = `${hh}:${mm} · ${tz}`;
-    }
-    tickClock();
-    setInterval(tickClock, 30000);
-
-    // ==========================================================
     // TABS — ARIA-compliant (arrow keys + roving tabindex)
     // ==========================================================
     const tabButtons = Array.from(document.querySelectorAll('.tab-btn'));
     const panels = {
       active: document.getElementById('tab-active'),
-      old: document.getElementById('tab-old')
+      old: document.getElementById('tab-old'),
+      about: document.getElementById('tab-about')
     };
 
     function selectTab(tabId) {

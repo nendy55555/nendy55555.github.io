@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Clearsulting">
+  <style>
+    .c-bg { fill: #00A3E0; }
+  </style>
+  <rect class="c-bg" x="16" y="16" width="68" height="68" rx="10"/>
+  <path d="M30 66 L44 38 L52 58 L70 28" stroke="#FFFFFF" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

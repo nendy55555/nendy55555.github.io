@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Ernst and Young">
+  <style>
+    .e-bg { fill: #2E2E38; }
+    .e-fg { fill: #FFE600; font-family: 'Helvetica Neue', Arial, sans-serif; font-weight: 800; font-size: 44px; letter-spacing: -1.5px; }
+    .e-mk { fill: #FFE600; }
+  </style>
+  <rect class="e-bg" x="14" y="20" width="72" height="60" rx="4"/>
+  <text x="24" y="66" class="e-fg">EY</text>
+  <path class="e-mk" d="M62 66 L68 60 L72 64 L82 54 L84 56 L72 68 L68 64 Z"/>
+</svg>

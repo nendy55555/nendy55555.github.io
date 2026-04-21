@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 80" role="img" aria-label="Clearsulting">
+  <style>
+    .c-wm { font-family: 'Helvetica Neue', Arial, sans-serif; font-weight: 600; font-size: 38px; letter-spacing: -0.5px; fill: #0F0F0F; }
+    .c-mk-1 { fill: #00A3E0; }
+    .c-mk-2 { fill: #0F0F0F; }
+  </style>
+  <g transform="translate(14,14)">
+    <rect class="c-mk-1" x="0" y="0" width="50" height="50" rx="8"/>
+    <path class="c-mk-2" d="M12 38 L22 18 L28 30 L40 14" stroke="#FFFFFF" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text x="78" y="52" class="c-wm">Clearsulting</text>
+</svg>

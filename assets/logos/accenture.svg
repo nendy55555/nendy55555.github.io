@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 80" role="img" aria-label="Accenture">
+  <style>
+    .a-wm { font-family: 'Helvetica Neue', Arial, sans-serif; font-weight: 400; font-size: 52px; letter-spacing: -0.5px; fill: #0F0F0F; }
+    .a-mk { fill: #A100FF; }
+  </style>
+  <path class="a-mk" d="M18 60 L46 44 L18 28 L22 22 L58 44 L22 66 Z"/>
+  <text x="72" y="60" class="a-wm">accenture</text>
+</svg>

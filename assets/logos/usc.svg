@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 80" role="img" aria-label="University of Southern California">
+  <style>
+    .u-bg { fill: #990000; }
+    .u-txt { fill: #FFCC00; font-family: 'Georgia', 'Times New Roman', serif; font-weight: 700; font-size: 44px; letter-spacing: 2px; }
+    .u-sub { fill: #990000; font-family: 'Georgia', 'Times New Roman', serif; font-size: 11px; letter-spacing: 3px; font-weight: 600; }
+  </style>
+  <rect class="u-bg" x="4" y="10" width="120" height="60" rx="2"/>
+  <text x="14" y="57" class="u-txt">USC</text>
+  <text x="132" y="40" class="u-sub">UNIVERSITY OF</text>
+  <text x="132" y="54" class="u-sub">SOUTHERN</text>
+  <text x="132" y="68" class="u-sub">CALIFORNIA</text>
+</svg>
