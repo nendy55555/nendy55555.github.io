@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Agentic Army, Volume One. Thomas Nendick's personal fleet of productivity agents — tools built to replace the tasks he didn't want to keep doing.">
+  <meta name="description" content="Thomas Nendick, Technology Strategy Manager at Deloitte. An index of strategy shipped, not drawn. Forward deployed engineering, in progress.">
   <meta name="theme-color" content="#F3ECE0">
   <meta name="color-scheme" content="light dark">
   <meta name="format-detection" content="telephone=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="mobile-web-app-capable" content="yes">
-  <title>Thomas Nendick — Agentic Army, Volume 1</title>
+  <title>Thomas Nendick — Deploying My Agentic Army</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -53,6 +53,7 @@
       --accent-deep:     #8B3F21;   /* body emphasis, AA 6.3:1 */
       --accent-ink:      #7A361B;   /* densest small type, AA 7.4:1 */
       --accent-teal:     #3E6B4B;   /* kept for var refs */
+      --accent-rgb:      194, 97, 58; /* base accent as RGB so rgba() can re-theme */
       --accent-wash:     rgba(194, 97, 58, 0.08);
       --accent-ring:     rgba(194, 97, 58, 0.28);
 
@@ -142,41 +143,10 @@
     /* ============================================================
        ATMOSPHERE — ambient gradient + grain
        ============================================================ */
-    .ambient {
-      position: fixed;
-      inset: -20%;
-      z-index: 0;
-      pointer-events: none;
-      opacity: 0.85;
-      /* Allow the layer to be GPU-promoted but only when it's likely to animate */
-      will-change: transform;
-    }
-    .ambient::before,
-    .ambient::after {
-      content: '';
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-    }
-    .ambient::before {
-      width: 55vw;
-      height: 55vw;
-      top: -10%;
-      left: -5%;
-      background: radial-gradient(circle, rgba(194, 97, 58, 0.32), transparent 70%);
-      animation: drift1 28s ease-in-out infinite alternate;
-    }
-    .ambient::after {
-      width: 45vw;
-      height: 45vw;
-      bottom: -10%;
-      right: -10%;
-      background: radial-gradient(circle, rgba(62, 107, 75, 0.22), transparent 70%);
-      animation: drift2 36s ease-in-out infinite alternate;
-    }
-
-    @keyframes drift1 { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(8vw, 6vh) scale(1.15); } }
-    @keyframes drift2 { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(-6vw,-8vh) scale(1.1); } }
+    /* Ambient is retired — editorial restraint beats SaaS drift. Keep the
+       .ambient element in markup as a harmless no-op in case we bring a
+       lighter version back; grain overlay (body::before) carries the texture. */
+    .ambient { display: none; }
 
     body::before {
       content: '';
@@ -245,6 +215,25 @@
       color: var(--text);
       letter-spacing: -0.005em;
     }
+    .hero-byline em {
+      color: var(--accent);
+      font-style: italic;
+      font-weight: 500;
+    }
+
+    .hero-rule {
+      margin-top: 10px;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(1.02rem, 1.6vw, 1.2rem);
+      color: var(--text-secondary);
+      letter-spacing: -0.005em;
+    }
+    .hero-rule em {
+      color: var(--accent);
+      font-style: normal;
+      font-weight: 500;
+    }
 
     .hero-sub {
       margin-top: 20px;
@@ -287,18 +276,18 @@
                   box-shadow 0.25s ease;
     }
     .cta-primary {
-      background: linear-gradient(135deg, var(--accent) 0%, #8B3F21 100%);
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
       color: var(--bg);
       border-color: var(--accent);
       font-weight: 600;
-      box-shadow: 0 10px 28px -8px rgba(194, 97, 58, 0.45);
+      box-shadow: 0 10px 28px -8px rgba(var(--accent-rgb), 0.45);
     }
     .cta-primary:hover,
     .cta-primary:focus-visible {
-      background: linear-gradient(135deg, #8B3F21 0%, var(--accent) 100%);
+      background: linear-gradient(135deg, var(--accent-deep) 0%, var(--accent) 100%);
       border-color: var(--accent-deep);
       transform: translateY(-1px);
-      box-shadow: 0 14px 36px -8px rgba(194, 97, 58, 0.75);
+      box-shadow: 0 14px 36px -8px rgba(var(--accent-rgb), 0.75);
     }
     .cta-primary svg { transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1); }
     .cta-primary:hover svg { transform: translateX(3px); }
@@ -341,12 +330,12 @@
       max-width: 200px;
       aspect-ratio: 4 / 5;
       overflow: hidden;
-      background: #FBF7EF;
+      background: var(--bg-card);
       border-radius: 6px;
       box-shadow:
-        inset 0 0 0 1px #D9CFC1,
+        inset 0 0 0 1px var(--rule),
         0 1px 2px rgba(0, 0, 0, 0.25),
-        0 18px 40px -18px rgba(194, 97, 58, 0.35);
+        0 18px 40px -18px rgba(var(--accent-rgb), 0.35);
     }
     .hero-portrait img {
       width: 100%;
@@ -413,9 +402,9 @@
       color: var(--text-muted);
       line-height: 1;
       padding: 4px 6px;
-      background: rgba(11, 14, 26, 0.72);
+      background: rgba(20, 17, 13, 0.72);
       backdrop-filter: blur(4px);
-      border: 1px solid #D9CFC1;
+      border: 1px solid var(--rule);
       border-radius: 2px;
     }
 
@@ -470,7 +459,8 @@
       margin-left: 6px;
       vertical-align: 1px;
     }
-    .tab-btn[aria-selected="true"] .tab-count { color: var(--accent); }
+    /* Selected count: weight bump, not rust. Rust is reserved for In-Build / status. */
+    .tab-btn[aria-selected="true"] .tab-count { color: var(--text); font-weight: 600; }
 
     .tab-panel { display: none; }
     .tab-panel.active {
@@ -513,7 +503,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(11, 14, 26, 0.55) 100%);
+      background: linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(20, 17, 13, 0.55) 100%);
       pointer-events: none;
       z-index: 1;
     }
@@ -532,9 +522,9 @@
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--text);
-      background: rgba(11, 14, 26, 0.6);
+      background: rgba(20, 17, 13, 0.6);
       padding: 3px 6px;
-      border: 1px solid #D9CFC1;
+      border: 1px solid var(--rule);
       border-radius: 2px;
       backdrop-filter: blur(4px);
     }
@@ -698,7 +688,7 @@
       overflow: hidden;
     }
     .exp-item:last-child { border-bottom: 1px solid var(--rule-soft); }
-    .exp-item[open] { background: linear-gradient(180deg, rgba(194, 97, 58, 0.06) 0%, transparent 100%); }
+    .exp-item[open] { background: linear-gradient(180deg, rgba(var(--accent-rgb), 0.06) 0%, transparent 100%); }
 
     /* static row */
     .exp-summary {
@@ -920,21 +910,22 @@
       color: var(--accent-deep);
       background: var(--accent-wash);
     }
+    .skill-tag:active { transform: scale(0.98); }
 
     .project-card {
       background: var(--bg-card);
       backdrop-filter: blur(14px) saturate(1.2);
       -webkit-backdrop-filter: blur(14px) saturate(1.2);
-      border: 1px solid #D9CFC1;
+      border: 1px solid var(--rule);
       border-radius: 16px;
-      padding: 28px 30px 26px;
+      padding: 24px 28px 24px;
       display: flex;
       flex-direction: column;
       min-height: 320px;
-      transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
-                  box-shadow 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
-                  border-color 0.35s ease,
-                  background 0.35s ease;
+      transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+                  box-shadow 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+                  border-color 0.3s ease,
+                  background 0.3s ease;
       position: relative;
       overflow: hidden;
     }
@@ -945,10 +936,17 @@
       inset: 0;
       border-radius: inherit;
       pointer-events: none;
-      background: linear-gradient(180deg, #EBE2D3, transparent 35%);
+      background: linear-gradient(180deg, var(--bg-deep), transparent 35%);
       z-index: 0;
     }
+    /* In dark mode: keep highlight as a subtle white sheen instead of the deep navy
+       (which crushes the top of every card with a flat block). */
+    [data-theme="dark"] .project-card::after {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 40%);
+    }
     .project-card > * { position: relative; z-index: 1; }
+    /* Left-edge spine earns its keep as a status cue, not decoration:
+       Live = rust, In-Build = accent-deep, Archive/Private = muted rule. */
     .project-card::before {
       content: '';
       position: absolute;
@@ -956,18 +954,20 @@
       left: 0;
       width: 3px;
       height: 100%;
-      background: linear-gradient(180deg, var(--accent) 0%, var(--accent-teal) 100%);
+      background: var(--rule);
       transform: scaleY(0);
       transform-origin: top;
-      transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+      transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
       z-index: 1;
     }
+    .project-card:has(.project-status.shipped)::before { background: var(--accent); }
+    .project-card:has(.project-status.wip)::before     { background: var(--accent-deep); }
     .project-card:hover {
       transform: translateY(-4px);
       box-shadow:
-        0 24px 60px -18px rgba(194, 97, 58, 0.35),
+        0 24px 60px -18px rgba(var(--accent-rgb), 0.35),
         0 6px 18px -6px rgba(0, 0, 0, 0.45);
-      border-color: rgba(194, 97, 58, 0.35);
+      border-color: rgba(var(--accent-rgb), 0.35);
       background: var(--bg-card-hover);
     }
     .project-card:hover::before { transform: scaleY(1); }
@@ -977,13 +977,13 @@
       height: 52px;
       border-radius: 14px;
       background: var(--accent-wash);
-      border: 1px solid rgba(194, 97, 58, 0.25);
+      border: 1px solid rgba(var(--accent-rgb), 0.25);
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 22px;
+      margin-bottom: 20px;
       flex-shrink: 0;
-      transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+      transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
                   background 0.3s ease,
                   border-color 0.3s ease,
                   box-shadow 0.3s ease;
@@ -996,9 +996,9 @@
     }
     .project-card:hover .project-icon {
       transform: scale(1.08) rotate(-4deg);
-      background: rgba(194, 97, 58, 0.15);
-      border-color: rgba(194, 97, 58, 0.55);
-      box-shadow: 0 8px 22px -6px rgba(194, 97, 58, 0.55);
+      background: rgba(var(--accent-rgb), 0.15);
+      border-color: rgba(var(--accent-rgb), 0.55);
+      box-shadow: 0 8px 22px -6px rgba(var(--accent-rgb), 0.55);
     }
 
     /* Last card in odd count: center it — but only when the singleton is a
@@ -1009,6 +1009,16 @@
       grid-column: 1 / -1;
       max-width: calc(50% - 10px);
       justify-self: center;
+    }
+    /* At narrow 2-col widths (1024–1099px), a lonely protected card pinned
+       left looks awkward — empty right cell reads as broken. Center any
+       singleton in this band. Restores left-alignment at 1100px+. */
+    @media (min-width: 1024px) and (max-width: 1099px) {
+      #tab-active .project-card:last-child:nth-child(odd) {
+        grid-column: 1 / -1;
+        max-width: calc(50% - 10px);
+        justify-self: center;
+      }
     }
 
     .project-meta {
@@ -1066,7 +1076,7 @@
     .project-desc {
       font-size: 0.93rem;
       color: var(--text-secondary);
-      line-height: 1.65;
+      line-height: 1.5;      /* tighter than body prose — fits 2-3 line snippets */
       flex: 1;
     }
     .project-tags {
@@ -1122,7 +1132,7 @@
       width: 100%;
       height: 1px;
       background: var(--text);
-      transition: background 0.35s ease;
+      transition: background 0.3s ease;
     }
     .project-link:hover,
     .project-link:focus-visible { color: var(--accent); }
@@ -1131,12 +1141,15 @@
     .project-link svg {
       width: 14px;
       height: 14px;
-      transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+      transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
     .project-link:hover svg { transform: translate(3px, -3px); }
 
-    /* Pre-launch marker — reads as status, not a link */
+    /* Pre-launch marker — reads as status, not a link. Hover reveals the
+       per-project aria-label as a micro-caption so visitors get a hint
+       instead of a dead end. */
     .project-soon {
+      position: relative;
       display: inline-flex;
       align-items: center;
       font-family: var(--mono);
@@ -1148,8 +1161,31 @@
       white-space: nowrap;
       padding-bottom: 2px;      /* visual parity with underlined link slot */
       border-bottom: 1px dashed var(--rule);
-      cursor: default;
+      cursor: help;
     }
+    .project-soon::after {
+      content: attr(aria-label);
+      position: absolute;
+      left: 0;
+      top: calc(100% + 6px);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: none;
+      font-family: var(--sans);
+      color: var(--text-secondary);
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      padding: 4px 8px;
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateY(-2px);
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      z-index: 3;
+    }
+    .project-soon:hover::after,
+    .project-soon:focus-visible::after { opacity: 1; transform: translateY(0); }
 
     /* Secondary link — Tech Jargon */
     .project-link.secondary {
@@ -1234,7 +1270,7 @@
       width: 18px;
       height: 18px;
       color: var(--text-muted);
-      transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), color 0.25s ease;
+      transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), color 0.3s ease;
       flex-shrink: 0;
     }
     .contact-row:hover .contact-arrow,
@@ -1305,7 +1341,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(11, 14, 26, 0.55) 0%, rgba(11, 14, 26, 0.9) 100%);
+      background: linear-gradient(180deg, rgba(20, 17, 13, 0.55) 0%, rgba(20, 17, 13, 0.9) 100%);
       pointer-events: none;
     }
 
@@ -1357,14 +1393,14 @@
       cursor: pointer;
       transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
       margin-top: 6px;
-      box-shadow: 0 6px 18px -6px rgba(194, 97, 58, 0.6);
+      box-shadow: 0 6px 18px -6px rgba(var(--accent-rgb), 0.6);
     }
     .lock-overlay .lock-btn:hover,
     .lock-overlay .lock-btn:focus-visible {
       background: var(--accent-deep);
       border-color: var(--accent-deep);
       transform: translateY(-1px);
-      box-shadow: 0 10px 24px -8px rgba(194, 97, 58, 0.75);
+      box-shadow: 0 10px 24px -8px rgba(var(--accent-rgb), 0.75);
     }
 
     /* ============================================================
@@ -1384,7 +1420,7 @@
     .pw-modal.open { display: flex; }
     .pw-modal-card {
       background: linear-gradient(180deg, rgba(28, 34, 58, 0.9), rgba(18, 22, 40, 0.9));
-      border: 1px solid #D9CFC1;
+      border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 18px;
       padding: 36px 32px 28px;
       max-width: 380px;
@@ -1393,7 +1429,7 @@
       animation: fadeUp 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) both;
       box-shadow:
         0 30px 80px -20px rgba(0, 0, 0, 0.6),
-        0 0 0 1px rgba(194, 97, 58, 0.08);
+        0 0 0 1px rgba(var(--accent-rgb), 0.08);
     }
     .pw-modal-card h3 {
       font-family: var(--serif);
@@ -1494,8 +1530,8 @@
       opacity: 0;
       transform: translateY(24px);
       will-change: opacity, transform;
-      transition: opacity 0.7s cubic-bezier(0.2, 0.8, 0.2, 1),
-                  transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+      transition: opacity 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
+                  transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
     .reveal.is-visible {
       opacity: 1;
@@ -1516,6 +1552,8 @@
     body.first-load #tab-active .project-card:nth-child(7) { animation: fadeUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.76s both; }
     body.first-load #tab-active .project-card:nth-child(8) { animation: fadeUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.80s both; }
     body.first-load #tab-active .project-card:nth-child(9) { animation: fadeUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.80s both; }
+    body.first-load #tab-active .project-card:nth-child(10) { animation: fadeUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.80s both; }
+    body.first-load #tab-active .project-card:nth-child(11) { animation: fadeUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.80s both; }
 
     /* ============================================================
        RESPONSIVE
@@ -1553,6 +1591,7 @@
       .hero-kicker { font-size: 0.7rem; gap: 12px; margin-bottom: 22px; }
       .hero-kicker .kicker-rule { flex: 0 0 20px; }
       .hero-byline { font-size: 1.18rem; margin-top: 22px; }
+      .hero-rule { font-size: 0.98rem; margin-top: 8px; }
       .hero-sub { font-size: 1rem; margin-top: 18px; }
       .hero-cta { margin-top: 30px; }
       .section-masthead { padding: 0 var(--gutter-sm); margin-top: 56px; gap: 14px; }
@@ -1800,9 +1839,9 @@
       .about-tab-portrait .portrait-corner {
         mix-blend-mode: normal;
         color: var(--text);
-        background: rgba(11, 14, 26, 0.6);
+        background: rgba(20, 17, 13, 0.6);
         padding: 3px 6px;
-        border: 1px solid #D9CFC1;
+        border: 1px solid var(--rule);
         border-radius: 2px;
         backdrop-filter: blur(4px);
       }
@@ -1820,35 +1859,39 @@
        DARK MODE — token overrides (default palette is warm/paper)
        ============================================================ */
     [data-theme="dark"] {
-      --bg:              #0B0E1A;
-      --bg-deep:         #141A2E;
-      --bg-card:         rgba(255, 255, 255, 0.04);
-      --bg-card-hover:   rgba(255, 255, 255, 0.07);
+      /* Warm near-black: paper after dusk. Same hue family as light #F3ECE0, inverted. */
+      --bg:              #14110D;
+      --bg-deep:         #1A1612;
+      --bg-card:         rgba(255, 245, 230, 0.04);
+      --bg-card-hover:   rgba(255, 245, 230, 0.07);
 
-      --text:            #E8EAFF;
-      --text-secondary:  #A7B0D0;
-      --text-muted:      #7A8299;
+      /* Ink flips to paper on dark. All pass WCAG AA. */
+      --text:            #F3ECE0;   /* 16.5:1 */
+      --text-secondary:  #C5B9A8;   /* 10.8:1 body prose */
+      --text-muted:      #948878;   /* 5.8:1 small mono metadata */
 
-      --accent:          #9B6DFF;
-      --accent-deep:     #B896FF;
-      --accent-ink:      #C4AAFF;
-      --accent-teal:     #3BD8C7;
-      --accent-wash:     rgba(155, 109, 255, 0.10);
-      --accent-ring:     rgba(155, 109, 255, 0.35);
+      /* Single accent — warm rust tuned brighter for dark bg. Same hue family as light. */
+      --accent:          #E8944D;   /* display, 7.8:1 */
+      --accent-deep:     #F0A668;   /* body emphasis, 9.6:1 */
+      --accent-ink:      #F5B47E;   /* densest small type, 11:1 */
+      --accent-teal:     #7AB891;   /* forest green brightened for dark — spine + live signal */
+      --accent-rgb:      232, 148, 77;
+      --accent-wash:     rgba(232, 148, 77, 0.10);
+      --accent-ring:     rgba(232, 148, 77, 0.35);
 
-      --live:            #3BD8C7;
-      --rule:            rgba(255, 255, 255, 0.09);
-      --rule-soft:       rgba(255, 255, 255, 0.05);
+      --live:            #7AB891;
+      --rule:            rgba(243, 236, 224, 0.09);
+      --rule-soft:       rgba(243, 236, 224, 0.05);
 
       color-scheme: dark;
     }
     [data-theme="dark"] body {
       background:
-        radial-gradient(ellipse 80% 50% at 70% -10%, rgba(155, 109, 255, 0.18), transparent 60%),
-        radial-gradient(ellipse 90% 60% at 0% 110%, rgba(59, 216, 199, 0.10), transparent 55%),
-        linear-gradient(180deg, #0B0E1A 0%, #101530 55%, #0B0E1A 100%);
+        radial-gradient(ellipse 80% 50% at 70% -10%, rgba(232, 148, 77, 0.12), transparent 60%),
+        radial-gradient(ellipse 90% 60% at 0% 110%, rgba(122, 184, 145, 0.08), transparent 55%),
+        linear-gradient(180deg, #14110D 0%, #1A1612 55%, #14110D 100%);
       background-attachment: fixed;
-      -webkit-tap-highlight-color: rgba(155, 109, 255, 0.22);
+      -webkit-tap-highlight-color: rgba(232, 148, 77, 0.22);
     }
     [data-theme="dark"] a,
     [data-theme="dark"] button,
@@ -1857,7 +1900,7 @@
     [data-theme="dark"] input,
     [data-theme="dark"] select,
     [data-theme="dark"] textarea {
-      -webkit-tap-highlight-color: rgba(155, 109, 255, 0.22);
+      -webkit-tap-highlight-color: rgba(232, 148, 77, 0.22);
     }
     /* Color logos: give tiles a light surface in dark mode so brand colors stay legible */
     [data-theme="dark"] .exp-logo,
@@ -1912,14 +1955,277 @@
     [data-theme="dark"] .theme-toggle .icon-moon { display: inline-block; }
 
     @media (max-width: 640px) {
-      .theme-toggle { top: 14px; right: 14px; width: 38px; height: 38px; }
+      .theme-toggle {
+        top: max(14px, env(safe-area-inset-top));
+        right: max(14px, env(safe-area-inset-right));
+        width: 38px;
+        height: 38px;
+      }
       .theme-toggle svg { width: 16px; height: 16px; }
+    }
+
+    /* ============================================================
+       UI EXTRAS — scroll rail · § anchors · glossary tooltips
+       Added 2026-04-21. See docs/agent/DECISIONS.md.
+       ============================================================ */
+
+    /* Scroll-progress rail ------------------------------------- */
+    .scroll-rail {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 2px;
+      height: 100vh;
+      background: var(--rule-soft);
+      z-index: 40;
+      pointer-events: none;
+    }
+    .scroll-rail-fill {
+      width: 100%;
+      height: 100%;
+      background: var(--accent);
+      transform-origin: top;
+      transform: scaleY(0);
+      transition: transform 80ms linear;
+      will-change: transform;
+    }
+    @media (max-width: 900px) { .scroll-rail { display: none; } }
+    @media (prefers-reduced-motion: reduce) { .scroll-rail { display: none; } }
+
+    /* Copy-link § anchors -------------------------------------- */
+    .has-anchor { position: relative; }
+    .heading-anchor {
+      position: absolute;
+      left: -1.4em;
+      top: 50%;
+      transform: translateY(-50%);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.1em;
+      height: 1.1em;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 0.72em;
+      line-height: 1;
+      color: var(--accent);
+      background: transparent;
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 160ms ease;
+      text-decoration: none;
+    }
+    .has-anchor:hover .heading-anchor,
+    .has-anchor:focus-within .heading-anchor { opacity: 0.55; }
+    .heading-anchor:hover { opacity: 1; }
+    .heading-anchor:focus-visible {
+      opacity: 1;
+      outline: 2px solid var(--accent-ring);
+      outline-offset: 3px;
+      border-radius: 3px;
+    }
+    @media (max-width: 820px) { .heading-anchor { display: none; } }
+    @media (prefers-reduced-motion: reduce) {
+      .heading-anchor { transition: none; }
+    }
+
+    /* Toast (shared by § copy + any future one-shot confirmations) */
+    .toast {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 90;
+      padding: 10px 14px;
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      box-shadow: 0 6px 20px rgba(30, 26, 22, 0.10);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 160ms ease, transform 160ms ease;
+      pointer-events: none;
+    }
+    .toast.open { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce) {
+      .toast { transition: opacity 120ms; transform: none; }
+      .toast.open { transform: none; }
+    }
+
+    /* Glossary tooltips ---------------------------------------- */
+    .gloss { cursor: help; }
+    .gloss--inline {
+      border-bottom: 1px dotted rgba(var(--accent-rgb), 0.55);
+    }
+    .gloss:focus-visible {
+      outline: 2px solid var(--accent-ring);
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+    .gloss-tooltip {
+      position: absolute;
+      z-index: 80;
+      max-width: 260px;
+      padding: 14px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      box-shadow: 0 6px 24px rgba(30, 26, 22, 0.10);
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 160ms ease, transform 160ms ease;
+      pointer-events: none;
+      top: 0;
+      left: 0;
+    }
+    .gloss-tooltip.open {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .gloss-tooltip h4 {
+      font-family: var(--sans);
+      font-weight: 500;
+      font-size: 0.92rem;
+      color: var(--text);
+      letter-spacing: -0.005em;
+      margin-bottom: 8px;
+    }
+    .gloss-tooltip .gloss-rule {
+      width: 28px;
+      height: 1px;
+      background: var(--accent);
+      margin-bottom: 10px;
+    }
+    .gloss-tooltip p {
+      font-family: var(--sans);
+      font-weight: 400;
+      font-size: 0.84rem;
+      line-height: 1.5;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+    .gloss-tooltip p.gloss-first {
+      color: var(--text);
+      font-style: italic;
+    }
+    .gloss-tooltip p:last-of-type { margin-bottom: 0; }
+    .gloss-tooltip .gloss-kicker {
+      display: block;
+      margin-top: 10px;
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .gloss-tooltip { transition: opacity 120ms; transform: none; }
+      .gloss-tooltip.open { transform: none; }
     }
   </style>
 </head>
 <body class="first-load">
 
   <a href="#main" class="skip-link">Skip to content</a>
+
+  <!-- UI extras: scroll rail, shared toast, glossary tooltip layer -->
+  <div class="scroll-rail" aria-hidden="true"><div class="scroll-rail-fill"></div></div>
+  <div class="toast" id="uiToast" role="status" aria-live="polite"></div>
+  <div class="gloss-tooltip" id="glossTooltip" role="tooltip" aria-hidden="true"></div>
+
+  <template id="gloss-defs">
+    <div data-term="fde">
+      <h4>Forward Deployed Engineer</h4>
+      <div class="gloss-rule"></div>
+      <p>Engineer who sits inside a client's problem, builds the smallest thing that answers it, and leaves the artifact behind. Palantir-origin role.</p>
+      <p class="gloss-first">I think this is what strategy management should become.</p>
+      <span class="gloss-kicker">§ In my words</span>
+    </div>
+    <div data-term="agentic-ai">
+      <h4>Agentic AI</h4>
+      <div class="gloss-rule"></div>
+      <p>Software agents that plan multi-step work, use tools, and act without a human approving each turn.</p>
+      <p class="gloss-first">I build mine to do one job well, then hand off.</p>
+      <span class="gloss-kicker">§ In my words</span>
+    </div>
+    <div data-term="gen-ai">
+      <h4>Generative AI</h4>
+      <div class="gloss-rule"></div>
+      <p>Models that generate text, code, or images from a prompt. The layer that agentic systems sit on top of.</p>
+      <p class="gloss-first">I treat it like electricity. Cheap, broadly useful, not the product.</p>
+      <span class="gloss-kicker">§ In my words</span>
+    </div>
+    <div data-term="prompt-engineering">
+      <h4>Prompt Engineering</h4>
+      <div class="gloss-rule"></div>
+      <p>The craft of writing instructions models follow reliably. Less clever phrasing, more contract design.</p>
+      <p class="gloss-first">I spend more time on context windows than wording.</p>
+      <span class="gloss-kicker">§ In my words</span>
+    </div>
+    <div data-term="system-architecture">
+      <h4>System Architecture</h4>
+      <div class="gloss-rule"></div>
+      <p>The pieces a software product runs on and how they talk to each other.</p>
+      <p class="gloss-first">I design the smallest viable stack, then replace parts when the load earns it.</p>
+      <span class="gloss-kicker">§ In my words</span>
+    </div>
+    <div data-term="operating-models">
+      <h4>Operating Models</h4>
+      <div class="gloss-rule"></div>
+      <p>How a company's people, processes, and technology produce its work. Consulting's term for the whole machine.</p>
+      <p class="gloss-first">I rewrite them when agentic systems change what humans should still do.</p>
+      <span class="gloss-kicker">§ In my words</span>
+    </div>
+    <div data-term="roadmapping">
+      <h4>Roadmapping</h4>
+      <div class="gloss-rule"></div>
+      <p>Sequencing work so value compounds and the next bet pays for the last.</p>
+      <p class="gloss-first">Not PM ticket triage. Strategy with dates attached.</p>
+      <span class="gloss-kicker">§ In my words</span>
+    </div>
+    <div data-term="ma-integration">
+      <h4>M&amp;A Integration</h4>
+      <div class="gloss-rule"></div>
+      <p>The messy work after the deal signs. Merging systems, people, and operating models without breaking either company.</p>
+      <p class="gloss-first">I lead the technology track.</p>
+      <span class="gloss-kicker">§ In my words</span>
+    </div>
+    <div data-term="engagement-economics">
+      <h4>Engagement Economics</h4>
+      <div class="gloss-rule"></div>
+      <p>Consulting math: what a project costs to run, what it's priced at, what it earns.</p>
+      <p class="gloss-first">I treat it as a product P&amp;L I own.</p>
+      <span class="gloss-kicker">§ In my words</span>
+    </div>
+    <div data-term="status-live">
+      <h4>Status · Live</h4>
+      <div class="gloss-rule"></div>
+      <p>Deployed and working. The flow runs unattended.</p>
+      <p class="gloss-first">I check in periodically. If it breaks, I fix it.</p>
+      <span class="gloss-kicker">§ In my words</span>
+    </div>
+    <div data-term="status-build">
+      <h4>Status · In Build</h4>
+      <div class="gloss-rule"></div>
+      <p>Working but not polished. Public so I can stress-test it in the open.</p>
+      <p class="gloss-first">Pieces may change week to week.</p>
+      <span class="gloss-kicker">§ In my words</span>
+    </div>
+    <div data-term="status-archived">
+      <h4>Status · Archived</h4>
+      <div class="gloss-rule"></div>
+      <p>Shipped, learned from, moved on. The code's still there.</p>
+      <p class="gloss-first">I'm not adding to it.</p>
+      <span class="gloss-kicker">§ In my words</span>
+    </div>
+  </template>
 
   <!-- Theme toggle -->
   <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode" title="Toggle theme">
@@ -1937,15 +2243,9 @@
   <!-- ======================== HERO ======================== -->
   <header class="hero" id="top">
     <div>
-      <p class="hero-kicker">
-        <span>Agentic Army</span>
-        <span class="kicker-rule" aria-hidden="true"></span>
-        <span class="kicker-muted">Volume One</span>
-      </p>
+      <h1 class="hero-headline">Deploying my <em>agentic</em> army.</h1>
 
-      <h1 class="hero-headline">An agent for <em>everything</em>.</h1>
-
-      <p class="hero-byline">If it's annoying enough to do twice, it may be worth building once.</p>
+      <p class="hero-byline">If it's annoying enough to do <em>twice</em>, it may be worth building once.</p>
 
       <p class="hero-sub">Personal productivity agents, tackling the mundane tasks you don't want to spend your <em>free time</em> doing.</p>
 
@@ -1960,11 +2260,11 @@
 
     <aside class="hero-bio" aria-label="About the author">
       <figure class="hero-portrait">
-        <img src="assets/portrait.jpg" alt="Thomas Nendick with his partner and two dogs" width="400" height="500" fetchpriority="high" decoding="async">
+        <img src="assets/portrait.jpg" alt="Thomas Nendick, Technology Strategy Manager at Deloitte, photographed with his partner and two dogs" width="400" height="500" fetchpriority="high" decoding="async">
       </figure>
       <div class="hero-bio-text">
         <p>Thomas Nendick.</p>
-        <p>Strategist by day. Aspiring FDE by night.</p>
+        <p>Strategy Manager at Deloitte. Aspiring <span class="gloss gloss--inline" data-gloss="fde">FDE</span>.</p>
       </div>
     </aside>
   </header>
@@ -1976,7 +2276,7 @@
 
       <nav class="tabs-wrapper" aria-label="Sections">
         <div class="tab-bar" role="tablist" aria-label="Switch section">
-          <button class="tab-btn" role="tab" aria-selected="true" aria-controls="tab-active" id="tabbtn-active" data-tab="active">Active <span class="tab-count">(9)</span></button>
+          <button class="tab-btn" role="tab" aria-selected="true" aria-controls="tab-active" id="tabbtn-active" data-tab="active">Active <span class="tab-count">(11)</span></button>
           <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-about" id="tabbtn-about" data-tab="about" tabindex="-1">About</button>
         </div>
       </nav>
@@ -1990,11 +2290,11 @@
           </div>
           <div class="project-meta">
             <span class="project-number">№ 01</span>
-            <span class="project-status shipped">Live</span>
+            <span class="project-status shipped gloss" data-gloss="status-live">Live</span>
           </div>
           <div class="project-info">
             <h2 class="project-name">Grocery Shopper Assistant</h2>
-            <p class="project-desc">Streamlines weekly grocery runs. Build lists, compare prices, and plan meals without the mental overhead of figuring out what you need.</p>
+            <p class="project-desc">Every recipe uploaded joins my working cookbook. Select any combination, get one consolidated grocery list, then order it from your local store. Text a number to start a list or add items on the fly.</p>
             <div class="project-tags">
               <span class="tag">Productivity</span>
               <span class="tag">Utility</span>
@@ -2018,11 +2318,11 @@
           </div>
           <div class="project-meta">
             <span class="project-number">№ 02</span>
-            <span class="project-status shipped">Live</span>
+            <span class="project-status shipped gloss" data-gloss="status-live">Live</span>
           </div>
           <div class="project-info">
             <h2 class="project-name">LA Concert Tracker</h2>
-            <p class="project-desc">Surfaces live shows in LA based on artists you actually listen to. Stop missing gigs because you didn't check the right site at the right time.</p>
+            <p class="project-desc">Reads my Spotify history, pulls live event APIs, surfaces only the shows I'd actually go to.</p>
             <div class="project-tags">
               <span class="tag">Music</span>
               <span class="tag">Discovery</span>
@@ -2046,11 +2346,11 @@
           </div>
           <div class="project-meta">
             <span class="project-number">№ 03</span>
-            <span class="project-status shipped">Live</span>
+            <span class="project-status shipped gloss" data-gloss="status-live">Live</span>
           </div>
           <div class="project-info">
             <h2 class="project-name">Dynasty Fantasy Football</h2>
-            <p class="project-desc">Tools and analysis for dynasty leagues. Evaluate trades, track player values, and build rosters that win over seasons, not just weeks.</p>
+            <p class="project-desc">Historical repository for our dynasty league. Stats, analytics, team values, and year-over-year data to analyze the league over time.</p>
             <div class="project-tags">
               <span class="tag">Fantasy Sports</span>
               <span class="tag">Analytics</span>
@@ -2074,11 +2374,11 @@
           </div>
           <div class="project-meta">
             <span class="project-number">№ 04</span>
-            <span class="project-status shipped">Live</span>
+            <span class="project-status shipped gloss" data-gloss="status-live">Live</span>
           </div>
           <div class="project-info">
             <h2 class="project-name">Rideshare Comp</h2>
-            <p class="project-desc">Compares Uber and Waymo side-by-side before you book. Pick the cheaper ride, skip the app-switching tax, see which service wins your routes. Lyft coming soon.</p>
+            <p class="project-desc">Drop in a pickup and drop-off, see live prices across the major rideshare apps side-by-side. Pick the cheapest ride, save the difference.</p>
             <div class="project-tags">
               <span class="tag">Transportation</span>
               <span class="tag">Utility</span>
@@ -2102,11 +2402,11 @@
           </div>
           <div class="project-meta">
             <span class="project-number">№ 05</span>
-            <span class="project-status">Archived</span>
+            <span class="project-status gloss" data-gloss="status-archived">Archived</span>
           </div>
           <div class="project-info">
             <h2 class="project-name">March Madness Dashboard 2026</h2>
-            <p class="project-desc">Interactive bracket and game tracker for the 2026 NCAA tournament. Visualized matchups, scores, and upsets as the madness unfolded.</p>
+            <p class="project-desc">Built for my snake-draft bracket league. Tracks each drafter's teams through the tournament and pulls live scores faster than ESPN.</p>
             <div class="project-tags">
               <span class="tag">Sports</span>
               <span class="tag">Dashboard</span>
@@ -2130,18 +2430,18 @@
           </div>
           <div class="project-meta">
             <span class="project-number">№ 06</span>
-            <span class="project-status wip">In Build</span>
+            <span class="project-status wip gloss" data-gloss="status-build">In Build</span>
           </div>
           <div class="project-info">
             <h2 class="project-name">Housing Finder</h2>
-            <p class="project-desc">Aggregates listings and surfaces the ones worth your time. Filters, alerts, and scoring so you spend less energy hunting and more time deciding.</p>
+            <p class="project-desc">Crawls listing APIs. Filters to my criteria, flags underpriced comps. No more tab graveyard.</p>
             <div class="project-tags">
               <span class="tag">Real Estate</span>
               <span class="tag">Search</span>
             </div>
           </div>
           <div class="project-links">
-            <span class="project-soon" aria-label="Housing Finder — not yet launched">Coming soon…</span>
+            <span class="project-soon" role="status" aria-label="Housing Finder — not yet launched">Coming soon…</span>
             <a href="docs/architecture/housing-finder.html" class="project-link secondary" aria-label="Tech Jargon — Housing Finder">
               Tech Jargon
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.6" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
@@ -2155,19 +2455,44 @@
           </div>
           <div class="project-meta">
             <span class="project-number">№ 07</span>
-            <span class="project-status wip">In Build</span>
+            <span class="project-status wip gloss" data-gloss="status-build">In Build</span>
           </div>
           <div class="project-info">
             <h2 class="project-name">Honeymoon Bot</h2>
-            <p class="project-desc">Plans the honeymoon so you don't have to open thirty browser tabs. Flights, stays, activities, and a budget that isn't a spreadsheet — in one itinerary you'll actually use.</p>
+            <p class="project-desc">Optimizes Chase point redemption across flights, hotels, and transfer partners. Maximum bang-for-buck on the honeymoon.</p>
             <div class="project-tags">
               <span class="tag">Travel</span>
               <span class="tag">Planning</span>
             </div>
           </div>
           <div class="project-links">
-            <span class="project-soon" aria-label="Honeymoon Bot — not yet launched">Coming soon…</span>
+            <span class="project-soon" role="status" aria-label="Honeymoon Bot — not yet launched">Coming soon…</span>
             <a href="docs/architecture/honeymoon-bot.html" class="project-link secondary" aria-label="Tech Jargon — Honeymoon Bot">
+              Tech Jargon
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.6" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 0 1 0 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 0 1 0-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375Z"/></svg>
+          </div>
+          <div class="project-meta">
+            <span class="project-number">№ 08</span>
+            <span class="project-status wip gloss" data-gloss="status-build">In Build</span>
+          </div>
+          <div class="project-info">
+            <h2 class="project-name">Coupon Tracker</h2>
+            <p class="project-desc">Scans inbox and browser for promos, cashback, and expiring coupons. Surfaces the ones worth using at checkout.</p>
+            <div class="project-tags">
+              <span class="tag">Savings</span>
+              <span class="tag">Utility</span>
+            </div>
+          </div>
+          <div class="project-links">
+            <span class="project-soon" role="status" aria-label="Coupon Tracker — not yet launched">Coming soon…</span>
+            <a href="docs/architecture/coupon-tracker.html" class="project-link secondary" aria-label="Tech Jargon — Coupon Tracker">
               Tech Jargon
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.6" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
             </a>
@@ -2179,19 +2504,19 @@
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"/></svg>
           </div>
           <div class="project-meta">
-            <span class="project-number">№ 08</span>
+            <span class="project-number">№ 09</span>
             <span class="project-status">Private</span>
           </div>
           <div class="project-info">
             <h2 class="project-name">Betting Tracker</h2>
-            <p class="project-desc">Logs every wager, tracks P&amp;L over time, and shows where the edge actually is — or isn't. The honest scoreboard.</p>
+            <p class="project-desc">Logs every wager, tracks P&amp;L over time, shows where the edge actually is. The honest scoreboard.</p>
             <div class="project-tags">
               <span class="tag">Sports</span>
               <span class="tag">Analytics</span>
             </div>
           </div>
           <div class="project-links">
-            <span class="project-soon" aria-label="Betting Tracker — not yet launched">Coming soon…</span>
+            <span class="project-soon" role="status" aria-label="Betting Tracker — not yet launched">Coming soon…</span>
             <a href="docs/architecture/betting-tracker.html" class="project-link secondary" aria-label="Tech Jargon — Betting Tracker">
               Tech Jargon
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.6" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
@@ -2210,19 +2535,19 @@
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Zm.75-12h9v9h-9v-9Z"/></svg>
           </div>
           <div class="project-meta">
-            <span class="project-number">№ 09</span>
+            <span class="project-number">№ 10</span>
             <span class="project-status">Private</span>
           </div>
           <div class="project-info">
             <h2 class="project-name">Betting Model</h2>
-            <p class="project-desc">Crunches the numbers behind the lines. A probability model that finds value where the market misprices outcomes — bet with data, not gut.</p>
+            <p class="project-desc">Probability model that finds value where the market misprices outcomes. Bet with data, not gut.</p>
             <div class="project-tags">
               <span class="tag">Machine Learning</span>
               <span class="tag">Sports</span>
             </div>
           </div>
           <div class="project-links">
-            <span class="project-soon" aria-label="Betting Model — not yet launched">Coming soon…</span>
+            <span class="project-soon" role="status" aria-label="Betting Model — not yet launched">Coming soon…</span>
             <a href="docs/architecture/betting-model.html" class="project-link secondary" aria-label="Tech Jargon — Betting Model">
               Tech Jargon
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.6" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
@@ -2232,6 +2557,37 @@
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.6" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"/></svg>
             <div class="lock-label">Protected Work</div>
             <div class="lock-sub">Password required</div>
+            <button type="button" class="lock-btn">Unlock</button>
+          </div>
+        </article>
+
+        <article class="project-card protected" data-protected="true">
+          <div class="project-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3-3.75h.008v.008H18V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-12 5.25h.008v.008H6V13.5Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/></svg>
+          </div>
+          <div class="project-meta">
+            <span class="project-number">№ 11</span>
+            <span class="project-status">Private</span>
+          </div>
+          <div class="project-info">
+            <h2 class="project-name">Financial Tracker</h2>
+            <p class="project-desc">Net worth, cash flow, and spending in one honest view. Tracks accounts, categorizes transactions, shows whether the month moved the needle.</p>
+            <div class="project-tags">
+              <span class="tag">Personal Finance</span>
+              <span class="tag">Analytics</span>
+            </div>
+          </div>
+          <div class="project-links">
+            <span class="project-soon" role="status" aria-label="Financial Tracker — not yet launched">Coming soon…</span>
+            <a href="docs/architecture/financial-tracker.html" class="project-link secondary" aria-label="Tech Jargon — Financial Tracker">
+              Tech Jargon
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.6" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
+            </a>
+          </div>
+          <div class="lock-overlay">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.6" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"/></svg>
+            <div class="lock-label">Personal Finances</div>
+            <div class="lock-sub">Private — kept off the open web</div>
             <button type="button" class="lock-btn">Unlock</button>
           </div>
         </article>
@@ -2248,10 +2604,10 @@
           </figure>
 
           <div class="about-tab-body">
-            <p class="about-tab-lede">Data, AI &amp; tech strategy by day. Vibe coder by night. Aspiring <em>FDE</em>.</p>
-            <p>I'm a data, AI and tech strategy consultant fascinated by agentic AI. I started vibe coding products and apps to boost my personal productivity and learn while doing it.</p>
-            <p>I've been stacking trainings to pair the strategic lens with real tech chops. The goal: operate as a forward deployed engineer — someone who makes ideas real, not just specs them.</p>
-            <p>This site is the index of those experiments. Each one started as a problem I ran into myself and grew into something I could point at. <em>Strategy is more honest when the strategist has shipped.</em></p>
+            <p class="about-tab-lede">Data, AI, and tech strategy by day. Builder by night. Aspiring <em><span class="gloss gloss--inline" data-gloss="fde">FDE</span></em>.</p>
+            <p>I advise teams on data, AI, and tech strategy. My focus: how agentic systems change operating models. I build products to test those ideas. Each one starts as a real problem I ran into.</p>
+            <p>Pairing strategy with shipped code. The target: forward deployed engineer. Someone who makes the idea real, not just specified.</p>
+            <p>This site is the index. Each tool started as a problem I hit first and grew into something I could point at. <em>Strategy is more honest when the strategist has shipped.</em></p>
 
             <div class="about-meta-row">
               <div class="about-meta-item">
@@ -2374,10 +2730,10 @@
               <div class="skill-col">
                 <h4 class="skill-col-title"><em>Technical</em></h4>
                 <div class="skill-tags">
-                  <span class="skill-tag">Agentic AI</span>
-                  <span class="skill-tag">Gen AI</span>
-                  <span class="skill-tag">Prompt Engineering</span>
-                  <span class="skill-tag">System Architecture</span>
+                  <span class="skill-tag gloss" data-gloss="agentic-ai">Agentic AI</span>
+                  <span class="skill-tag gloss" data-gloss="gen-ai">Gen AI</span>
+                  <span class="skill-tag gloss" data-gloss="prompt-engineering">Prompt Engineering</span>
+                  <span class="skill-tag gloss" data-gloss="system-architecture">System Architecture</span>
                   <span class="skill-tag">Data Viz</span>
                   <span class="skill-tag">Agile</span>
                   <span class="skill-tag">Cloud</span>
@@ -2387,13 +2743,13 @@
               <div class="skill-col">
                 <h4 class="skill-col-title"><em>Business</em></h4>
                 <div class="skill-tags">
-                  <span class="skill-tag">Operating Models</span>
+                  <span class="skill-tag gloss" data-gloss="operating-models">Operating Models</span>
                   <span class="skill-tag">IT Strategy</span>
                   <span class="skill-tag">AI Strategy</span>
                   <span class="skill-tag">Data Strategy</span>
-                  <span class="skill-tag">Roadmapping</span>
+                  <span class="skill-tag gloss" data-gloss="roadmapping">Roadmapping</span>
                   <span class="skill-tag">Vendor Mgmt</span>
-                  <span class="skill-tag">M&amp;A Integration</span>
+                  <span class="skill-tag gloss" data-gloss="ma-integration">M&amp;A Integration</span>
                 </div>
               </div>
               <div class="skill-col">
@@ -2402,7 +2758,7 @@
                   <span class="skill-tag">Exec Communication</span>
                   <span class="skill-tag">Storytelling</span>
                   <span class="skill-tag">Data-driven Decisions</span>
-                  <span class="skill-tag">Engagement Economics</span>
+                  <span class="skill-tag gloss" data-gloss="engagement-economics">Engagement Economics</span>
                   <span class="skill-tag">Program Delivery</span>
                   <span class="skill-tag">Sales</span>
                 </div>
@@ -2426,7 +2782,7 @@
 
       <div class="contact-wrap">
         <div class="contact-grid">
-          <p class="contact-lede reveal">Happy to trade notes — on tech strategy, forward deployment, or <em>anything I'm building</em>.</p>
+          <p class="contact-lede reveal">Happy to trade notes on tech strategy, forward deployment, or <em>anything I'm building</em>.</p>
 
           <ul class="contact-list reveal">
             <li>
@@ -2461,14 +2817,14 @@
     <div class="footer-rule"></div>
     <div class="footer-grid">
       <div class="footer-left">© Thomas Nendick · 2026</div>
-      <div class="footer-sig">— Agentic Army · Volume 1 —</div>
+      <div class="footer-sig">— Deploying my agentic army —</div>
       <div class="footer-right">Set in Instrument Serif &amp; DM Sans</div>
     </div>
   </footer>
 
   <!-- ======================== PASSWORD MODAL ======================== -->
   <div class="pw-modal" id="pwModal" role="dialog" aria-modal="true" aria-labelledby="pwTitle">
-    <div class="pw-modal-card">
+    <div class="pw-modal-card" tabindex="-1">
       <h3 id="pwTitle"><em>Protected</em></h3>
       <p>Enter the password to view betting projects.</p>
       <label class="sr-only" for="pwInput">Password</label>
@@ -2504,7 +2860,7 @@
       const btn = document.querySelector('[data-theme-toggle]');
       if (!btn) return;
       const metaThemeColor = document.querySelector('meta[name="theme-color"]');
-      const colors = { light: '#F3ECE0', dark: '#0B0E1A' };
+      const colors = { light: '#F3ECE0', dark: '#14110D' };
 
       function sync() {
         const t = root.getAttribute('data-theme') || 'light';
@@ -2591,6 +2947,7 @@
     // ==========================================================
     const protectedCards = document.querySelectorAll('.project-card.protected');
     const modal = document.getElementById('pwModal');
+    const modalCard = modal.querySelector('.pw-modal-card');
     const input = document.getElementById('pwInput');
     const errorEl = document.getElementById('pwError');
     const submitBtn = document.getElementById('pwSubmit');
@@ -2604,18 +2961,21 @@
 
     function applyLockState() {
       const unlocked = isUnlocked();
+      // Single source of truth: the .locked class drives both visuals and
+      // the lock-btn unlock flow. aria-disabled is dropped to avoid a
+      // second state the CSS never reads.
       protectedCards.forEach(card => {
         card.classList.toggle('locked', !unlocked);
-        card.setAttribute('aria-disabled', String(!unlocked));
       });
     }
 
     function openModal() {
       lastFocus = document.activeElement;
-      errorEl.textContent = '';
       input.value = '';
       modal.classList.add('open');
-      // 60ms beats iOS focus race with keyboard-opening transitions.
+      // Park focus inside the modal immediately so stray keystrokes don't hit
+      // the page behind it, then hand off to the input once iOS has settled.
+      modalCard.focus({ preventScroll: true });
       setTimeout(() => input.focus(), 60);
     }
 
@@ -2646,6 +3006,9 @@
 
     submitBtn.addEventListener('click', attemptUnlock);
     cancelBtn.addEventListener('click', closeModal);
+    // Clear the error once the user starts typing again, not on modal open —
+    // keeps the message visible long enough to read between attempts.
+    input.addEventListener('input', () => { errorEl.textContent = ''; });
     input.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') attemptUnlock();
       if (e.key === 'Escape') closeModal();
@@ -2658,6 +3021,274 @@
     });
 
     applyLockState();
+  </script>
+
+  <!-- ============================================================
+       UI EXTRAS SCRIPT — scroll rail · § anchors · glossary tooltips
+       Added 2026-04-21. Keep inline to preserve single-file discipline.
+       ============================================================ -->
+  <script>
+  (function () {
+    'use strict';
+
+    var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ---------- Toast (shared) ---------- */
+    var toast = document.getElementById('uiToast');
+    var toastTimer = null;
+    function showToast(message) {
+      if (!toast) return;
+      toast.textContent = message;
+      toast.classList.add('open');
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(function () { toast.classList.remove('open'); }, 1200);
+    }
+
+    /* ---------- Scroll-progress rail ---------- */
+    var rail = document.querySelector('.scroll-rail-fill');
+    if (rail && !reducedMotion && window.innerWidth > 900) {
+      var ticking = false;
+      function updateRail() {
+        var h = document.documentElement;
+        var max = h.scrollHeight - h.clientHeight;
+        var p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+        rail.style.transform = 'scaleY(' + p.toFixed(4) + ')';
+        ticking = false;
+      }
+      function onScroll() {
+        if (!ticking) {
+          window.requestAnimationFrame(updateRail);
+          ticking = true;
+        }
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', updateRail);
+      updateRail();
+    }
+
+    /* ---------- Copy-link § anchors ---------- */
+    function slugify(text) {
+      return String(text)
+        .toLowerCase()
+        .replace(/[^\w\s-]/g, '')
+        .trim()
+        .replace(/\s+/g, '-')
+        .slice(0, 60);
+    }
+
+    // Eligible headings on index: role h3s + education. Skip project-names, modal.
+    var anchorTargets = document.querySelectorAll(
+      'h3.exp-role, h3.edu-school'
+    );
+    anchorTargets.forEach(function (h) {
+      if (h.closest('.project-card') || h.closest('.modal')) return;
+      if (!h.id) {
+        var text = h.textContent || '';
+        var slug = slugify(text);
+        if (!slug) return;
+        // Ensure unique
+        var base = slug, i = 2;
+        while (document.getElementById(slug)) { slug = base + '-' + (i++); }
+        h.id = slug;
+      }
+      h.classList.add('has-anchor');
+      var a = document.createElement('a');
+      a.className = 'heading-anchor';
+      a.href = '#' + h.id;
+      a.textContent = '\u00A7'; // §
+      a.setAttribute('aria-label', 'Copy link to: ' + (h.textContent || '').trim());
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        var url = window.location.origin + window.location.pathname + '#' + h.id;
+        history.replaceState(null, '', '#' + h.id);
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(url).then(
+            function () { showToast('Link copied'); },
+            function () { showToast('Copy failed'); }
+          );
+        } else {
+          // Legacy fallback
+          var ta = document.createElement('textarea');
+          ta.value = url;
+          document.body.appendChild(ta);
+          ta.select();
+          try { document.execCommand('copy'); showToast('Link copied'); }
+          catch (err) { showToast('Copy failed'); }
+          document.body.removeChild(ta);
+        }
+      });
+      h.appendChild(a);
+    });
+
+    // If page loaded with a hash, nudge scroll after anchors are wired.
+    if (window.location.hash) {
+      var target = document.getElementById(window.location.hash.slice(1));
+      if (target) {
+        setTimeout(function () {
+          target.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
+        }, 50);
+      }
+    }
+
+    /* ---------- Glossary tooltips ---------- */
+    // Make every .gloss keyboard-reachable without mangling semantic markup.
+    document.querySelectorAll('.gloss').forEach(function (el) {
+      if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
+    });
+
+    var tip = document.getElementById('glossTooltip');
+    var tpl = document.getElementById('gloss-defs');
+    if (tip && tpl) {
+      var OPEN_DELAY = 120;
+      var CLOSE_DELAY = 80;
+      var openTimer = null;
+      var closeTimer = null;
+      var activeTerm = null;
+      var activeEl = null;
+
+      function defsMap() {
+        var map = {};
+        tpl.content.querySelectorAll('[data-term]').forEach(function (node) {
+          map[node.getAttribute('data-term')] = node;
+        });
+        return map;
+      }
+      var DEFS = defsMap();
+
+      function renderDef(term) {
+        var node = DEFS[term];
+        if (!node) return false;
+        tip.innerHTML = '';
+        var frag = document.createDocumentFragment();
+        Array.prototype.forEach.call(node.childNodes, function (c) {
+          frag.appendChild(c.cloneNode(true));
+        });
+        tip.appendChild(frag);
+        return true;
+      }
+
+      function positionTip(el) {
+        // Reset to measure
+        tip.style.left = '0px';
+        tip.style.top = '0px';
+        var pad = 12;
+        var r = el.getBoundingClientRect();
+        var tipRect = tip.getBoundingClientRect();
+        var scrollX = window.scrollX || window.pageXOffset;
+        var scrollY = window.scrollY || window.pageYOffset;
+
+        // Horizontal: center on term, clamp to viewport
+        var left = r.left + scrollX + (r.width / 2) - (tipRect.width / 2);
+        var minLeft = scrollX + pad;
+        var maxLeft = scrollX + window.innerWidth - tipRect.width - pad;
+        if (left < minLeft) left = minLeft;
+        if (left > maxLeft) left = maxLeft;
+
+        // Vertical: above if space, otherwise below
+        var top;
+        var spaceAbove = r.top;
+        var spaceBelow = window.innerHeight - r.bottom;
+        if (spaceAbove >= tipRect.height + pad || spaceAbove > spaceBelow) {
+          top = r.top + scrollY - tipRect.height - 8;
+        } else {
+          top = r.bottom + scrollY + 8;
+        }
+        tip.style.left = left + 'px';
+        tip.style.top = top + 'px';
+      }
+
+      function openGloss(el) {
+        if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+        var term = el.getAttribute('data-gloss');
+        if (!term || !DEFS[term]) return;
+        if (activeEl === el && tip.classList.contains('open')) return;
+        openTimer = setTimeout(function () {
+          renderDef(term);
+          tip.setAttribute('aria-hidden', 'false');
+          // Give aria-describedby to the active term
+          if (activeEl && activeEl !== el) activeEl.removeAttribute('aria-describedby');
+          el.setAttribute('aria-describedby', 'glossTooltip');
+          activeTerm = term;
+          activeEl = el;
+          // Two-step: insert then position (need dimensions) then add open class
+          tip.classList.add('open');
+          // Position after layout
+          window.requestAnimationFrame(function () { positionTip(el); });
+        }, OPEN_DELAY);
+      }
+
+      function closeGloss(immediate) {
+        if (openTimer) { clearTimeout(openTimer); openTimer = null; }
+        var run = function () {
+          tip.classList.remove('open');
+          tip.setAttribute('aria-hidden', 'true');
+          if (activeEl) activeEl.removeAttribute('aria-describedby');
+          activeTerm = null;
+          activeEl = null;
+        };
+        if (immediate) run();
+        else closeTimer = setTimeout(run, CLOSE_DELAY);
+      }
+
+      // Delegate on document to catch dynamically-added spans (none today, but safe)
+      document.addEventListener('mouseover', function (e) {
+        var el = e.target.closest ? e.target.closest('.gloss') : null;
+        if (el) openGloss(el);
+      });
+      document.addEventListener('mouseout', function (e) {
+        var el = e.target.closest ? e.target.closest('.gloss') : null;
+        if (!el) return;
+        // Don't close if moving into the tooltip itself
+        var to = e.relatedTarget;
+        if (to && (to === tip || (tip.contains && tip.contains(to)))) return;
+        closeGloss();
+      });
+      tip.addEventListener('mouseenter', function () {
+        if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+      });
+      tip.addEventListener('mouseleave', function () { closeGloss(); });
+
+      document.addEventListener('focusin', function (e) {
+        var el = e.target.closest ? e.target.closest('.gloss') : null;
+        if (el) openGloss(el);
+      });
+      document.addEventListener('focusout', function (e) {
+        var el = e.target.closest ? e.target.closest('.gloss') : null;
+        if (el) closeGloss();
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && tip.classList.contains('open')) {
+          closeGloss(true);
+          if (activeEl && typeof activeEl.focus === 'function') activeEl.focus();
+        }
+      });
+
+      // Touch: single-tap opens, tap elsewhere closes
+      document.addEventListener('click', function (e) {
+        var el = e.target.closest ? e.target.closest('.gloss') : null;
+        if (el) {
+          // Let keyboard users trigger via Enter/Space via the native focus path.
+          if (activeEl === el && tip.classList.contains('open')) {
+            closeGloss(true);
+          } else {
+            openGloss(el);
+          }
+          return;
+        }
+        if (tip.classList.contains('open') && !tip.contains(e.target)) {
+          closeGloss(true);
+        }
+      });
+
+      window.addEventListener('scroll', function () {
+        if (tip.classList.contains('open') && activeEl) positionTip(activeEl);
+      }, { passive: true });
+      window.addEventListener('resize', function () {
+        if (tip.classList.contains('open') && activeEl) positionTip(activeEl);
+      });
+    }
+  })();
   </script>
 </body>
 </html>

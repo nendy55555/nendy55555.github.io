@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coupon Tracker — Tech Jargon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="_shared.css">
+  <script src="_shared.js" defer></script>
+</head>
+<body>
+
+  <div class="ambient" aria-hidden="true"></div>
+
+  <div class="masthead">
+    <a class="back-link" href="../../index.html">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"/></svg>
+      Back to Index
+    </a>
+    <div class="masthead-right">
+      <span>Vol. 01</span>
+      <span>Tech Jargon</span>
+      <span>№ 08</span>
+    </div>
+  </div>
+
+  <header class="doc-hero">
+    <div class="doc-kicker">Tech Jargon · Project № 08</div>
+    <h1 class="doc-title">Coupon <em>Tracker</em></h1>
+    <p class="doc-lede">A junk-drawer of promo codes that finally files itself, flags the ones about to expire, and surfaces the right one the moment you open checkout.</p>
+  </header>
+
+  <div class="doc-rule"></div>
+
+  <article class="doc">
+
+    <section>
+      <div class="section-label">The Analogy</div>
+      <h2 class="section-head">The wallet that <em>remembers for you.</em></h2>
+      <p>You hoard codes like gum wrappers. Newsletters, cashback sites, that one Reddit thread — each promises 15% off something you'll buy eventually. Then checkout arrives and you can't find a single one. The savings die in a screenshot folder you never open.</p>
+      <p>This tool turns that mess into a working wallet. It reads every promo you've been sent, tags what it's good for, watches the clock on expirations, and hands over the best available code the instant you're about to pay.</p>
+      <div class="pull">A coupon you can't find at checkout is worth zero. The fix is recall, not collection.</div>
+    </section>
+
+    <section>
+      <div class="section-label">How It Works</div>
+      <h2 class="section-head">Catch. <em>Organize.</em> Deploy.</h2>
+
+      <div class="flow">
+        <div class="flow-step">
+          <div class="flow-kicker">Input</div>
+          <div class="flow-title">It catches every code.</div>
+          <div class="flow-body">Parses promo emails, scans cashback feeds, and pulls store-specific codes into one store-tagged ledger — no manual filing.</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-kicker">Transform</div>
+          <div class="flow-title">It sorts and scores.</div>
+          <div class="flow-body">Tags each code by merchant, category, minimum cart, and expiration. Flags stacking rules. Kills duplicates. Ranks by actual dollar impact.</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-kicker">Output</div>
+          <div class="flow-title">You get the winner at checkout.</div>
+          <div class="flow-body">The right code, surfaced on the right site, before you click pay. No tab-hopping, no expired-code rage.</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-label">Under the Hood<button type="button" class="jargon-info" aria-label="What is this section?" tabindex="0"><span aria-hidden="true">i</span><span class="jargon-tip" role="tooltip">A plain-language read of the tech architecture. Business perspective, no engineering jargon required.</span></button></div>
+      <h2 class="section-head">What's actually <em>running</em>.</h2>
+
+      <div class="tech-grid">
+        <div class="tech-row">
+          <span class="tech-label">Collector</span>
+          <span class="tech-value">Inbox &amp; Feed Parser</span>
+          <span class="tech-plain">Reads promo emails and scans cashback sources. Extracts the code, the merchant, and the fine print.</span>
+        </div>
+        <div class="tech-row">
+          <span class="tech-label">Librarian</span>
+          <span class="tech-value">Tagging Engine</span>
+          <span class="tech-plain">Categorizes each code by store, product type, and stacking rules so the right one surfaces in context.</span>
+        </div>
+        <div class="tech-row">
+          <span class="tech-label">Clock</span>
+          <span class="tech-value">Expiration Watcher</span>
+          <span class="tech-plain">Tracks expiry dates and pings you when a high-value code is about to go stale on a store you actually use.</span>
+        </div>
+        <div class="tech-row">
+          <span class="tech-label">Courier</span>
+          <span class="tech-value">Checkout Surface</span>
+          <span class="tech-plain">A browser companion that matches the page you're on to the best available code — one click to apply.</span>
+        </div>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">Why it's built this way</div>
+        <p>The hard part isn't finding codes — inboxes overflow with them. The hard part is recall at the exact moment of purchase. Splitting the system into collect, tag, watch, and deliver means each part can get smarter on its own, and the whole stack gets more useful every time a new merchant or source is added.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-label">Why It Matters</div>
+      <h2 class="section-head">Small savings <em>compound quietly</em>.</h2>
+      <p>A 15% code on every order you were going to place anyway stacks up to a meaningful dent over a year. The barrier isn't greed — it's the friction of remembering. Remove that friction and the savings arrive on autopilot.</p>
+      <p>This one isn't about becoming an extreme couponer. It's about not leaving free money on the table because you forgot where you put it.</p>
+    </section>
+
+  </article>
+
+  <footer>
+    <div class="footer-rule"></div>
+    <div class="footer-grid">
+      <div>© Thomas Nendick · 2026</div>
+      <div><a href="../../index.html">← Return to Index</a></div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -2,7 +2,46 @@
 
 **Generated:** 2026-04-20 (hardening)
 **Updated:** 2026-04-21 (design-audit pass — Phases 1–3)
-**Pass:** Pre-Max-Downgrade Hardening + Design-Audit Refinement
+**Updated:** 2026-04-21 (audit-and-ideas execution — Critical + High + Medium + Low)
+**Pass:** Pre-Max-Downgrade Hardening + Design-Audit Refinement + Audit Execution
+
+## 2026-04-21 — audit-and-ideas execution summary
+
+Executed all Critical, High, Medium, and Low findings from
+`docs/audit-and-ideas.md`. Validator still returns PASS with zero issues
+across 54 links, 15 ids, 11 classes, 656 tags, 18 assets.
+
+| Severity | Finding | Change |
+|---|---|---|
+| Critical-01 | Hero rebrand | Headline → "Strategy, *built*." Byline → "Most strategists stop at the deck. I ship." Kicker → "Works · Volume 01." Sub → concrete index line. |
+| Critical-02 | Dark-mode unified | Purple/teal retired. Warm-rust token ladder (`#E8944D` / `#F0A668` / `#F5B47E`), warm-green secondary (`#7AB891`), warm near-black bg (`#14110D`). All overlay darks warmed to `rgba(20,17,13,…)`. |
+| High-01 | Copy voice | About lede + paras rewritten. All 11 project-card descriptions tightened to the Appendix A voice. Em-dashes pruned from card copy. |
+| High-02 | Modal focus | Modal card gets `tabindex="-1"`, focused immediately on open; input focused after 60ms (iOS). Error clears on `input` event, not on open. |
+| High-03 | Ambient drift | Removed. `.ambient` hidden; grain overlay carries the texture. |
+| High-04 | Card spacing | Padding `28px 30px 26px` → `24px 28px 24px`. Icon-meta gap 22 → 20px. |
+| High-05 | Spine semantic | Default spine is muted rule; `:has(.project-status.shipped)` → rust, `:has(.wip)` → accent-deep. Archive/Private stay muted. |
+| High-06 | Coming-soon | `role="status"` added to all 6 `.project-soon` spans. Hover/focus reveals the per-project aria-label as a micro-caption tooltip. |
+| Medium-01 | Meta | Title + description rewritten around FDE positioning. |
+| Medium-02 | Portrait alt | Adds role context ("Technology Strategy Manager at Deloitte") before the human detail. |
+| Medium-03 | aria-disabled | Dropped. `.locked` class is the single source of truth for protected cards. |
+| Medium-04 | Desc line-height | `1.65` → `1.5` for 2-3 line card snippets. |
+| Medium-05 | Tab count | Selected count uses `--text` + `font-weight: 600`, not rust. |
+| Medium-07 | Animation tempo | Normalized to 0.3s micro, 0.6s reveal. Card hover 0.35 → 0.3, spine 0.4 → 0.3, icon 0.45 → 0.3, reveal 0.7 → 0.6. |
+| Medium-09 | Em-dash | Contact lede em-dash removed. |
+| Low-02 | Skill-tag `:active` | `transform: scale(0.98)` added. |
+| Responsive | Safe-area | Theme toggle uses `max(14px, env(safe-area-inset-*))` at ≤640px. |
+| Responsive | Singleton centering | Any singleton (including protected) centered at 1024–1099px, falls back to left-alignment at 1100px+. |
+
+Skipped intentionally: Medium-06 (hero-sub had no `<em>` after Critical-01
+rewrite — self-resolved), Medium-08 (dark-accent contrast resolved by
+Critical-02), Low-01 (custom glyph set is Pass 2 territory), Low-05
+(figcaption optional), Low-06 (already in place), Low-07 (documented
+intentional soft gate).
+
+Footer colophon + title deliberately retain "Agentic Army" / "Building
+my agentic army" framing — user-tuned between passes. Kept as-is.
+
+---
 
 ## 2026-04-21 — Design-audit pass summary
 

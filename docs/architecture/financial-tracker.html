@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financial Tracker — Tech Jargon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="_shared.css">
+  <script src="_shared.js" defer></script>
+</head>
+<body>
+
+  <div class="ambient" aria-hidden="true"></div>
+
+  <div class="masthead">
+    <a class="back-link" href="../../index.html">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"/></svg>
+      Back to Index
+    </a>
+    <div class="masthead-right">
+      <span>Vol. 01</span>
+      <span>Tech Jargon</span>
+      <span>№ 11</span>
+    </div>
+  </div>
+
+  <header class="doc-hero">
+    <div class="doc-kicker">Tech Jargon · Project № 11</div>
+    <h1 class="doc-title">Financial <em>Tracker</em></h1>
+    <p class="doc-lede">A private ledger that stitches every account into one honest view — net worth, cash flow, and spending, with no spreadsheet ritual on the first of the month.</p>
+  </header>
+
+  <div class="doc-rule"></div>
+
+  <article class="doc">
+
+    <section>
+      <div class="section-label">The Analogy</div>
+      <h2 class="section-head">The personal <em>CFO</em> that actually shows up.</h2>
+      <p>Most people know their paycheck and their rent. The rest is fog — scattered cards, a 401k you log into twice a year, a checking balance that lies by two days. Budgeting apps try to help and then nag you into uninstalling them.</p>
+      <p>This is the opposite of a nagging app. It reads every account you own, reconciles the mess, and gives you one picture: what came in, what left, what's actually growing. No gamification. No guilt. Just the number.</p>
+      <div class="pull">You can't improve a finish line you can't see. The first job is measurement.</div>
+    </section>
+
+    <section>
+      <div class="section-label">How It Works</div>
+      <h2 class="section-head">Pull. <em>Reconcile.</em> Report.</h2>
+
+      <div class="flow">
+        <div class="flow-step">
+          <div class="flow-kicker">Input</div>
+          <div class="flow-title">It pulls everything.</div>
+          <div class="flow-body">Syncs checking, credit, brokerage, retirement, and crypto accounts through secure aggregators so nothing is left out.</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-kicker">Transform</div>
+          <div class="flow-title">It reconciles the mess.</div>
+          <div class="flow-body">Categorizes transactions, nets out transfers, rolls up recurring bills, and marks the outliers worth a second look.</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-kicker">Output</div>
+          <div class="flow-title">You get one honest view.</div>
+          <div class="flow-body">Net worth over time, cash flow by month, category trends, and a short list of what actually moved the number.</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-label">Under the Hood<button type="button" class="jargon-info" aria-label="What is this section?" tabindex="0"><span aria-hidden="true">i</span><span class="jargon-tip" role="tooltip">A plain-language read of the tech architecture. Business perspective, no engineering jargon required.</span></button></div>
+      <h2 class="section-head">What's actually <em>running</em>.</h2>
+
+      <div class="tech-grid">
+        <div class="tech-row">
+          <span class="tech-label">Ingest</span>
+          <span class="tech-value">Account Aggregator</span>
+          <span class="tech-plain">Secure read-only connections to banks, brokerages, and card issuers. Credentials never touch the app directly.</span>
+        </div>
+        <div class="tech-row">
+          <span class="tech-label">Ledger</span>
+          <span class="tech-value">Transaction Store</span>
+          <span class="tech-plain">A local-first database of every transaction, labeled and deduplicated. Built so you own the data, not a vendor.</span>
+        </div>
+        <div class="tech-row">
+          <span class="tech-label">Categorizer</span>
+          <span class="tech-value">Rules &amp; ML Hybrid</span>
+          <span class="tech-plain">Starts with rules you set, learns the edge cases over time. Fewer miscategorized Chipotle runs, more accurate trend lines.</span>
+        </div>
+        <div class="tech-row">
+          <span class="tech-label">Scoreboard</span>
+          <span class="tech-value">Reporting Layer</span>
+          <span class="tech-plain">Net worth, cash flow, savings rate, and category deltas — rendered as the report a private CFO would hand you each Sunday.</span>
+        </div>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">Why it's built this way</div>
+        <p>Personal finance data is the most sensitive data you have. The architecture prioritizes local-first storage, read-only integrations, and zero third-party data sale. Separate layers mean you can swap any aggregator without losing your history — your ledger is yours, independent of whoever last made a decent data feed.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-label">Why It Matters</div>
+      <h2 class="section-head">Net worth is the <em>only honest score</em>.</h2>
+      <p>Income is a vanity number. Spending is a confession. Net worth is the truth — it moves whether you feel productive or not. Measure it cleanly and the right decisions get easier: which expense to cut, which account to fund, which risk to actually take.</p>
+      <p>This one stays private by design. The goal is clarity for the one person it's for.</p>
+    </section>
+
+  </article>
+
+  <footer>
+    <div class="footer-rule"></div>
+    <div class="footer-grid">
+      <div>© Thomas Nendick · 2026</div>
+      <div><a href="../../index.html">← Return to Index</a></div>
+    </div>
+  </footer>
+
+</body>
+</html>
