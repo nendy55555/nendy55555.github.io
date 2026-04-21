@@ -1,0 +1,54 @@
+# ============================================================
+# thomasnendick.com — .gitignore
+# ============================================================
+# The site is a static, no-build project. The only files that
+# belong in git are index.html, assets/**, docs/**, scripts/**,
+# and the top-level README / .gitignore / CNAME-style config.
+# ============================================================
+
+# macOS
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# Editors / IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Python (for scripts/validate.py)
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Node (in case future tooling shows up — nothing ships through node today)
+node_modules/
+npm-debug.log*
+yarn-error.log
+
+# Build output (there is no build, but if Netlify/Vercel config shows up)
+dist/
+build/
+.cache/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# OS backups
+*.bak
+*.orig
+
+# Local-only image originals (pre-compression). Stored as dotfiles in
+# assets/ so the filename hints at provenance. The original pre-compress
+# copy is recoverable from git history if ever needed.
+assets/.*.original.*
+
+# Validator working files
+.validator-cache/

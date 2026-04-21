@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Honeymoon Bot — Technical Jargon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="_shared.css">
+</head>
+<body>
+
+  <div class="ambient" aria-hidden="true"></div>
+
+  <div class="masthead">
+    <a class="back-link" href="../../index.html">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"/></svg>
+      Back to Index
+    </a>
+    <div class="masthead-right">
+      <span>Vol. 01</span>
+      <span>Tech Doc</span>
+      <span>№ 07</span>
+    </div>
+  </div>
+
+  <header class="doc-hero">
+    <div class="doc-kicker">Technical Jargon · Project № 07</div>
+    <h1 class="doc-title">Honeymoon <em>Bot</em></h1>
+    <p class="doc-lede">The travel agent who already knows your budget, your no-fly list, and the two countries your partner actually cares about — and hands you one itinerary instead of thirty tabs.</p>
+  </header>
+
+  <div class="doc-rule"></div>
+
+  <article class="doc">
+
+    <section>
+      <div class="section-label">The Analogy</div>
+      <h2 class="section-head">A travel agent who <em>remembers</em> what you said last time.</h2>
+      <p>Honeymoon planning turns into a browser-tab factory fast. One tab for flights, three for hotels, another for "things to do in Lisbon," another for visa rules, another for dinner reservations. Nobody reads thirty tabs. People panic-book the first option that looks okay, and the trip is shaped by whichever tab happened to be on top.</p>
+      <p>This bot is the alternative: a planner that holds the whole trip in its head. Budget, preferences, dates, and the two non-negotiables your partner mentioned in February are all retained. It proposes an itinerary that actually fits, not a menu of flights you have to cross-reference by hand.</p>
+      <div class="pull">Great trips aren't planned by the spreadsheet. They're planned by someone who remembers what you actually want.</div>
+    </section>
+
+    <section>
+      <div class="section-label">How It Works</div>
+      <h2 class="section-head">Capture. <em>Compose.</em> Commit.</h2>
+
+      <div class="flow">
+        <div class="flow-step">
+          <div class="flow-kicker">Input</div>
+          <div class="flow-title">You describe the trip.</div>
+          <div class="flow-body">Budget, dates, must-haves, must-avoids, travel style. A short conversation — not a form. Everything is remembered between sessions.</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-kicker">Transform</div>
+          <div class="flow-title">It builds the trip.</div>
+          <div class="flow-body">Stitches flights, stays, and activities into one itinerary. Prices every leg, checks visa and weather, flags anything that blows the budget or the calendar.</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-kicker">Output</div>
+          <div class="flow-title">You get one itinerary.</div>
+          <div class="flow-body">A single plan — dates, bookings, daily rhythm, a running cost — with swap-in alternatives for anything you want to negotiate. Approve, book, done.</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-label">Under the Hood</div>
+      <h2 class="section-head">What's actually <em>running</em>.</h2>
+
+      <div class="tech-grid">
+        <div class="tech-row">
+          <span class="tech-label">Interviewer</span>
+          <span class="tech-value">Conversational Frontend</span>
+          <span class="tech-plain">A chat surface that captures preferences in plain language — no endless form, no dropdowns nobody wants to touch.</span>
+        </div>
+        <div class="tech-row">
+          <span class="tech-label">Planner</span>
+          <span class="tech-value">Itinerary Engine</span>
+          <span class="tech-plain">Stitches flights, stays, and activities together. Scores the trade-offs, prices everything, keeps the daily pace sane.</span>
+        </div>
+        <div class="tech-row">
+          <span class="tech-label">Scout</span>
+          <span class="tech-value">Travel API Layer</span>
+          <span class="tech-plain">Pulls live pricing and availability from flight, lodging, and activity sources — so the itinerary reflects today's market, not last week's.</span>
+        </div>
+        <div class="tech-row">
+          <span class="tech-label">Memory</span>
+          <span class="tech-value">Preference Store</span>
+          <span class="tech-plain">Keeps budget rules, no-fly lists, and the small partner preferences that break a trip if forgotten. Survives every session.</span>
+        </div>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">Why it's built this way</div>
+        <p>A honeymoon is a single-shot project with a hard deadline, a real budget, and two stakeholders with different taste. Splitting the work into capture, compose, and commit keeps each piece auditable — you can see where the plan came from, why a leg was chosen, and what the next-best option was. Nothing is hand-wavy.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-label">Why It Matters</div>
+      <h2 class="section-head">The point isn't <em>travel.</em></h2>
+      <p>It's proving that the highest-leverage place for software is the moments where planning fatigue silently shapes the outcome. Most big personal decisions — trips, moves, weddings — get worse the longer you stare at them. The right tool shrinks that staring window and gives the decision back to the people it belongs to.</p>
+      <p>Same pattern as every other agent in the Army: capture what you actually want, do the grunt work, hand back one clean decision.</p>
+    </section>
+
+  </article>
+
+  <footer>
+    <div class="footer-rule"></div>
+    <div class="footer-grid">
+      <div>© Thomas Nendick · 2026</div>
+      <div><a href="../../index.html">← Return to Index</a></div>
+    </div>
+  </footer>
+
+</body>
+</html>

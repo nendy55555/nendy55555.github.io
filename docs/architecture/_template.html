@@ -1,0 +1,153 @@
+<!--
+  _template.html — starter for a new architecture page.
+
+  How to use
+  ----------
+  1. Duplicate this file and rename it to match the project card slug on the
+     index (e.g. `rideshare-comp.html`). The filename must match the href
+     used in index.html → arch-url data attribute.
+  2. Replace every `{{TOKEN}}` below. The required substitutions are:
+
+       {{TITLE}}           Project name in the <title> tag ("Housing Finder")
+       {{NUMBER}}          Two-digit project number matching the card №
+       {{TITLE_HTML}}      Display title; wrap the emphasized word in <em>
+                           (e.g. `Housing <em>Finder</em>`)
+       {{LEDE}}            One-sentence lede sitting under the title. Set the
+                           analogy. No filler.
+       {{ANALOGY_HEAD}}    Section-head for "The Analogy" (wrap a word in <em>)
+       {{ANALOGY_BODY}}    Two short paragraphs. Pose the pain, then the fix.
+       {{PULLQUOTE}}       One-line pull — a statement the reader will quote.
+       {{STEP_1_TITLE}}    First flow step ("It watches the market.")
+       {{STEP_1_BODY}}     One or two sentences — what happens at this step.
+       {{STEP_2_TITLE}}    Second flow step.
+       {{STEP_2_BODY}}
+       {{STEP_3_TITLE}}    Third flow step.
+       {{STEP_3_BODY}}
+       {{TECH_ROWS}}       Four <div class="tech-row"> blocks; see housing-finder.html
+                           for the shape (label → value → plain-english line).
+       {{RATIONALE}}       One paragraph inside the callout: why it is built
+                           this way. Connect architecture to the outcome.
+       {{PAYOFF_HEAD}}     "Why It Matters" section-head (italicize a word).
+       {{PAYOFF_BODY}}     Two short paragraphs. No hedging.
+
+  3. Update the `doc-kicker`, `<title>`, and `masthead-right` number in three
+     places.
+  4. Save and run:
+
+         python3 scripts/validate.py
+
+     This verifies the back-link resolves and the new file has balanced tags.
+
+  5. Open index.html, add the card with `data-arch-url="docs/architecture/
+     <your-file>.html"`. Keep protected cards (Betting Tracker, Betting Model)
+     at the bottom of the Active grid.
+
+  Voice
+  -----
+  • Active voice. Human subject for every claim.
+  • Cut adverbs. Cut "not X, it's Y". State Y.
+  • Rhythm: vary sentence length. Avoid em-dashes. Avoid quotables unless the
+    pullquote needs one.
+  • Keep each section under 120 words. The lede does the work.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{TITLE}} — Technical Jargon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="_shared.css">
+</head>
+<body>
+
+  <div class="ambient" aria-hidden="true"></div>
+
+  <div class="masthead">
+    <a class="back-link" href="../../index.html">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"/></svg>
+      Back to Index
+    </a>
+    <div class="masthead-right">
+      <span>Vol. 01</span>
+      <span>Tech Doc</span>
+      <span>№ {{NUMBER}}</span>
+    </div>
+  </div>
+
+  <header class="doc-hero">
+    <div class="doc-kicker">Technical Jargon · Project № {{NUMBER}}</div>
+    <h1 class="doc-title">{{TITLE_HTML}}</h1>
+    <p class="doc-lede">{{LEDE}}</p>
+  </header>
+
+  <div class="doc-rule"></div>
+
+  <article class="doc">
+
+    <section>
+      <div class="section-label">The Analogy</div>
+      <h2 class="section-head">{{ANALOGY_HEAD}}</h2>
+      {{ANALOGY_BODY}}
+      <div class="pull">{{PULLQUOTE}}</div>
+    </section>
+
+    <section>
+      <div class="section-label">How It Works</div>
+      <h2 class="section-head">Capture. <em>Compose.</em> Commit.</h2>
+
+      <div class="flow">
+        <div class="flow-step">
+          <div class="flow-kicker">Input</div>
+          <div class="flow-title">{{STEP_1_TITLE}}</div>
+          <div class="flow-body">{{STEP_1_BODY}}</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-kicker">Transform</div>
+          <div class="flow-title">{{STEP_2_TITLE}}</div>
+          <div class="flow-body">{{STEP_2_BODY}}</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-kicker">Output</div>
+          <div class="flow-title">{{STEP_3_TITLE}}</div>
+          <div class="flow-body">{{STEP_3_BODY}}</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-label">Under the Hood</div>
+      <h2 class="section-head">What's actually <em>running</em>.</h2>
+
+      <div class="tech-grid">
+        {{TECH_ROWS}}
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">Why it's built this way</div>
+        <p>{{RATIONALE}}</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-label">Why It Matters</div>
+      <h2 class="section-head">{{PAYOFF_HEAD}}</h2>
+      {{PAYOFF_BODY}}
+    </section>
+
+  </article>
+
+  <footer>
+    <div class="footer-rule"></div>
+    <div class="footer-grid">
+      <div>© Thomas Nendick · 2026</div>
+      <div><a href="../../index.html">← Return to Index</a></div>
+    </div>
+  </footer>
+
+</body>
+</html>
