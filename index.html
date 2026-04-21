@@ -2,10 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Workshop Notes, Volume One. An index of tools, apps, and experiments built by Thomas Nendick.">
-  <meta name="theme-color" content="#F3ECE0">
-  <title>Thomas Nendick — Workshop Notes, Vol. 01</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Agentic Army, Volume One. Thomas Nendick's personal fleet of productivity agents — tools built to replace the tasks he didn't want to keep doing.">
+  <meta name="theme-color" content="#0B0E1A">
+  <meta name="color-scheme" content="light">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>Thomas Nendick — Agentic Army, Volume 1</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,28 +23,29 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      /* Surfaces */
-      --bg:              #F3ECE0;
-      --bg-deep:         #EBE2D3;
-      --bg-card:         #FBF7EF;
-      --bg-card-hover:   #FFFBF3;
+      /* Surfaces — Deep Space Glass */
+      --bg:              #0B0E1A;   /* ink-navy base */
+      --bg-deep:         #141A2E;   /* section wells + deep cards */
+      --bg-card:         rgba(255, 255, 255, 0.04);   /* frosted glass */
+      --bg-card-hover:   rgba(255, 255, 255, 0.07);
 
-      /* Ink — all pass WCAG AA on paper bg */
-      --text:            #1E1A16;   /* AA 13.6:1 */
-      --text-secondary:  #574E47;   /* AA 6.94:1 — body prose */
-      --text-muted:      #6E6459;   /* AA 4.60:1 — small mono metadata */
+      /* Ink — luminous neutrals on navy */
+      --text:            #E8EAFF;   /* primary display */
+      --text-secondary:  #A7B0D0;   /* body prose, AA 7.5:1 */
+      --text-muted:      #7A8299;   /* small mono metadata, AA 4.8:1 */
 
-      /* Accent — scale by role */
-      --accent:          #C2613A;   /* display only, passes AA large 3:1 */
-      --accent-deep:     #8B3F21;   /* body emphasis, AA 6.3:1 */
-      --accent-ink:      #7A361B;   /* densest small type, AA 7.4:1 */
-      --accent-wash:     rgba(194, 97, 58, 0.08);
-      --accent-ring:     rgba(194, 97, 58, 0.28);
+      /* Accent — iridescent violet */
+      --accent:          #9B6DFF;   /* display / primary */
+      --accent-deep:     #B896FF;   /* body emphasis (lighter on dark) */
+      --accent-ink:      #C4AAFF;   /* densest small type */
+      --accent-teal:     #3BD8C7;   /* secondary iridescent pop */
+      --accent-wash:     rgba(155, 109, 255, 0.10);
+      --accent-ring:     rgba(155, 109, 255, 0.35);
 
       /* Signals */
-      --live:            #3E6B4B;   /* tightened forest for AA */
-      --rule:            #D9CFC1;
-      --rule-soft:       #E6DED0;
+      --live:            #3BD8C7;   /* teal = live */
+      --rule:            rgba(255, 255, 255, 0.09);
+      --rule-soft:       rgba(255, 255, 255, 0.05);
 
       /* Typography */
       --serif: 'Instrument Serif', Georgia, serif;
@@ -53,17 +59,33 @@
       --gutter-sm: 24px;
     }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+      /* Prevent iOS text auto-inflation on rotation */
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
 
     body {
       font-family: var(--sans);
-      background: var(--bg);
+      background:
+        radial-gradient(ellipse 80% 50% at 70% -10%, rgba(155, 109, 255, 0.18), transparent 60%),
+        radial-gradient(ellipse 90% 60% at 0% 110%, rgba(59, 216, 199, 0.10), transparent 55%),
+        linear-gradient(180deg, #0B0E1A 0%, #101530 55%, #0B0E1A 100%);
+      background-attachment: fixed;
       color: var(--text);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       min-height: 100vh;
       overflow-x: hidden;
+      /* Custom accent-tinted tap highlight */
+      -webkit-tap-highlight-color: rgba(155, 109, 255, 0.22);
+    }
+
+    /* Give interactive elements a consistent, subtle tap flash */
+    a, button, [role="tab"], summary, input, select, textarea {
+      -webkit-tap-highlight-color: rgba(155, 109, 255, 0.22);
     }
 
     ::selection { background: var(--accent-wash); color: var(--text); }
@@ -114,7 +136,9 @@
       inset: -20%;
       z-index: 0;
       pointer-events: none;
-      opacity: 0.55;
+      opacity: 0.85;
+      /* Allow the layer to be GPU-promoted but only when it's likely to animate */
+      will-change: transform;
     }
     .ambient::before,
     .ambient::after {
@@ -128,7 +152,7 @@
       height: 55vw;
       top: -10%;
       left: -5%;
-      background: radial-gradient(circle, rgba(194, 97, 58, 0.22), transparent 70%);
+      background: radial-gradient(circle, rgba(155, 109, 255, 0.32), transparent 70%);
       animation: drift1 28s ease-in-out infinite alternate;
     }
     .ambient::after {
@@ -136,7 +160,7 @@
       height: 45vw;
       bottom: -10%;
       right: -10%;
-      background: radial-gradient(circle, rgba(139, 63, 33, 0.16), transparent 70%);
+      background: radial-gradient(circle, rgba(59, 216, 199, 0.22), transparent 70%);
       animation: drift2 36s ease-in-out infinite alternate;
     }
 
@@ -163,6 +187,9 @@
       max-width: var(--container);
       margin: 0 auto;
       padding: 28px var(--gutter-lg) 0;
+      /* Respect notch on landscape iPhones */
+      padding-left:  max(var(--gutter-lg), env(safe-area-inset-left));
+      padding-right: max(var(--gutter-lg), env(safe-area-inset-right));
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -189,13 +216,13 @@
       height: 7px;
       border-radius: 50%;
       background: var(--live);
-      box-shadow: 0 0 0 0 rgba(62, 107, 75, 0.55);
+      box-shadow: 0 0 0 0 rgba(59, 216, 199, 0.55);
       animation: pulse 2.2s ease-out infinite;
     }
     @keyframes pulse {
-      0%   { box-shadow: 0 0 0 0 rgba(62, 107, 75, 0.55); }
-      70%  { box-shadow: 0 0 0 9px rgba(62, 107, 75, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(62, 107, 75, 0); }
+      0%   { box-shadow: 0 0 0 0 rgba(59, 216, 199, 0.55); }
+      70%  { box-shadow: 0 0 0 9px rgba(59, 216, 199, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(59, 216, 199, 0); }
     }
 
     /* ============================================================
@@ -204,7 +231,7 @@
     header.hero {
       max-width: var(--container);
       margin: 0 auto;
-      padding: 72px var(--gutter-lg) 56px;
+      padding: 72px var(--gutter-lg) 24px;
       display: grid;
       grid-template-columns: 1fr 220px;
       gap: 56px;
@@ -305,16 +332,18 @@
                   box-shadow 0.25s ease;
     }
     .cta-primary {
-      background: var(--text);
-      color: var(--bg);
-      border-color: var(--text);
+      background: linear-gradient(135deg, var(--accent) 0%, #7A4EFF 100%);
+      color: #0B0E1A;
+      border-color: var(--accent);
+      font-weight: 600;
+      box-shadow: 0 10px 28px -8px rgba(155, 109, 255, 0.45);
     }
     .cta-primary:hover,
     .cta-primary:focus-visible {
-      background: var(--accent);
-      border-color: var(--accent);
+      background: linear-gradient(135deg, #B896FF 0%, var(--accent) 100%);
+      border-color: var(--accent-deep);
       transform: translateY(-1px);
-      box-shadow: 0 10px 24px -10px rgba(194, 97, 58, 0.45);
+      box-shadow: 0 14px 36px -8px rgba(155, 109, 255, 0.75);
     }
     .cta-primary svg { transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1); }
     .cta-primary:hover svg { transform: translateX(3px); }
@@ -357,11 +386,12 @@
       max-width: 200px;
       aspect-ratio: 4 / 5;
       overflow: hidden;
-      background: #eae3d9;
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 6px;
       box-shadow:
-        inset 0 0 0 1px rgba(44,40,37,0.08),
-        0 1px 2px rgba(44,40,37,0.04),
-        0 12px 28px -18px rgba(44,40,37,0.28);
+        inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+        0 1px 2px rgba(0, 0, 0, 0.25),
+        0 18px 40px -18px rgba(155, 109, 255, 0.35);
     }
     .hero-portrait img {
       width: 100%;
@@ -401,7 +431,7 @@
        ============================================================ */
     .section-masthead {
       max-width: var(--container);
-      margin: 96px auto 28px;
+      margin: 48px auto 28px;
       padding: 0 var(--gutter-lg);
       display: flex;
       align-items: center;
@@ -451,8 +481,8 @@
       align-items: center;
       justify-content: center;
       box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.5),
-        0 1px 0 rgba(30, 26, 22, 0.03);
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        0 20px 44px -20px rgba(155, 109, 255, 0.35);
     }
     .portrait::before {
       content: '';
@@ -503,8 +533,9 @@
       color: var(--text-muted);
       line-height: 1;
       padding: 4px 6px;
-      background: rgba(243, 236, 224, 0.78);
-      backdrop-filter: blur(2px);
+      background: rgba(11, 14, 26, 0.72);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 2px;
     }
     .portrait-corner.tl { top: 18px; left: 20px; }
@@ -629,7 +660,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(0,0,0,0) 65%, rgba(30,26,22,0.12) 100%);
+      background: linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(11, 14, 26, 0.55) 100%);
       pointer-events: none;
       z-index: 1;
     }
@@ -647,8 +678,12 @@
       font-size: 0.66rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: #FBF7EF;
-      mix-blend-mode: difference;
+      color: #E8EAFF;
+      background: rgba(11, 14, 26, 0.6);
+      padding: 3px 6px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 2px;
+      backdrop-filter: blur(4px);
     }
     .about-tab-portrait .pc-tl { top: 18px; left: 20px; }
     .about-tab-portrait .pc-br { bottom: 18px; right: 20px; }
@@ -810,7 +845,7 @@
       overflow: hidden;
     }
     .exp-item:last-child { border-bottom: 1px solid var(--rule-soft); }
-    .exp-item[open] { background: linear-gradient(180deg, rgba(194,97,58,0.02) 0%, transparent 100%); }
+    .exp-item[open] { background: linear-gradient(180deg, rgba(155, 109, 255, 0.06) 0%, transparent 100%); }
 
     /* summary is the clickable row */
     .exp-summary {
@@ -825,7 +860,7 @@
       transition: background 0.2s ease;
     }
     .exp-summary::-webkit-details-marker { display: none; }
-    .exp-summary:hover { background: rgba(194,97,58,0.025); }
+    .exp-summary:hover { background: rgba(155, 109, 255, 0.05); }
     .exp-summary:focus-visible {
       outline: 2px solid var(--accent-ring);
       outline-offset: 2px;
@@ -897,6 +932,8 @@
       max-width: 78%;
       max-height: 78%;
       object-fit: contain;
+      /* Dark-mode invert for dark SVG logos */
+      filter: invert(1) brightness(1.1);
     }
 
     /* expanded body */
@@ -967,14 +1004,14 @@
       width: 72px;
       height: 72px;
       border-radius: 12px;
-      background: #FFFBF3;
+      background: rgba(255, 255, 255, 0.06);
       border: 1px solid var(--rule);
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
     }
-    .edu-logo img { max-width: 64%; max-height: 64%; object-fit: contain; }
+    .edu-logo img { max-width: 64%; max-height: 64%; object-fit: contain; filter: invert(1) brightness(1.1); }
     .edu-logo .fallback {
       font-family: var(--serif);
       font-size: 1.5rem;
@@ -1078,11 +1115,12 @@
       height: 34px;
       display: flex;
       align-items: center;
-      filter: grayscale(1) contrast(1.05);
+      /* Invert dark logos for the dark palette, keep them desaturated */
+      filter: invert(1) grayscale(1) brightness(1.15) contrast(0.95);
       transition: filter 0.3s ease, opacity 0.3s ease;
     }
     .company-wall-logos .wall-logo:hover {
-      filter: grayscale(0);
+      filter: invert(1) grayscale(0) brightness(1.2);
     }
     .company-wall-logos .wall-logo img {
       max-height: 100%;
@@ -1099,7 +1137,9 @@
 
     .project-card {
       background: var(--bg-card);
-      border: 1px solid var(--rule-soft);
+      backdrop-filter: blur(14px) saturate(1.2);
+      -webkit-backdrop-filter: blur(14px) saturate(1.2);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 16px;
       padding: 28px 30px 26px;
       display: flex;
@@ -1112,6 +1152,17 @@
       position: relative;
       overflow: hidden;
     }
+    /* Subtle top-edge specular highlight for glass */
+    .project-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 35%);
+      z-index: 0;
+    }
+    .project-card > * { position: relative; z-index: 1; }
     .project-card::before {
       content: '';
       position: absolute;
@@ -1119,16 +1170,18 @@
       left: 0;
       width: 3px;
       height: 100%;
-      background: var(--accent);
+      background: linear-gradient(180deg, var(--accent) 0%, var(--accent-teal) 100%);
       transform: scaleY(0);
       transform-origin: top;
       transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+      z-index: 1;
     }
     .project-card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 18px 48px -12px rgba(44, 30, 20, 0.12),
-                  0 6px 16px -6px rgba(44, 30, 20, 0.06);
-      border-color: var(--rule);
+      box-shadow:
+        0 24px 60px -18px rgba(155, 109, 255, 0.35),
+        0 6px 18px -6px rgba(0, 0, 0, 0.45);
+      border-color: rgba(155, 109, 255, 0.35);
       background: var(--bg-card-hover);
     }
     .project-card:hover::before { transform: scaleY(1); }
@@ -1138,7 +1191,7 @@
       height: 52px;
       border-radius: 14px;
       background: var(--accent-wash);
-      border: 1px solid rgba(194, 97, 58, 0.18);
+      border: 1px solid rgba(155, 109, 255, 0.25);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1157,9 +1210,9 @@
     }
     .project-card:hover .project-icon {
       transform: scale(1.08) rotate(-4deg);
-      background: rgba(194, 97, 58, 0.15);
-      border-color: rgba(194, 97, 58, 0.35);
-      box-shadow: 0 6px 18px -8px rgba(194, 97, 58, 0.35);
+      background: rgba(155, 109, 255, 0.22);
+      border-color: rgba(155, 109, 255, 0.55);
+      box-shadow: 0 8px 22px -6px rgba(155, 109, 255, 0.55);
     }
 
     /* Last card in odd count: center it */
@@ -1254,6 +1307,7 @@
       align-items: center;
       gap: 22px;
       margin-top: 18px;
+      min-height: 22px;
     }
 
     .project-link {
@@ -1301,9 +1355,7 @@
       text-transform: uppercase;
       color: var(--text-muted);
       white-space: nowrap;
-      align-self: flex-start;
-      margin-top: 18px;
-      padding-bottom: 1px;      /* visual parity with underlined link slot */
+      padding-bottom: 2px;      /* visual parity with underlined link slot */
       border-bottom: 1px dashed var(--rule);
       cursor: default;
     }
@@ -1407,6 +1459,8 @@
       max-width: var(--container);
       margin: 96px auto 0;
       padding: 0 var(--gutter-lg) 64px;
+      /* Keep clear of iPhone home indicator */
+      padding-bottom: calc(64px + env(safe-area-inset-bottom));
     }
     .footer-rule { width: 100%; height: 1px; background: var(--rule); margin-bottom: 28px; }
     .footer-grid {
@@ -1460,7 +1514,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(251,247,239,0.4) 0%, rgba(251,247,239,0.85) 100%);
+      background: linear-gradient(180deg, rgba(11, 14, 26, 0.55) 0%, rgba(11, 14, 26, 0.9) 100%);
       pointer-events: none;
     }
 
@@ -1504,19 +1558,22 @@
       font-family: var(--sans);
       font-size: 0.82rem;
       font-weight: 500;
-      color: #fff;
+      color: #0B0E1A;
       background: var(--accent);
       border: 1px solid var(--accent);
       padding: 9px 18px;
       border-radius: 100px;
       cursor: pointer;
-      transition: background 0.25s ease, transform 0.25s ease;
+      transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
       margin-top: 6px;
+      box-shadow: 0 6px 18px -6px rgba(155, 109, 255, 0.6);
     }
     .lock-overlay .lock-btn:hover,
     .lock-overlay .lock-btn:focus-visible {
       background: var(--accent-deep);
+      border-color: var(--accent-deep);
       transform: translateY(-1px);
+      box-shadow: 0 10px 24px -8px rgba(155, 109, 255, 0.75);
     }
 
     /* ============================================================
@@ -1529,21 +1586,23 @@
       z-index: 1000;
       align-items: center;
       justify-content: center;
-      background: rgba(30, 26, 22, 0.55);
-      backdrop-filter: blur(6px);
+      background: rgba(5, 7, 14, 0.65);
+      backdrop-filter: blur(12px);
       padding: 24px;
     }
     .pw-modal.open { display: flex; }
     .pw-modal-card {
-      background: var(--bg-card);
-      border: 1px solid var(--rule);
+      background: linear-gradient(180deg, rgba(28, 34, 58, 0.9), rgba(18, 22, 40, 0.9));
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 18px;
       padding: 36px 32px 28px;
       max-width: 380px;
       width: 100%;
       text-align: center;
       animation: fadeUp 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) both;
-      box-shadow: 0 24px 60px -20px rgba(44, 30, 20, 0.35);
+      box-shadow:
+        0 30px 80px -20px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(155, 109, 255, 0.08);
     }
     .pw-modal-card h3 {
       font-family: var(--serif);
@@ -1564,8 +1623,9 @@
     }
     .pw-modal-card input {
       width: 100%;
-      padding: 12px 14px;
-      font-size: 0.95rem;
+      padding: 14px 14px;
+      /* 16px+ prevents iOS Safari auto-zoom on focus */
+      font-size: 16px;
       font-family: var(--sans);
       background: var(--bg);
       border: 1px solid var(--rule);
@@ -1573,13 +1633,15 @@
       color: var(--text);
       outline: none;
       transition: border-color 0.25s ease, box-shadow 0.25s ease;
+      -webkit-appearance: none;
+      appearance: none;
     }
     .pw-modal-card input:focus {
       border-color: var(--accent);
       box-shadow: 0 0 0 3px var(--accent-wash);
     }
     .pw-modal-card .pw-error {
-      color: #B33A1F;
+      color: #FF6D8A;
       font-family: var(--mono);
       font-size: 0.7rem;
       letter-spacing: 0.1em;
@@ -1608,7 +1670,8 @@
     .pw-modal-actions button.primary {
       background: var(--accent);
       border-color: var(--accent);
-      color: #fff;
+      color: #0B0E1A;
+      font-weight: 600;
     }
     .pw-modal-actions button.primary:hover,
     .pw-modal-actions button.primary:focus-visible {
@@ -1659,17 +1722,18 @@
     #tab-active .project-card:nth-child(6) { animation: fadeUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.90s both; }
     #tab-active .project-card:nth-child(7) { animation: fadeUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.98s both; }
     #tab-active .project-card:nth-child(8) { animation: fadeUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 1.06s both; }
+    #tab-active .project-card:nth-child(9) { animation: fadeUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 1.14s both; }
 
     /* ============================================================
        RESPONSIVE
        ============================================================ */
     @media (max-width: 1100px) {
-      .section-masthead { margin-top: 88px; }
+      .section-masthead { margin-top: 44px; }
     }
 
     @media (max-width: 900px) {
       header.hero {
-        padding: 56px var(--gutter-md) 48px;
+        padding: 56px var(--gutter-md) 24px;
         grid-template-columns: 1fr;
         gap: 40px;
       }
@@ -1693,78 +1757,183 @@
         max-width: 320px;
         width: 100%;
       }
-      .section-masthead { margin-top: 80px; }
+      .section-masthead { margin-top: 40px; }
     }
 
     @media (max-width: 720px) {
-      .masthead { padding: 20px var(--gutter-sm) 0; flex-wrap: wrap; gap: 8px; font-size: 0.64rem; }
+      .masthead {
+        padding: 18px var(--gutter-sm) 0;
+        padding-left:  max(var(--gutter-sm), env(safe-area-inset-left));
+        padding-right: max(var(--gutter-sm), env(safe-area-inset-right));
+        flex-wrap: wrap;
+        gap: 10px;
+        font-size: 0.7rem;
+      }
       .masthead-rule { display: none; }
-      header.hero { padding: 44px var(--gutter-sm) 40px; gap: 32px; }
-      .hero-kicker { font-size: 0.66rem; gap: 12px; }
+      header.hero { padding: 40px var(--gutter-sm) 24px; gap: 32px; }
+      .hero-kicker { font-size: 0.7rem; gap: 12px; margin-bottom: 22px; }
       .hero-kicker .kicker-rule { flex: 0 0 20px; }
-      .hero-byline { font-size: 1.15rem; }
-      .hero-sub { font-size: 0.98rem; }
-      .section-masthead { padding: 0 var(--gutter-sm); margin-top: 64px; gap: 14px; }
-      .section-label { font-size: 0.66rem; letter-spacing: 0.14em; }
+      .hero-byline { font-size: 1.18rem; margin-top: 22px; }
+      .hero-sub { font-size: 1rem; margin-top: 18px; }
+      .hero-cta { margin-top: 30px; }
+      .section-masthead { padding: 0 var(--gutter-sm); margin-top: 56px; gap: 14px; }
+      .section-label { font-size: 0.7rem; letter-spacing: 0.14em; }
       .section-label-sub { display: none; }
       .about-wrap, .contact-wrap, .tabs-wrapper { padding: 0 var(--gutter-sm); }
       .about-lede { font-size: 1.55rem; }
-      .tab-btn { margin-right: 12px; padding: 12px 4px; font-size: 0.9rem; }
+      .tab-btn { margin-right: 18px; padding: 14px 2px; font-size: 0.95rem; }
+      .tab-count { font-size: 0.72rem; }
       .tab-panel.active {
         padding: 24px var(--gutter-sm) 0;
         grid-template-columns: 1fr;
         gap: 16px;
       }
-      .project-card { padding: 24px 24px 22px; min-height: 0; }
+      .project-card { padding: 24px 22px 22px; min-height: 0; border-radius: 14px; }
       #tab-active .project-card:last-child:nth-child(odd) { max-width: 100%; }
+      .project-icon { margin-bottom: 18px; }
+      .project-name { font-size: 1.55rem; line-height: 1.1; }
+      .project-desc { font-size: 0.95rem; }
+      .project-meta { margin-bottom: 16px; }
+      .project-tags { margin-top: 16px; padding-top: 14px; }
+      .tag { font-size: 0.66rem; }
 
       /* About tab mobile */
-      .about-tab-hero { grid-template-columns: 1fr; gap: 32px; margin-bottom: 56px; }
-      .about-tab-body .about-tab-lede { font-size: 1.9rem; }
-      .resume-metrics { grid-template-columns: repeat(2, 1fr); }
-      .resume-metric { border-right: none; border-bottom: 1px solid var(--rule-soft); }
-      .resume-metric:nth-child(2n) { border-right: none; }
+      .about-tab-hero { grid-template-columns: 1fr; gap: 28px; margin-bottom: 48px; }
+      .about-tab-portrait { max-width: 360px; margin: 0 auto; width: 100%; }
+      .about-tab-body .about-tab-lede { font-size: 1.85rem; line-height: 1.1; }
+      .about-tab-body p { font-size: 1rem; }
+      .about-meta-row { gap: 22px 28px; margin-top: 24px; padding-top: 18px; }
+      .resume-metrics { grid-template-columns: repeat(2, 1fr); margin-bottom: 48px; }
+      .resume-metric { padding: 18px 16px; border-right: none; border-bottom: 1px solid var(--rule-soft); }
+      .resume-metric:nth-child(2n-1) { border-right: 1px solid var(--rule-soft); }
       .resume-metric:nth-last-child(-n+2) { border-bottom: none; }
-      .exp-summary { grid-template-columns: 48px 1fr auto; gap: 16px; padding: 18px 4px 18px 0; }
+      .resume-metric .n { font-size: 1.95rem; }
+      .resume-metric .l { font-size: 0.66rem; }
+      .exp-summary { grid-template-columns: 48px 1fr 36px; gap: 16px; padding: 20px 4px 20px 0; }
       .exp-logo { width: 48px; height: 48px; border-radius: 10px; }
       .exp-role { font-size: 1.1rem; }
-      .exp-summary-meta { font-size: 0.82rem; gap: 8px; }
-      .exp-summary-meta .dates { font-size: 0.68rem; }
-      .exp-detail { padding: 0 4px 22px 4px; }
-      .exp-chevron { width: 24px; height: 24px; }
+      .exp-summary-meta { font-size: 0.84rem; gap: 8px; }
+      .exp-summary-meta .dates { font-size: 0.7rem; width: 100%; }
+      .exp-detail { padding: 0 4px 24px 4px; }
+      .exp-bullets li { font-size: 0.94rem; line-height: 1.6; }
+      .exp-chevron { width: 32px; height: 32px; }
       .edu-card { grid-template-columns: 56px 1fr; padding: 20px; gap: 18px; }
       .edu-logo { width: 56px; height: 56px; }
+      .edu-school { font-size: 1.2rem; }
       .edu-location { grid-column: 1 / -1; text-align: left; margin-top: 4px; }
       .skills-grid { grid-template-columns: 1fr; gap: 20px; }
-      .resume-head { flex-wrap: wrap; gap: 10px; }
+      .skill-tag { font-size: 0.74rem; padding: 6px 11px; }
+      .resume-head { flex-wrap: wrap; gap: 10px; padding-bottom: 14px; margin-bottom: 28px; }
       .resume-head .title { font-size: 1.7rem; }
       .resume-head .rule { display: none; }
-      .company-wall-logos { gap: 28px; }
-      .project-name { font-size: 1.6rem; }
+      .resume-section-label { font-size: 0.7rem; }
+      .company-wall { padding: 22px 0; }
+      .company-wall-logos { gap: 28px 36px; }
+      .company-wall-logos .wall-logo { height: 28px; }
+
+      /* Contact rows */
       .contact-row {
-        grid-template-columns: 100px 1fr auto;
+        grid-template-columns: 90px 1fr auto;
         gap: 14px;
         padding: 18px 4px;
       }
-      .contact-value { font-size: 1.05rem; }
-      .contact-label { font-size: 0.62rem; letter-spacing: 0.12em; }
-      footer { margin-top: 72px; padding: 0 var(--gutter-sm) 48px; }
-      .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 12px; }
+      .contact-value {
+        /* No truncation on mobile — let the email wrap if it must. */
+        font-size: 1.05rem;
+        white-space: normal;
+        text-overflow: clip;
+        word-break: break-word;
+        overflow-wrap: anywhere;
+      }
+      .contact-label { font-size: 0.66rem; letter-spacing: 0.12em; }
+      .contact-row:hover, .contact-row:focus-visible { padding-left: 4px; }
+
+      /* Footer */
+      footer {
+        margin-top: 64px;
+        padding: 0 var(--gutter-sm) 48px;
+        padding-bottom: calc(48px + env(safe-area-inset-bottom));
+      }
+      .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 12px; font-size: 0.7rem; }
       .footer-right { text-align: center; }
+      .footer-sig { font-size: 1.1rem; }
+
+      /* Hero bio: tighter 110px portrait + text */
+      .hero-bio {
+        grid-template-columns: 110px 1fr;
+        gap: 18px;
+        align-items: center;
+      }
+      .hero-portrait { max-width: 110px; }
+      .hero-bio-text { font-size: 0.95rem; text-align: left; }
+
+      /* Password modal */
+      .pw-modal { padding: 16px; padding-bottom: max(16px, env(safe-area-inset-bottom)); }
+      .pw-modal-card { padding: 28px 22px 22px; border-radius: 16px; }
+      .pw-modal-card h3 { font-size: 1.5rem; }
+      .pw-modal-card p { font-size: 0.92rem; }
+      .pw-modal-actions button { flex: 1 1 auto; }
     }
 
     @media (max-width: 420px) {
-      .hero-headline { font-size: clamp(2.6rem, 14vw, 3.4rem); }
-      .hero-cta { gap: 8px 20px; }
-      .cta { font-size: 0.86rem; padding: 12px 18px; }
-      .contact-row { grid-template-columns: 1fr auto; }
-      /* Keep label available to screen readers; hide visually */
+      .hero-headline { font-size: clamp(2.6rem, 13vw, 3.2rem); line-height: 1; }
+      .hero-cta {
+        gap: 10px;
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+      }
+      .cta { font-size: 0.92rem; padding: 14px 22px; justify-content: center; }
+      .cta-ghost { padding: 14px 22px; }
+      .cta-ghost::after { display: none; }
+
+      /* Tighter masthead */
+      .masthead { font-size: 0.66rem; gap: 8px; }
+
+      /* Hero bio: stack portrait on top of text for breathing room */
+      .hero-bio {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        text-align: left;
+      }
+      .hero-portrait {
+        max-width: 96px;
+        align-self: start;
+      }
+      .hero-bio-text { font-size: 0.95rem; }
+
+      .section-label { letter-spacing: 0.12em; }
+
+      .project-card { padding: 22px 20px 20px; }
+
+      /* Contact: drop label column on narrowest; preserve for a11y. */
+      .contact-row {
+        grid-template-columns: 1fr auto;
+        gap: 12px;
+        padding: 18px 2px;
+      }
       .contact-label {
         position: absolute;
         width: 1px; height: 1px;
         overflow: hidden; clip: rect(0,0,0,0);
         white-space: nowrap;
       }
+      .contact-value { font-size: 1rem; }
+
+      .about-tab-portrait .portrait-corner { font-size: 0.6rem; padding: 3px 5px; }
+
+      .resume-metric .n { font-size: 1.7rem; }
+
+      .footer-sig { font-size: 1rem; }
+    }
+
+    /* Very narrow / older devices (Android 360w, iPhone SE, Galaxy Fold cover) */
+    @media (max-width: 360px) {
+      :root { --gutter-sm: 18px; }
+      .hero-headline { font-size: 2.4rem; }
+      .resume-metric .n { font-size: 1.5rem; }
+      .resume-metric { padding: 16px 12px; }
+      .pw-modal-card { padding: 24px 18px 18px; }
     }
 
     /* ============================================================
@@ -1779,6 +1948,102 @@
       .ambient { display: none; }
       .reveal { opacity: 1; transform: none; }
     }
+
+    /* ============================================================
+       TAP TARGETS — ≥44×44 on touch (WCAG 2.5.5 / iOS HIG)
+       Padding-based, so visual size is unchanged but the hit-area grows.
+       ============================================================ */
+    @media (hover: none) and (pointer: coarse) {
+      /* Project links — the worst offender at 22px tall. Bump vertical
+         padding so the row is comfortably tappable on a thumb. */
+      .project-link {
+        padding: 12px 0;
+        min-height: 44px;
+      }
+      /* Project link group needs more vertical breathing room since each
+         link is now taller. */
+      .project-links {
+        gap: 4px 24px;
+        margin-top: 14px;
+      }
+      .project-soon { padding: 12px 0; min-height: 44px; }
+
+      /* Tab buttons */
+      .tab-btn {
+        padding: 16px 6px;
+        min-height: 48px;
+      }
+
+      /* Hero CTAs — full-width primary button is the mobile convention */
+      .hero-cta { width: 100%; }
+      .hero-cta .cta {
+        padding: 16px 24px;
+        min-height: 48px;
+      }
+      .hero-cta .cta-primary {
+        flex: 1 1 auto;
+        justify-content: center;
+      }
+      .hero-cta .cta-ghost { padding: 14px 0; }
+
+      /* Lock button & modal buttons */
+      .lock-overlay .lock-btn {
+        padding: 12px 22px;
+        min-height: 44px;
+      }
+      .pw-modal-actions button {
+        padding: 13px 22px;
+        min-height: 48px;
+      }
+
+      /* Experience chevron — 24px is unreachable. Pad the entire summary
+         row so the whole thing is tap-eligible (already cursor:pointer). */
+      .exp-chevron { width: 36px; height: 36px; }
+      .exp-chevron svg { width: 14px; height: 14px; }
+      .exp-summary { padding-top: 20px; padding-bottom: 20px; min-height: 64px; }
+
+      /* Skip link */
+      .skip-link { padding: 14px 18px; }
+
+      /* Contact rows already span full width; just ensure min-height */
+      .contact-row { min-height: 56px; }
+    }
+
+    /* ============================================================
+       TOUCH / LOW-POWER OPTIMIZATIONS
+       Drop expensive blurs + blend-modes on touch devices (iOS/Android).
+       Keeps the aesthetic on desktop, saves battery + prevents jank on phones.
+       ============================================================ */
+    @media (hover: none) and (pointer: coarse) {
+      /* Kill the ambient drifting gradient — it fills the whole viewport
+         with an 80px blur and animates on two 28–36s timers. Major GPU cost. */
+      .ambient { display: none; }
+
+      /* SVG grain overlay: keep it, but halve the opacity so it doesn't
+         look muddy on lower-density mobile screens. */
+      body::before { opacity: 0.03; }
+
+      /* mix-blend-mode: difference triggers a full-viewport composite on iOS.
+         Use a solid readable color instead. */
+      .about-tab-portrait .portrait-corner {
+        mix-blend-mode: normal;
+        color: #E8EAFF;
+        background: rgba(11, 14, 26, 0.6);
+        padding: 3px 6px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 2px;
+        backdrop-filter: blur(4px);
+      }
+
+      /* Remove hover-only transforms that never fire on touch but still
+         cost the browser a paint layer to prepare. */
+      .project-card:hover,
+      .hero-portrait:hover,
+      .portrait:hover .portrait-img,
+      .project-card:hover .project-icon {
+        transform: none;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1791,16 +2056,16 @@
   <header class="hero" id="top">
     <div>
       <p class="hero-kicker">
-        <span>Workshop Notes</span>
+        <span>Agentic Army</span>
         <span class="kicker-rule" aria-hidden="true"></span>
         <span class="kicker-muted">Volume One</span>
       </p>
 
-      <h1 class="hero-headline">Everything <em>shipped</em><span class="amp">.</span></h1>
+      <h1 class="hero-headline">An agent for <em>everything</em><span class="amp">.</span></h1>
 
-      <p class="hero-byline">The tools I actually use, the ones I built to replace something worse.</p>
+      <p class="hero-byline">If it's annoying enough to do twice, it's worth building once.</p>
 
-      <p class="hero-sub">An index of the tools, apps, and experiments I'm <em>building</em>. Some are live, some are still in the repo.</p>
+      <p class="hero-sub">Groceries, rides, housing, sports — if it has <em>friction</em>, it gets an agent. The ship list is below.</p>
 
       <div class="hero-cta">
         <a href="#work" class="cta cta-primary">
@@ -1816,9 +2081,8 @@
         <img src="assets/portrait.jpg" alt="Thomas Nendick with his partner and two dogs" loading="lazy">
       </figure>
       <div class="hero-bio-text">
-        <p>Thomas Nendick. Based in Los Angeles.</p>
+        <p>Thomas Nendick.</p>
         <p>Strategist by day. Aspiring FDE by night.</p>
-        <p class="hero-bio-meta">Vol. 01 · MMXXVI</p>
       </div>
     </aside>
   </header>
@@ -1826,17 +2090,11 @@
   <main id="main">
 
     <!-- ======================== INDEX ======================== -->
-    <section class="section" id="work" aria-labelledby="work-label">
-      <div class="section-masthead">
-        <span class="section-label" id="work-label">— The Index</span>
-        <span class="section-rule" aria-hidden="true"></span>
-        <span class="section-label-sub">2026 / Ongoing</span>
-      </div>
+    <section class="section" id="work" aria-label="The Index">
 
       <nav class="tabs-wrapper" aria-label="Sections">
         <div class="tab-bar" role="tablist" aria-label="Switch section">
-          <button class="tab-btn" role="tab" aria-selected="true" aria-controls="tab-active" id="tabbtn-active" data-tab="active">Active <span class="tab-count">(8)</span></button>
-          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-old" id="tabbtn-old" data-tab="old" tabindex="-1">Archive <span class="tab-count">(1)</span></button>
+          <button class="tab-btn" role="tab" aria-selected="true" aria-controls="tab-active" id="tabbtn-active" data-tab="active">Active <span class="tab-count">(9)</span></button>
           <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-about" id="tabbtn-about" data-tab="about" tabindex="-1">About</button>
         </div>
       </nav>
@@ -1874,23 +2132,26 @@
 
         <article class="project-card">
           <div class="project-icon" aria-hidden="true">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m0-1.5v1.5m0-1.5V9a2.25 2.25 0 0 0-2.25-2.25H4.5A2.25 2.25 0 0 0 2.25 9v7.5h4.5m6 0v-3h6.75a1.5 1.5 0 0 0 1.342-.832l1.296-2.59a1.5 1.5 0 0 0 .026-1.292l-.904-2.062a1.5 1.5 0 0 0-1.374-.898H14.25v9.675Zm5.25 1.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0"/></svg>
           </div>
           <div class="project-meta">
             <span class="project-number">№ 02</span>
-            <span class="project-status wip">In Build</span>
+            <span class="project-status shipped">Live</span>
           </div>
           <div class="project-info">
-            <h3 class="project-name">Housing Finder</h3>
-            <p class="project-desc">Aggregates listings and surfaces the ones worth your time. Filters, alerts, and scoring so you spend less energy hunting and more time deciding.</p>
+            <h3 class="project-name">Rideshare Comp</h3>
+            <p class="project-desc">Compares Uber and Lyft side-by-side before you book. Pick the cheaper ride, skip the app-switching tax, see which service wins your routes.</p>
             <div class="project-tags">
-              <span class="tag">Real Estate</span>
-              <span class="tag">Search</span>
+              <span class="tag">Transportation</span>
+              <span class="tag">Utility</span>
             </div>
           </div>
           <div class="project-links">
-            <span class="project-soon" aria-label="Housing Finder — not yet launched">Coming soon.....</span>
-            <a href="docs/architecture/housing-finder.html" class="project-link secondary" aria-label="Technical Jargon — Housing Finder architecture">
+            <a href="https://rideshare-comps.fly.dev/" class="project-link" target="_blank" rel="noopener" aria-label="Open Rideshare Comp">
+              Open project
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M7 7h10v10"/></svg>
+            </a>
+            <a href="docs/architecture/rideshare-comp.html" class="project-link secondary" aria-label="Technical Jargon — Rideshare Comp architecture">
               Technical Jargon
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
             </a>
@@ -1953,12 +2214,90 @@
           </div>
         </article>
 
+        <article class="project-card">
+          <div class="project-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z"/></svg>
+          </div>
+          <div class="project-meta">
+            <span class="project-number">№ 05</span>
+            <span class="project-status">Archived</span>
+          </div>
+          <div class="project-info">
+            <h3 class="project-name">March Madness Dashboard 2026</h3>
+            <p class="project-desc">Interactive bracket and game tracker for the 2026 NCAA tournament. Visualized matchups, scores, and upsets as the madness unfolded.</p>
+            <div class="project-tags">
+              <span class="tag">Sports</span>
+              <span class="tag">Dashboard</span>
+            </div>
+          </div>
+          <div class="project-links">
+            <a href="https://nendy55555.github.io/MMD-2026/" class="project-link" target="_blank" rel="noopener" aria-label="Open March Madness Dashboard 2026">
+              Open project
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M7 7h10v10"/></svg>
+            </a>
+            <a href="docs/architecture/march-madness-dashboard.html" class="project-link secondary" aria-label="Technical Jargon — March Madness Dashboard 2026 architecture">
+              Technical Jargon
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>
+          </div>
+          <div class="project-meta">
+            <span class="project-number">№ 06</span>
+            <span class="project-status wip">In Build</span>
+          </div>
+          <div class="project-info">
+            <h3 class="project-name">Housing Finder</h3>
+            <p class="project-desc">Aggregates listings and surfaces the ones worth your time. Filters, alerts, and scoring so you spend less energy hunting and more time deciding.</p>
+            <div class="project-tags">
+              <span class="tag">Real Estate</span>
+              <span class="tag">Search</span>
+            </div>
+          </div>
+          <div class="project-links">
+            <span class="project-soon" aria-label="Housing Finder — not yet launched">Coming soon.....</span>
+            <a href="docs/architecture/housing-finder.html" class="project-link secondary" aria-label="Technical Jargon — Housing Finder architecture">
+              Technical Jargon
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/></svg>
+          </div>
+          <div class="project-meta">
+            <span class="project-number">№ 07</span>
+            <span class="project-status wip">In Build</span>
+          </div>
+          <div class="project-info">
+            <h3 class="project-name">Honeymoon Bot</h3>
+            <p class="project-desc">Plans the honeymoon so you don't have to open thirty browser tabs. Flights, stays, activities, and a budget that isn't a spreadsheet — in one itinerary you'll actually use.</p>
+            <div class="project-tags">
+              <span class="tag">Travel</span>
+              <span class="tag">Planning</span>
+            </div>
+          </div>
+          <div class="project-links">
+            <span class="project-soon" aria-label="Honeymoon Bot — not yet launched">Coming soon.....</span>
+            <a href="docs/architecture/honeymoon-bot.html" class="project-link secondary" aria-label="Technical Jargon — Honeymoon Bot architecture">
+              Technical Jargon
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
+            </a>
+          </div>
+        </article>
+
         <article class="project-card protected" data-protected="true" tabindex="0" aria-label="Betting Tracker — password protected">
           <div class="project-icon" aria-hidden="true">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"/></svg>
           </div>
           <div class="project-meta">
-            <span class="project-number">№ 05</span>
+            <span class="project-number">№ 08</span>
             <span class="project-status">Private</span>
           </div>
           <div class="project-info">
@@ -1989,7 +2328,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Zm.75-12h9v9h-9v-9Z"/></svg>
           </div>
           <div class="project-meta">
-            <span class="project-number">№ 06</span>
+            <span class="project-number">№ 09</span>
             <span class="project-status">Private</span>
           </div>
           <div class="project-info">
@@ -2015,65 +2354,6 @@
           </div>
         </article>
 
-        <article class="project-card">
-          <div class="project-icon" aria-hidden="true">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m0-1.5v1.5m0-1.5V9a2.25 2.25 0 0 0-2.25-2.25H4.5A2.25 2.25 0 0 0 2.25 9v7.5h4.5m6 0v-3h6.75a1.5 1.5 0 0 0 1.342-.832l1.296-2.59a1.5 1.5 0 0 0 .026-1.292l-.904-2.062a1.5 1.5 0 0 0-1.374-.898H14.25v9.675Zm5.25 1.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0"/></svg>
-          </div>
-          <div class="project-meta">
-            <span class="project-number">№ 07</span>
-            <span class="project-status shipped">Live</span>
-          </div>
-          <div class="project-info">
-            <h3 class="project-name">Rideshare Comp</h3>
-            <p class="project-desc">Compares Uber and Lyft side-by-side before you book. Pick the cheaper ride, skip the app-switching tax, see which service wins your routes.</p>
-            <div class="project-tags">
-              <span class="tag">Transportation</span>
-              <span class="tag">Utility</span>
-            </div>
-          </div>
-          <div class="project-links">
-            <a href="https://rideshare-comps.fly.dev/" class="project-link" target="_blank" rel="noopener" aria-label="Open Rideshare Comp">
-              Open project
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M7 7h10v10"/></svg>
-            </a>
-            <a href="docs/architecture/rideshare-comp.html" class="project-link secondary" aria-label="Technical Jargon — Rideshare Comp architecture">
-              Technical Jargon
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
-            </a>
-          </div>
-        </article>
-
-      </section>
-
-      <!-- ===== ARCHIVE ===== -->
-      <section class="tab-panel" id="tab-old" role="tabpanel" aria-labelledby="tabbtn-old" hidden>
-        <article class="project-card">
-          <div class="project-icon" aria-hidden="true">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z"/></svg>
-          </div>
-          <div class="project-meta">
-            <span class="project-number">№ 01</span>
-            <span class="project-status">Archived</span>
-          </div>
-          <div class="project-info">
-            <h3 class="project-name">March Madness Dashboard 2026</h3>
-            <p class="project-desc">Interactive bracket and game tracker for the 2026 NCAA tournament. Visualized matchups, scores, and upsets as the madness unfolded.</p>
-            <div class="project-tags">
-              <span class="tag">Sports</span>
-              <span class="tag">Dashboard</span>
-            </div>
-          </div>
-          <div class="project-links">
-            <a href="https://nendy55555.github.io/MMD-2026/" class="project-link" target="_blank" rel="noopener" aria-label="Open March Madness Dashboard 2026">
-              Open project
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M7 7h10v10"/></svg>
-            </a>
-            <a href="docs/architecture/march-madness-dashboard.html" class="project-link secondary" aria-label="Technical Jargon — March Madness Dashboard 2026 architecture">
-              Technical Jargon
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
-            </a>
-          </div>
-        </article>
       </section>
 
       <!-- ===== ABOUT ===== -->
@@ -2384,7 +2664,7 @@
     <div class="footer-rule"></div>
     <div class="footer-grid">
       <div class="footer-left">© Thomas Nendick · 2026</div>
-      <div class="footer-sig">— Workshop Notes, Vol. 01 —</div>
+      <div class="footer-sig">— Agentic Army · Volume 1 —</div>
       <div class="footer-right">Set in Instrument Serif &amp; DM Sans</div>
     </div>
   </footer>
@@ -2416,7 +2696,6 @@
     const tabButtons = Array.from(document.querySelectorAll('.tab-btn'));
     const panels = {
       active: document.getElementById('tab-active'),
-      old: document.getElementById('tab-old'),
       about: document.getElementById('tab-about')
     };
 
