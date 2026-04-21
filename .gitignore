@@ -52,3 +52,4 @@ assets/.*.original.*
 
 # Validator working files
 .validator-cache/
+thomasnendick.com-dns.txt
