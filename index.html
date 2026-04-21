@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="description" content="Agentic Army, Volume One. Thomas Nendick's personal fleet of productivity agents — tools built to replace the tasks he didn't want to keep doing.">
-  <meta name="theme-color" content="#0B0E1A">
-  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#F3ECE0">
+  <meta name="color-scheme" content="light dark">
   <meta name="format-detection" content="telephone=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -16,6 +16,20 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
+  <!-- Set theme BEFORE paint to avoid FOUC -->
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('theme');
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = saved || (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+
   <style>
     /* ============================================================
        RESET + TOKENS
@@ -23,29 +37,30 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      /* Surfaces — Deep Space Glass */
-      --bg:              #0B0E1A;   /* ink-navy base */
-      --bg-deep:         #141A2E;   /* section wells + deep cards */
-      --bg-card:         rgba(255, 255, 255, 0.04);   /* frosted glass */
-      --bg-card-hover:   rgba(255, 255, 255, 0.07);
+      /* Surfaces */
+      --bg:              #F3ECE0;
+      --bg-deep:         #EBE2D3;
+      --bg-card:         #FBF7EF;
+      --bg-card-hover:   #FFFBF3;
 
-      /* Ink — luminous neutrals on navy */
-      --text:            #E8EAFF;   /* primary display */
-      --text-secondary:  #A7B0D0;   /* body prose, AA 7.5:1 */
-      --text-muted:      #7A8299;   /* small mono metadata, AA 4.8:1 */
+      /* Ink — all pass WCAG AA on paper bg */
+      --text:            #1E1A16;   /* AA 13.6:1 */
+      --text-secondary:  #574E47;   /* AA 6.94:1 — body prose */
+      --text-muted:      #6E6459;   /* AA 4.60:1 — small mono metadata */
 
-      /* Accent — iridescent violet */
-      --accent:          #9B6DFF;   /* display / primary */
-      --accent-deep:     #B896FF;   /* body emphasis (lighter on dark) */
-      --accent-ink:      #C4AAFF;   /* densest small type */
-      --accent-teal:     #3BD8C7;   /* secondary iridescent pop */
-      --accent-wash:     rgba(155, 109, 255, 0.10);
-      --accent-ring:     rgba(155, 109, 255, 0.35);
+      /* Accent — scale by role */
+      --accent:          #C2613A;   /* display only, passes AA large 3:1 */
+      --accent-deep:     #8B3F21;   /* body emphasis, AA 6.3:1 */
+      --accent-ink:      #7A361B;   /* densest small type, AA 7.4:1 */
+      --accent-teal:     #3E6B4B;   /* kept for var refs */
+      --accent-wash:     rgba(194, 97, 58, 0.08);
+      --accent-ring:     rgba(194, 97, 58, 0.28);
 
       /* Signals */
-      --live:            #3BD8C7;   /* teal = live */
-      --rule:            rgba(255, 255, 255, 0.09);
-      --rule-soft:       rgba(255, 255, 255, 0.05);
+      --live:            #3E6B4B;   /* tightened forest for AA */
+      --danger:          #FF6D8A;   /* modal error on dark glass — AA 4.6:1 */
+      --rule:            #D9CFC1;
+      --rule-soft:       #E6DED0;
 
       /* Typography */
       --serif: 'Instrument Serif', Georgia, serif;
@@ -68,11 +83,7 @@
 
     body {
       font-family: var(--sans);
-      background:
-        radial-gradient(ellipse 80% 50% at 70% -10%, rgba(155, 109, 255, 0.18), transparent 60%),
-        radial-gradient(ellipse 90% 60% at 0% 110%, rgba(59, 216, 199, 0.10), transparent 55%),
-        linear-gradient(180deg, #0B0E1A 0%, #101530 55%, #0B0E1A 100%);
-      background-attachment: fixed;
+      background: var(--bg);
       color: var(--text);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
@@ -80,12 +91,12 @@
       min-height: 100vh;
       overflow-x: hidden;
       /* Custom accent-tinted tap highlight */
-      -webkit-tap-highlight-color: rgba(155, 109, 255, 0.22);
+      -webkit-tap-highlight-color: rgba(194, 97, 58, 0.15);
     }
 
     /* Give interactive elements a consistent, subtle tap flash */
     a, button, [role="tab"], summary, input, select, textarea {
-      -webkit-tap-highlight-color: rgba(155, 109, 255, 0.22);
+      -webkit-tap-highlight-color: rgba(194, 97, 58, 0.15);
     }
 
     ::selection { background: var(--accent-wash); color: var(--text); }
@@ -152,7 +163,7 @@
       height: 55vw;
       top: -10%;
       left: -5%;
-      background: radial-gradient(circle, rgba(155, 109, 255, 0.32), transparent 70%);
+      background: radial-gradient(circle, rgba(194, 97, 58, 0.32), transparent 70%);
       animation: drift1 28s ease-in-out infinite alternate;
     }
     .ambient::after {
@@ -160,7 +171,7 @@
       height: 45vw;
       bottom: -10%;
       right: -10%;
-      background: radial-gradient(circle, rgba(59, 216, 199, 0.22), transparent 70%);
+      background: radial-gradient(circle, rgba(62, 107, 75, 0.22), transparent 70%);
       animation: drift2 36s ease-in-out infinite alternate;
     }
 
@@ -225,13 +236,6 @@
       color: var(--accent);
       font-style: italic;
     }
-    .hero-headline .amp {
-      color: var(--accent-deep);
-      font-style: italic;
-      font-size: 0.82em;
-      vertical-align: 0.04em;
-      padding: 0 0.05em;
-    }
 
     .hero-byline {
       margin-top: 26px;
@@ -240,10 +244,6 @@
       font-size: clamp(1.25rem, 2.2vw, 1.55rem);
       color: var(--text);
       letter-spacing: -0.005em;
-    }
-    .hero-byline::before {
-      content: '— ';
-      color: var(--text-muted);
     }
 
     .hero-sub {
@@ -287,18 +287,18 @@
                   box-shadow 0.25s ease;
     }
     .cta-primary {
-      background: linear-gradient(135deg, var(--accent) 0%, #7A4EFF 100%);
-      color: #0B0E1A;
+      background: linear-gradient(135deg, var(--accent) 0%, #8B3F21 100%);
+      color: var(--bg);
       border-color: var(--accent);
       font-weight: 600;
-      box-shadow: 0 10px 28px -8px rgba(155, 109, 255, 0.45);
+      box-shadow: 0 10px 28px -8px rgba(194, 97, 58, 0.45);
     }
     .cta-primary:hover,
     .cta-primary:focus-visible {
-      background: linear-gradient(135deg, #B896FF 0%, var(--accent) 100%);
+      background: linear-gradient(135deg, #8B3F21 0%, var(--accent) 100%);
       border-color: var(--accent-deep);
       transform: translateY(-1px);
-      box-shadow: 0 14px 36px -8px rgba(155, 109, 255, 0.75);
+      box-shadow: 0 14px 36px -8px rgba(194, 97, 58, 0.75);
     }
     .cta-primary svg { transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1); }
     .cta-primary:hover svg { transform: translateX(3px); }
@@ -341,12 +341,12 @@
       max-width: 200px;
       aspect-ratio: 4 / 5;
       overflow: hidden;
-      background: rgba(255, 255, 255, 0.04);
+      background: #FBF7EF;
       border-radius: 6px;
       box-shadow:
-        inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+        inset 0 0 0 1px #D9CFC1,
         0 1px 2px rgba(0, 0, 0, 0.25),
-        0 18px 40px -18px rgba(155, 109, 255, 0.35);
+        0 18px 40px -18px rgba(194, 97, 58, 0.35);
     }
     .hero-portrait img {
       width: 100%;
@@ -415,7 +415,7 @@
       padding: 4px 6px;
       background: rgba(11, 14, 26, 0.72);
       backdrop-filter: blur(4px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid #D9CFC1;
       border-radius: 2px;
     }
 
@@ -485,6 +485,10 @@
     #tab-about.active {
       display: block;
       padding-top: 40px;
+      animation: fadeIn 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      #tab-about.active { animation: none; }
     }
 
     /* ============================================================
@@ -527,10 +531,10 @@
       font-size: 0.66rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: #E8EAFF;
+      color: var(--text);
       background: rgba(11, 14, 26, 0.6);
       padding: 3px 6px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid #D9CFC1;
       border-radius: 2px;
       backdrop-filter: blur(4px);
     }
@@ -694,26 +698,15 @@
       overflow: hidden;
     }
     .exp-item:last-child { border-bottom: 1px solid var(--rule-soft); }
-    .exp-item[open] { background: linear-gradient(180deg, rgba(155, 109, 255, 0.06) 0%, transparent 100%); }
+    .exp-item[open] { background: linear-gradient(180deg, rgba(194, 97, 58, 0.06) 0%, transparent 100%); }
 
-    /* summary is the clickable row */
+    /* static row */
     .exp-summary {
       display: grid;
-      grid-template-columns: 96px 1fr auto;
+      grid-template-columns: 96px 1fr;
       gap: 32px;
       align-items: center;
       padding: 24px 8px 24px 0;
-      cursor: pointer;
-      list-style: none;
-      user-select: none;
-      transition: background 0.2s ease;
-    }
-    .exp-summary::-webkit-details-marker { display: none; }
-    .exp-summary:hover { background: rgba(155, 109, 255, 0.05); }
-    .exp-summary:focus-visible {
-      outline: 2px solid var(--accent-ring);
-      outline-offset: 2px;
-      border-radius: 4px;
     }
 
     .exp-summary-head {
@@ -782,7 +775,7 @@
       max-height: 78%;
       object-fit: contain;
       /* Dark-mode invert for dark SVG logos */
-      filter: invert(1) brightness(1.1);
+      filter: none;
     }
 
     /* expanded body */
@@ -846,14 +839,14 @@
       width: 72px;
       height: 72px;
       border-radius: 12px;
-      background: rgba(255, 255, 255, 0.06);
+      background: #EBE2D3;
       border: 1px solid var(--rule);
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
     }
-    .edu-logo img { max-width: 64%; max-height: 64%; object-fit: contain; filter: invert(1) brightness(1.1); }
+    .edu-logo img { max-width: 64%; max-height: 64%; object-fit: contain; filter: none; }
     .edu-body { display: flex; flex-direction: column; gap: 4px; }
     .edu-school {
       font-family: var(--serif);
@@ -923,52 +916,11 @@
       background: var(--accent-wash);
     }
 
-    /* company wall at bottom of resume */
-    .company-wall {
-      margin-top: 40px;
-      padding: 28px 0;
-      border-top: 1px solid var(--rule);
-      border-bottom: 1px solid var(--rule);
-    }
-    .company-wall-label {
-      font-family: var(--mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 18px;
-      text-align: center;
-    }
-    .company-wall-logos {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 56px;
-      flex-wrap: wrap;
-      opacity: 0.78;
-    }
-    .company-wall-logos .wall-logo {
-      height: 34px;
-      display: flex;
-      align-items: center;
-      /* Invert dark logos for the dark palette, keep them desaturated */
-      filter: invert(1) grayscale(1) brightness(1.15) contrast(0.95);
-      transition: filter 0.3s ease, opacity 0.3s ease;
-    }
-    .company-wall-logos .wall-logo:hover {
-      filter: invert(1) grayscale(0) brightness(1.2);
-    }
-    .company-wall-logos .wall-logo img {
-      max-height: 100%;
-      max-width: 140px;
-      object-fit: contain;
-    }
-
     .project-card {
       background: var(--bg-card);
       backdrop-filter: blur(14px) saturate(1.2);
       -webkit-backdrop-filter: blur(14px) saturate(1.2);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid #D9CFC1;
       border-radius: 16px;
       padding: 28px 30px 26px;
       display: flex;
@@ -988,7 +940,7 @@
       inset: 0;
       border-radius: inherit;
       pointer-events: none;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 35%);
+      background: linear-gradient(180deg, #EBE2D3, transparent 35%);
       z-index: 0;
     }
     .project-card > * { position: relative; z-index: 1; }
@@ -1008,9 +960,9 @@
     .project-card:hover {
       transform: translateY(-4px);
       box-shadow:
-        0 24px 60px -18px rgba(155, 109, 255, 0.35),
+        0 24px 60px -18px rgba(194, 97, 58, 0.35),
         0 6px 18px -6px rgba(0, 0, 0, 0.45);
-      border-color: rgba(155, 109, 255, 0.35);
+      border-color: rgba(194, 97, 58, 0.35);
       background: var(--bg-card-hover);
     }
     .project-card:hover::before { transform: scaleY(1); }
@@ -1020,7 +972,7 @@
       height: 52px;
       border-radius: 14px;
       background: var(--accent-wash);
-      border: 1px solid rgba(155, 109, 255, 0.25);
+      border: 1px solid rgba(194, 97, 58, 0.25);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1039,13 +991,16 @@
     }
     .project-card:hover .project-icon {
       transform: scale(1.08) rotate(-4deg);
-      background: rgba(155, 109, 255, 0.22);
-      border-color: rgba(155, 109, 255, 0.55);
-      box-shadow: 0 8px 22px -6px rgba(155, 109, 255, 0.55);
+      background: rgba(194, 97, 58, 0.15);
+      border-color: rgba(194, 97, 58, 0.55);
+      box-shadow: 0 8px 22px -6px rgba(194, 97, 58, 0.55);
     }
 
-    /* Last card in odd count: center it */
-    #tab-active .project-card:last-child:nth-child(odd) {
+    /* Last card in odd count: center it — but only when the singleton is a
+       public project. Protected cards always sit quietly at the bottom;
+       promoting a lock to centered-singleton contradicts the "bury locked
+       work" rule (see DECISIONS.md). */
+    #tab-active .project-card:last-child:nth-child(odd):not(.protected) {
       grid-column: 1 / -1;
       max-width: calc(50% - 10px);
       justify-self: center;
@@ -1058,14 +1013,16 @@
       margin-bottom: 20px;
     }
     .project-number {
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: 1.1rem;
-      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
     }
     .project-status {
       font-family: var(--mono);
-      font-size: 0.64rem;
+      font-size: 0.7rem;
       font-weight: 500;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -1117,7 +1074,7 @@
     }
     .tag {
       font-family: var(--mono);
-      font-size: 0.64rem;
+      font-size: 0.7rem;
       font-weight: 500;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -1189,7 +1146,7 @@
       cursor: default;
     }
 
-    /* Secondary link — Technical Jargon */
+    /* Secondary link — Architecture */
     .project-link.secondary {
       color: var(--text-secondary);
       font-weight: 400;
@@ -1329,7 +1286,7 @@
     /* ============================================================
        PROTECTED (locked) CARDS
        ============================================================ */
-    .project-card.protected.locked { cursor: pointer; }
+    .project-card.protected.locked { cursor: default; }
     .project-card.protected.locked .project-info,
     .project-card.protected.locked .project-link,
     .project-card.protected.locked .project-meta {
@@ -1387,7 +1344,7 @@
       font-family: var(--sans);
       font-size: 0.82rem;
       font-weight: 500;
-      color: #0B0E1A;
+      color: var(--bg);
       background: var(--accent);
       border: 1px solid var(--accent);
       padding: 9px 18px;
@@ -1395,14 +1352,14 @@
       cursor: pointer;
       transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
       margin-top: 6px;
-      box-shadow: 0 6px 18px -6px rgba(155, 109, 255, 0.6);
+      box-shadow: 0 6px 18px -6px rgba(194, 97, 58, 0.6);
     }
     .lock-overlay .lock-btn:hover,
     .lock-overlay .lock-btn:focus-visible {
       background: var(--accent-deep);
       border-color: var(--accent-deep);
       transform: translateY(-1px);
-      box-shadow: 0 10px 24px -8px rgba(155, 109, 255, 0.75);
+      box-shadow: 0 10px 24px -8px rgba(194, 97, 58, 0.75);
     }
 
     /* ============================================================
@@ -1422,7 +1379,7 @@
     .pw-modal.open { display: flex; }
     .pw-modal-card {
       background: linear-gradient(180deg, rgba(28, 34, 58, 0.9), rgba(18, 22, 40, 0.9));
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid #D9CFC1;
       border-radius: 18px;
       padding: 36px 32px 28px;
       max-width: 380px;
@@ -1431,7 +1388,7 @@
       animation: fadeUp 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) both;
       box-shadow:
         0 30px 80px -20px rgba(0, 0, 0, 0.6),
-        0 0 0 1px rgba(155, 109, 255, 0.08);
+        0 0 0 1px rgba(194, 97, 58, 0.08);
     }
     .pw-modal-card h3 {
       font-family: var(--serif);
@@ -1470,7 +1427,7 @@
       box-shadow: 0 0 0 3px var(--accent-wash);
     }
     .pw-modal-card .pw-error {
-      color: #FF6D8A;
+      color: var(--danger);
       font-family: var(--mono);
       font-size: 0.7rem;
       letter-spacing: 0.1em;
@@ -1499,7 +1456,7 @@
     .pw-modal-actions button.primary {
       background: var(--accent);
       border-color: var(--accent);
-      color: #0B0E1A;
+      color: var(--bg);
       font-weight: 600;
     }
     .pw-modal-actions button.primary:hover,
@@ -1541,16 +1498,19 @@
       will-change: auto;
     }
 
-    /* Cards still stagger on first load; scroll-reveal handles later tab switches */
-    #tab-active .project-card:nth-child(1) { animation: fadeUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.5s both; }
-    #tab-active .project-card:nth-child(2) { animation: fadeUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.58s both; }
-    #tab-active .project-card:nth-child(3) { animation: fadeUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.66s both; }
-    #tab-active .project-card:nth-child(4) { animation: fadeUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.74s both; }
-    #tab-active .project-card:nth-child(5) { animation: fadeUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.82s both; }
-    #tab-active .project-card:nth-child(6) { animation: fadeUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.90s both; }
-    #tab-active .project-card:nth-child(7) { animation: fadeUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.98s both; }
-    #tab-active .project-card:nth-child(8) { animation: fadeUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 1.06s both; }
-    #tab-active .project-card:nth-child(9) { animation: fadeUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 1.14s both; }
+    /* Cards stagger on first load ONLY. Body gets .first-load until the
+       last card has finished animating; after that, tab switches are snappy
+       instead of replaying the 9-card cascade. Delays shortened (0.06s
+       step, max 0.8s) per Phase 3.1. */
+    body.first-load #tab-active .project-card:nth-child(1) { animation: fadeUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.40s both; }
+    body.first-load #tab-active .project-card:nth-child(2) { animation: fadeUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.46s both; }
+    body.first-load #tab-active .project-card:nth-child(3) { animation: fadeUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.52s both; }
+    body.first-load #tab-active .project-card:nth-child(4) { animation: fadeUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.58s both; }
+    body.first-load #tab-active .project-card:nth-child(5) { animation: fadeUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.64s both; }
+    body.first-load #tab-active .project-card:nth-child(6) { animation: fadeUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.70s both; }
+    body.first-load #tab-active .project-card:nth-child(7) { animation: fadeUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.76s both; }
+    body.first-load #tab-active .project-card:nth-child(8) { animation: fadeUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.80s both; }
+    body.first-load #tab-active .project-card:nth-child(9) { animation: fadeUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.80s both; }
 
     /* ============================================================
        RESPONSIVE
@@ -1602,13 +1562,13 @@
         gap: 16px;
       }
       .project-card { padding: 24px 22px 22px; min-height: 0; border-radius: 14px; }
-      #tab-active .project-card:last-child:nth-child(odd) { max-width: 100%; }
+      #tab-active .project-card:last-child:nth-child(odd):not(.protected) { max-width: 100%; }
       .project-icon { margin-bottom: 18px; }
       .project-name { font-size: 1.55rem; line-height: 1.1; }
       .project-desc { font-size: 0.95rem; }
       .project-meta { margin-bottom: 16px; }
       .project-tags { margin-top: 16px; padding-top: 14px; }
-      .tag { font-size: 0.66rem; }
+      .tag { font-size: 0.68rem; }
 
       /* About tab mobile */
       .about-tab-hero { grid-template-columns: 1fr; gap: 28px; margin-bottom: 48px; }
@@ -1640,9 +1600,6 @@
       .resume-head .title { font-size: 1.7rem; }
       .resume-head .rule { display: none; }
       .resume-section-label { font-size: 0.7rem; }
-      .company-wall { padding: 22px 0; }
-      .company-wall-logos { gap: 28px 36px; }
-      .company-wall-logos .wall-logo { height: 28px; }
 
       /* Contact rows */
       .contact-row {
@@ -1837,10 +1794,10 @@
          Use a solid readable color instead. */
       .about-tab-portrait .portrait-corner {
         mix-blend-mode: normal;
-        color: #E8EAFF;
+        color: var(--text);
         background: rgba(11, 14, 26, 0.6);
         padding: 3px 6px;
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        border: 1px solid #D9CFC1;
         border-radius: 2px;
         backdrop-filter: blur(4px);
       }
@@ -1853,11 +1810,122 @@
         transform: none;
       }
     }
+
+    /* ============================================================
+       DARK MODE — token overrides (default palette is warm/paper)
+       ============================================================ */
+    [data-theme="dark"] {
+      --bg:              #0B0E1A;
+      --bg-deep:         #141A2E;
+      --bg-card:         rgba(255, 255, 255, 0.04);
+      --bg-card-hover:   rgba(255, 255, 255, 0.07);
+
+      --text:            #E8EAFF;
+      --text-secondary:  #A7B0D0;
+      --text-muted:      #7A8299;
+
+      --accent:          #9B6DFF;
+      --accent-deep:     #B896FF;
+      --accent-ink:      #C4AAFF;
+      --accent-teal:     #3BD8C7;
+      --accent-wash:     rgba(155, 109, 255, 0.10);
+      --accent-ring:     rgba(155, 109, 255, 0.35);
+
+      --live:            #3BD8C7;
+      --rule:            rgba(255, 255, 255, 0.09);
+      --rule-soft:       rgba(255, 255, 255, 0.05);
+
+      color-scheme: dark;
+    }
+    [data-theme="dark"] body {
+      background:
+        radial-gradient(ellipse 80% 50% at 70% -10%, rgba(155, 109, 255, 0.18), transparent 60%),
+        radial-gradient(ellipse 90% 60% at 0% 110%, rgba(59, 216, 199, 0.10), transparent 55%),
+        linear-gradient(180deg, #0B0E1A 0%, #101530 55%, #0B0E1A 100%);
+      background-attachment: fixed;
+      -webkit-tap-highlight-color: rgba(155, 109, 255, 0.22);
+    }
+    [data-theme="dark"] a,
+    [data-theme="dark"] button,
+    [data-theme="dark"] [role="tab"],
+    [data-theme="dark"] summary,
+    [data-theme="dark"] input,
+    [data-theme="dark"] select,
+    [data-theme="dark"] textarea {
+      -webkit-tap-highlight-color: rgba(155, 109, 255, 0.22);
+    }
+    /* Color logos: give tiles a light surface in dark mode so brand colors stay legible */
+    [data-theme="dark"] .exp-logo,
+    [data-theme="dark"] .edu-logo {
+      background: #F6EEE2;
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+    /* Wall wordmarks: keep grayscale in both themes, reveal color on hover (base rule applies) */
+
+    /* ============================================================
+       THEME TOGGLE BUTTON
+       ============================================================ */
+    .theme-toggle {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      z-index: 200;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--rule);
+      background: var(--bg-card);
+      color: var(--text);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(10px) saturate(1.1);
+      -webkit-backdrop-filter: blur(10px) saturate(1.1);
+      transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+    }
+    .theme-toggle:hover {
+      border-color: var(--accent);
+      background: var(--bg-card-hover);
+      transform: scale(1.05);
+    }
+    .theme-toggle:focus-visible {
+      outline: 2px solid var(--accent-ring);
+      outline-offset: 3px;
+    }
+    .theme-toggle svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .theme-toggle .icon-moon { display: none; }
+    [data-theme="dark"] .theme-toggle .icon-sun { display: none; }
+    [data-theme="dark"] .theme-toggle .icon-moon { display: inline-block; }
+
+    @media (max-width: 640px) {
+      .theme-toggle { top: 14px; right: 14px; width: 38px; height: 38px; }
+      .theme-toggle svg { width: 16px; height: 16px; }
+    }
   </style>
 </head>
-<body>
+<body class="first-load">
 
   <a href="#main" class="skip-link">Skip to content</a>
+
+  <!-- Theme toggle -->
+  <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode" title="Toggle theme">
+    <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="12" cy="12" r="4"/>
+      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+    </svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  </button>
 
   <div class="ambient" aria-hidden="true"></div>
 
@@ -1870,11 +1938,11 @@
         <span class="kicker-muted">Volume One</span>
       </p>
 
-      <h1 class="hero-headline">An agent for <em>everything</em><span class="amp">.</span></h1>
+      <h1 class="hero-headline">An agent for <em>everything</em>.</h1>
 
-      <p class="hero-byline">If it's annoying enough to do twice, it's worth building once.</p>
+      <p class="hero-byline">If it's annoying enough to do twice, it may be worth building once.</p>
 
-      <p class="hero-sub">Groceries, rides, housing, sports — if it has <em>friction</em>, it gets an agent. The ship list is below.</p>
+      <p class="hero-sub">Personal productivity agents, tackling the mundane tasks you don't want to spend your <em>free time</em> doing.</p>
 
       <div class="hero-cta">
         <a href="#work" class="cta cta-primary">
@@ -1887,7 +1955,7 @@
 
     <aside class="hero-bio" aria-label="About the author">
       <figure class="hero-portrait">
-        <img src="assets/portrait.jpg" alt="Thomas Nendick with his partner and two dogs" loading="lazy">
+        <img src="assets/portrait.jpg" alt="Thomas Nendick with his partner and two dogs" width="400" height="500" fetchpriority="high" decoding="async">
       </figure>
       <div class="hero-bio-text">
         <p>Thomas Nendick.</p>
@@ -1920,7 +1988,7 @@
             <span class="project-status shipped">Live</span>
           </div>
           <div class="project-info">
-            <h3 class="project-name">Grocery Shopper Assistant</h3>
+            <h2 class="project-name">Grocery Shopper Assistant</h2>
             <p class="project-desc">Streamlines weekly grocery runs. Build lists, compare prices, and plan meals without the mental overhead of figuring out what you need.</p>
             <div class="project-tags">
               <span class="tag">Productivity</span>
@@ -1932,9 +2000,9 @@
               Open project
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M7 7h10v10"/></svg>
             </a>
-            <a href="docs/architecture/grocery-shopper.html" class="project-link secondary" aria-label="Technical Jargon — Grocery Shopper Assistant architecture">
-              Technical Jargon
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
+            <a href="docs/architecture/grocery-shopper.html" class="project-link secondary" aria-label="Architecture — Grocery Shopper Assistant">
+              Architecture
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.6" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
             </a>
           </div>
         </article>
@@ -1948,8 +2016,8 @@
             <span class="project-status shipped">Live</span>
           </div>
           <div class="project-info">
-            <h3 class="project-name">Rideshare Comp</h3>
-            <p class="project-desc">Compares Uber and Lyft side-by-side before you book. Pick the cheaper ride, skip the app-switching tax, see which service wins your routes.</p>
+            <h2 class="project-name">Rideshare Comp</h2>
+            <p class="project-desc">Compares Uber and Waymo side-by-side before you book. Pick the cheaper ride, skip the app-switching tax, see which service wins your routes. Lyft coming soon.</p>
             <div class="project-tags">
               <span class="tag">Transportation</span>
               <span class="tag">Utility</span>
@@ -1960,9 +2028,9 @@
               Open project
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M7 7h10v10"/></svg>
             </a>
-            <a href="docs/architecture/rideshare-comp.html" class="project-link secondary" aria-label="Technical Jargon — Rideshare Comp architecture">
-              Technical Jargon
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
+            <a href="docs/architecture/rideshare-comp.html" class="project-link secondary" aria-label="Architecture — Rideshare Comp">
+              Architecture
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.6" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
             </a>
           </div>
         </article>
@@ -1976,7 +2044,7 @@
             <span class="project-status shipped">Live</span>
           </div>
           <div class="project-info">
-            <h3 class="project-name">Dynasty Fantasy Football</h3>
+            <h2 class="project-name">Dynasty Fantasy Football</h2>
             <p class="project-desc">Tools and analysis for dynasty leagues. Evaluate trades, track player values, and build rosters that win over seasons, not just weeks.</p>
             <div class="project-tags">
               <span class="tag">Fantasy Sports</span>
@@ -1988,9 +2056,9 @@
               Open project
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M7 7h10v10"/></svg>
             </a>
-            <a href="docs/architecture/dynasty-fantasy-football.html" class="project-link secondary" aria-label="Technical Jargon — Dynasty Fantasy Football architecture">
-              Technical Jargon
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
+            <a href="docs/architecture/dynasty-fantasy-football.html" class="project-link secondary" aria-label="Architecture — Dynasty Fantasy Football">
+              Architecture
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.6" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
             </a>
           </div>
         </article>
@@ -2004,7 +2072,7 @@
             <span class="project-status shipped">Live</span>
           </div>
           <div class="project-info">
-            <h3 class="project-name">LA Concert Tracker</h3>
+            <h2 class="project-name">LA Concert Tracker</h2>
             <p class="project-desc">Surfaces live shows in LA based on artists you actually listen to. Stop missing gigs because you didn't check the right site at the right time.</p>
             <div class="project-tags">
               <span class="tag">Music</span>
@@ -2016,9 +2084,9 @@
               Open project
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M7 7h10v10"/></svg>
             </a>
-            <a href="docs/architecture/concert-finder.html" class="project-link secondary" aria-label="Technical Jargon — LA Concert Tracker architecture">
-              Technical Jargon
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
+            <a href="docs/architecture/concert-finder.html" class="project-link secondary" aria-label="Architecture — LA Concert Tracker">
+              Architecture
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.6" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
             </a>
           </div>
         </article>
@@ -2032,7 +2100,7 @@
             <span class="project-status">Archived</span>
           </div>
           <div class="project-info">
-            <h3 class="project-name">March Madness Dashboard 2026</h3>
+            <h2 class="project-name">March Madness Dashboard 2026</h2>
             <p class="project-desc">Interactive bracket and game tracker for the 2026 NCAA tournament. Visualized matchups, scores, and upsets as the madness unfolded.</p>
             <div class="project-tags">
               <span class="tag">Sports</span>
@@ -2044,9 +2112,9 @@
               Open project
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M7 7h10v10"/></svg>
             </a>
-            <a href="docs/architecture/march-madness-dashboard.html" class="project-link secondary" aria-label="Technical Jargon — March Madness Dashboard 2026 architecture">
-              Technical Jargon
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
+            <a href="docs/architecture/march-madness-dashboard.html" class="project-link secondary" aria-label="Architecture — March Madness Dashboard 2026">
+              Architecture
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.6" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
             </a>
           </div>
         </article>
@@ -2060,7 +2128,7 @@
             <span class="project-status wip">In Build</span>
           </div>
           <div class="project-info">
-            <h3 class="project-name">Housing Finder</h3>
+            <h2 class="project-name">Housing Finder</h2>
             <p class="project-desc">Aggregates listings and surfaces the ones worth your time. Filters, alerts, and scoring so you spend less energy hunting and more time deciding.</p>
             <div class="project-tags">
               <span class="tag">Real Estate</span>
@@ -2068,10 +2136,10 @@
             </div>
           </div>
           <div class="project-links">
-            <span class="project-soon" aria-label="Housing Finder — not yet launched">Coming soon.....</span>
-            <a href="docs/architecture/housing-finder.html" class="project-link secondary" aria-label="Technical Jargon — Housing Finder architecture">
-              Technical Jargon
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
+            <span class="project-soon" aria-label="Housing Finder — not yet launched">Coming soon…</span>
+            <a href="docs/architecture/housing-finder.html" class="project-link secondary" aria-label="Architecture — Housing Finder">
+              Architecture
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.6" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
             </a>
           </div>
         </article>
@@ -2085,7 +2153,7 @@
             <span class="project-status wip">In Build</span>
           </div>
           <div class="project-info">
-            <h3 class="project-name">Honeymoon Bot</h3>
+            <h2 class="project-name">Honeymoon Bot</h2>
             <p class="project-desc">Plans the honeymoon so you don't have to open thirty browser tabs. Flights, stays, activities, and a budget that isn't a spreadsheet — in one itinerary you'll actually use.</p>
             <div class="project-tags">
               <span class="tag">Travel</span>
@@ -2093,15 +2161,15 @@
             </div>
           </div>
           <div class="project-links">
-            <span class="project-soon" aria-label="Honeymoon Bot — not yet launched">Coming soon.....</span>
-            <a href="docs/architecture/honeymoon-bot.html" class="project-link secondary" aria-label="Technical Jargon — Honeymoon Bot architecture">
-              Technical Jargon
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
+            <span class="project-soon" aria-label="Honeymoon Bot — not yet launched">Coming soon…</span>
+            <a href="docs/architecture/honeymoon-bot.html" class="project-link secondary" aria-label="Architecture — Honeymoon Bot">
+              Architecture
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.6" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
             </a>
           </div>
         </article>
 
-        <article class="project-card protected" data-protected="true" tabindex="0" aria-label="Betting Tracker — password protected">
+        <article class="project-card protected" data-protected="true">
           <div class="project-icon" aria-hidden="true">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"/></svg>
           </div>
@@ -2110,7 +2178,7 @@
             <span class="project-status">Private</span>
           </div>
           <div class="project-info">
-            <h3 class="project-name">Betting Tracker</h3>
+            <h2 class="project-name">Betting Tracker</h2>
             <p class="project-desc">Logs every wager, tracks P&amp;L over time, and shows where the edge actually is — or isn't. The honest scoreboard.</p>
             <div class="project-tags">
               <span class="tag">Sports</span>
@@ -2118,21 +2186,21 @@
             </div>
           </div>
           <div class="project-links">
-            <span class="project-soon" aria-label="Betting Tracker — not yet launched">Coming soon.....</span>
-            <a href="docs/architecture/betting-tracker.html" class="project-link secondary" aria-label="Technical Jargon — Betting Tracker architecture">
-              Technical Jargon
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
+            <span class="project-soon" aria-label="Betting Tracker — not yet launched">Coming soon…</span>
+            <a href="docs/architecture/betting-tracker.html" class="project-link secondary" aria-label="Architecture — Betting Tracker">
+              Architecture
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.6" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
             </a>
           </div>
           <div class="lock-overlay">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.6" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"/></svg>
             <div class="lock-label">Protected Work</div>
             <div class="lock-sub">Password required</div>
             <button type="button" class="lock-btn">Unlock</button>
           </div>
         </article>
 
-        <article class="project-card protected" data-protected="true" tabindex="0" aria-label="Betting Model — password protected">
+        <article class="project-card protected" data-protected="true">
           <div class="project-icon" aria-hidden="true">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Zm.75-12h9v9h-9v-9Z"/></svg>
           </div>
@@ -2141,7 +2209,7 @@
             <span class="project-status">Private</span>
           </div>
           <div class="project-info">
-            <h3 class="project-name">Betting Model</h3>
+            <h2 class="project-name">Betting Model</h2>
             <p class="project-desc">Crunches the numbers behind the lines. A probability model that finds value where the market misprices outcomes — bet with data, not gut.</p>
             <div class="project-tags">
               <span class="tag">Machine Learning</span>
@@ -2149,14 +2217,14 @@
             </div>
           </div>
           <div class="project-links">
-            <span class="project-soon" aria-label="Betting Model — not yet launched">Coming soon.....</span>
-            <a href="docs/architecture/betting-model.html" class="project-link secondary" aria-label="Technical Jargon — Betting Model architecture">
-              Technical Jargon
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
+            <span class="project-soon" aria-label="Betting Model — not yet launched">Coming soon…</span>
+            <a href="docs/architecture/betting-model.html" class="project-link secondary" aria-label="Architecture — Betting Model">
+              Architecture
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.6" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
             </a>
           </div>
           <div class="lock-overlay">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.6" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"/></svg>
             <div class="lock-label">Protected Work</div>
             <div class="lock-sub">Password required</div>
             <button type="button" class="lock-btn">Unlock</button>
@@ -2172,13 +2240,14 @@
         <div class="about-tab-hero">
           <figure class="about-tab-portrait">
             <span class="portrait-corner pc-tl">Fig. 01</span>
-            <img src="assets/leahsofiaphoto-11416.jpg" alt="Thomas Nendick professional portrait" loading="lazy">
+            <img src="assets/leahsofiaphoto-11416.jpg" alt="Thomas Nendick professional portrait" width="800" height="1000" loading="lazy" decoding="async">
             <span class="portrait-corner pc-br">MMXXVI</span>
           </figure>
 
           <div class="about-tab-body">
-            <p class="about-tab-lede">I sit at the intersection of <em>strategy</em> and <em>execution</em>.</p>
-            <p>In Deloitte's Tech, Data &amp; AI Strategy practice, I help Fortune 500 clients turn ambitious technology bets into programs that actually ship. The edge isn't the frameworks — it's that I write code. Prototypes, internal tools, weekend experiments.</p>
+            <p class="about-tab-lede">Data, AI &amp; tech strategy by day. Vibe coder by night. Aspiring <em>FDE</em>.</p>
+            <p>I'm a data, AI and tech strategy consultant fascinated by agentic AI. I started vibe coding products and apps to boost my personal productivity and learn while doing it.</p>
+            <p>I've been stacking trainings to pair the strategic lens with real tech chops. The goal: operate as a forward deployed engineer — someone who makes ideas real, not just specs them.</p>
             <p>This site is the index of those experiments. Each one started as a problem I ran into myself and grew into something I could point at. <em>Strategy is more honest when the strategist has shipped.</em></p>
 
             <div class="about-meta-row">
@@ -2189,10 +2258,6 @@
               <div class="about-meta-item">
                 <span class="label">Role</span>
                 <span class="value">Tech &amp; AI Strategy</span>
-              </div>
-              <div class="about-meta-item">
-                <span class="label">Practice</span>
-                <span class="value">Deloitte Consulting</span>
               </div>
             </div>
           </div>
@@ -2207,64 +2272,35 @@
             <span class="year">2016 — Present</span>
           </div>
 
-          <!-- Key metrics strip -->
-          <div class="resume-metrics">
-            <div class="resume-metric">
-              <span class="n">$10M<sup>+</sup></span>
-              <span class="l">Annual OPEX Saved</span>
-            </div>
-            <div class="resume-metric">
-              <span class="n">$25M</span>
-              <span class="l">Tech Debt Reduced</span>
-            </div>
-            <div class="resume-metric">
-              <span class="n">400<sup>+</sup></span>
-              <span class="l">IT Org Transformed</span>
-            </div>
-            <div class="resume-metric">
-              <span class="n">100<sup>+</sup></span>
-              <span class="l">AI Agents Deployed</span>
-            </div>
-          </div>
-
           <!-- Experience -->
           <div class="resume-exp">
             <p class="resume-section-label">Experience</p>
 
-            <details class="exp-item">
-              <summary class="exp-summary">
+            <div class="exp-item">
+              <div class="exp-summary">
                 <div class="exp-logo">
-                  <img src="assets/logos/deloitte-mark.svg" alt="Deloitte" loading="lazy">
+                  <img src="assets/logos/deloitte.png" alt="Deloitte" width="72" height="72" loading="lazy" decoding="async">
                 </div>
                 <div class="exp-summary-head">
-                  <h4 class="exp-role">Technology Strategy &amp; AI <em>Manager</em></h4>
+                  <h3 class="exp-role">Tech, AI &amp; Data Strategy <em>Manager</em></h3>
                   <div class="exp-summary-meta">
                     <span class="co">Deloitte Consulting</span>
                     <span class="sep">·</span>
-                    <span>Tech, Data &amp; AI Strategy</span>
+                    <span>Tech, AI &amp; Data Strategy</span>
                     <span class="sep">·</span>
                     <span class="dates">Apr 2026 — Present</span>
                   </div>
                 </div>
-                <span class="exp-chevron" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-                </span>
-              </summary>
-              <div class="exp-detail">
-                <ul class="exp-bullets">
-                  <li>Helping Fortune 500 clients translate ambitious <strong>tech, data, and AI bets</strong> into programs that actually ship — combining strategy rigor with hands-on prototyping.</li>
-                  <li>Building internal tooling and agentic workflows to accelerate engagement delivery.</li>
-                </ul>
               </div>
-            </details>
+            </div>
 
-            <details class="exp-item">
-              <summary class="exp-summary">
+            <div class="exp-item">
+              <div class="exp-summary">
                 <div class="exp-logo">
-                  <img src="assets/logos/accenture-mark.svg" alt="Accenture" loading="lazy">
+                  <img src="assets/logos/accenture.png" alt="Accenture" width="72" height="72" loading="lazy" decoding="async">
                 </div>
                 <div class="exp-summary-head">
-                  <h4 class="exp-role">Technology Strategy &amp; Advisory <em>Manager</em></h4>
+                  <h3 class="exp-role">Technology Strategy &amp; Advisory <em>Manager</em></h3>
                   <div class="exp-summary-meta">
                     <span class="co">Accenture</span>
                     <span class="sep">·</span>
@@ -2273,29 +2309,16 @@
                     <span class="dates">Nov 2021 — Apr 2026</span>
                   </div>
                 </div>
-                <span class="exp-chevron" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-                </span>
-              </summary>
-              <div class="exp-detail">
-                <ul class="exp-bullets">
-                  <li>Partnered with a CTO to build an <strong>enterprise-wide AI strategy</strong> — governance, use-case triage, operational frameworks — standardizing how the org capitalizes on innovation.</li>
-                  <li>Delivered <strong>$10M annual OPEX savings</strong> by restructuring the digital content supply chain: new operating model, tech rationalization, redesigned org, and process standardization.</li>
-                  <li>Led <strong>$25M tech-debt reduction</strong> across a 400+ member IT org with the CIO — pivoted from project-based to product-centric delivery, reengineered workflows end to end.</li>
-                  <li>Designed and shipped an <strong>agentic AI solution</strong> using LLMs, tools, and orchestrated agents — accelerated product time-to-market by <strong>60%</strong>.</li>
-                  <li>Architected 100+ agents across largest clients; built rollout playbook and business cases driving productivity gains across SDLC and app maintenance.</li>
-                  <li>Drove <strong>$20M in revenue</strong> by leading development of ML, APIs, and scraping to enrich customer data — led cross-functional team of 15+ on/offshore.</li>
-                </ul>
               </div>
-            </details>
+            </div>
 
-            <details class="exp-item">
-              <summary class="exp-summary">
+            <div class="exp-item">
+              <div class="exp-summary">
                 <div class="exp-logo">
-                  <img src="assets/logos/clearsulting-mark.svg" alt="Clearsulting" loading="lazy">
+                  <img src="assets/logos/clearsulting.png" alt="Clearsulting" width="72" height="72" loading="lazy" decoding="async">
                 </div>
                 <div class="exp-summary-head">
-                  <h4 class="exp-role">Senior Technology Strategy <em>Consultant</em></h4>
+                  <h3 class="exp-role">Senior Technology Strategy <em>Consultant</em></h3>
                   <div class="exp-summary-meta">
                     <span class="co">Clearsulting</span>
                     <span class="sep">·</span>
@@ -2304,26 +2327,16 @@
                     <span class="dates">Dec 2019 — Feb 2021</span>
                   </div>
                 </div>
-                <span class="exp-chevron" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-                </span>
-              </summary>
-              <div class="exp-detail">
-                <ul class="exp-bullets">
-                  <li>Led financial transformation consolidating AP, AR, P2P, O2C into a shared service center — <strong>$3M OPEX reduction</strong> year over year.</li>
-                  <li>Automated <strong>65% of manual accounting activities</strong> for a global ecommerce client by building tailored integrations; captured 150+ requirements across 50+ interviews.</li>
-                  <li>Ran end-to-end SaaS implementations — planning, scoping, system/integration/UAT testing, training, and hypercare.</li>
-                </ul>
               </div>
-            </details>
+            </div>
 
-            <details class="exp-item">
-              <summary class="exp-summary">
+            <div class="exp-item">
+              <div class="exp-summary">
                 <div class="exp-logo">
-                  <img src="assets/logos/ey-mark.svg" alt="Ernst &amp; Young" loading="lazy">
+                  <img src="assets/logos/EY.png" alt="Ernst &amp; Young" width="72" height="72" loading="lazy" decoding="async">
                 </div>
                 <div class="exp-summary-head">
-                  <h4 class="exp-role">IT Advisory <em>Senior Consultant</em></h4>
+                  <h3 class="exp-role">IT Advisory <em>Senior Consultant</em></h3>
                   <div class="exp-summary-meta">
                     <span class="co">Ernst &amp; Young</span>
                     <span class="sep">·</span>
@@ -2332,17 +2345,8 @@
                     <span class="dates">Aug 2016 — Oct 2019</span>
                   </div>
                 </div>
-                <span class="exp-chevron" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-                </span>
-              </summary>
-              <div class="exp-detail">
-                <ul class="exp-bullets">
-                  <li>Restructured and integrated companies from a <strong>multi-billion-dollar media acquisition</strong> — identified tech and vendor synergies, recommended consolidation vs. spin-off.</li>
-                  <li>Ran product management and system architecture: assessed current state, redesigned future state against complex integration requirements.</li>
-                </ul>
               </div>
-            </details>
+            </div>
           </div>
 
           <!-- Education -->
@@ -2350,10 +2354,10 @@
             <p class="resume-section-label">Education</p>
             <div class="edu-card">
               <div class="edu-logo">
-                <img src="assets/logos/usc-mark.svg" alt="University of Southern California" loading="lazy">
+                <img src="assets/logos/usc.png" alt="University of Southern California" width="72" height="72" loading="lazy" decoding="async">
               </div>
               <div class="edu-body">
-                <h4 class="edu-school">University of Southern California <em>·</em> Marshall School of Business</h4>
+                <h3 class="edu-school">University of Southern California <em>·</em> Marshall School of Business</h3>
                 <p class="edu-degree">Bachelor's Degree in Business Administration</p>
                 <p class="edu-spec">Viterbi School of Engineering — Innovation Specialization</p>
               </div>
@@ -2366,7 +2370,7 @@
             <p class="resume-section-label">Skills</p>
             <div class="skills-grid">
               <div class="skill-col">
-                <h5 class="skill-col-title"><em>Technical</em></h5>
+                <h4 class="skill-col-title"><em>Technical</em></h4>
                 <div class="skill-tags">
                   <span class="skill-tag">Agentic AI</span>
                   <span class="skill-tag">Gen AI</span>
@@ -2379,7 +2383,7 @@
                 </div>
               </div>
               <div class="skill-col">
-                <h5 class="skill-col-title"><em>Business</em></h5>
+                <h4 class="skill-col-title"><em>Business</em></h4>
                 <div class="skill-tags">
                   <span class="skill-tag">Operating Models</span>
                   <span class="skill-tag">IT Strategy</span>
@@ -2391,7 +2395,7 @@
                 </div>
               </div>
               <div class="skill-col">
-                <h5 class="skill-col-title"><em>Leadership</em></h5>
+                <h4 class="skill-col-title"><em>Leadership</em></h4>
                 <div class="skill-tags">
                   <span class="skill-tag">Exec Communication</span>
                   <span class="skill-tag">Storytelling</span>
@@ -2404,24 +2408,6 @@
             </div>
           </div>
 
-          <!-- Company wall -->
-          <div class="company-wall">
-            <div class="company-wall-label">Where I've built · 2016 → 2026</div>
-            <div class="company-wall-logos">
-              <div class="wall-logo" title="Ernst &amp; Young">
-                <img src="assets/logos/ey.svg" alt="Ernst &amp; Young" loading="lazy">
-              </div>
-              <div class="wall-logo" title="Clearsulting">
-                <img src="assets/logos/clearsulting.svg" alt="Clearsulting" loading="lazy">
-              </div>
-              <div class="wall-logo" title="Accenture">
-                <img src="assets/logos/accenture.svg" alt="Accenture" loading="lazy">
-              </div>
-              <div class="wall-logo" title="Deloitte">
-                <img src="assets/logos/deloitte.svg" alt="Deloitte" loading="lazy">
-              </div>
-            </div>
-          </div>
         </div>
 
       </section>
@@ -2500,6 +2486,51 @@
     const PROTECTED_PASSWORD = 'nendick';
 
     // ==========================================================
+    // FIRST-LOAD GATE — drop .first-load after the staggered card
+    // cascade finishes (last card at 0.80s + 0.60s animation = 1.40s).
+    // After this, the cards render instantly on tab switch.
+    // ==========================================================
+    window.addEventListener('load', () => {
+      setTimeout(() => document.body.classList.remove('first-load'), 1500);
+    });
+
+    // ==========================================================
+    // THEME TOGGLE
+    // ==========================================================
+    (function () {
+      const root = document.documentElement;
+      const btn = document.querySelector('[data-theme-toggle]');
+      if (!btn) return;
+      const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+      const colors = { light: '#F3ECE0', dark: '#0B0E1A' };
+
+      function sync() {
+        const t = root.getAttribute('data-theme') || 'light';
+        btn.setAttribute('aria-pressed', String(t === 'dark'));
+        btn.setAttribute('aria-label', t === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+        if (metaThemeColor) metaThemeColor.setAttribute('content', colors[t] || colors.light);
+      }
+      sync();
+
+      btn.addEventListener('click', function () {
+        const next = (root.getAttribute('data-theme') === 'dark') ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        try { localStorage.setItem('theme', next); } catch (e) {}
+        sync();
+      });
+
+      // If user hasn't set a preference, track the OS change
+      const mql = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+      if (mql && mql.addEventListener) {
+        mql.addEventListener('change', function (e) {
+          if (localStorage.getItem('theme')) return; // user chose — respect
+          root.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+          sync();
+        });
+      }
+    })();
+
+    // ==========================================================
     // TABS — ARIA-compliant (arrow keys + roving tabindex)
     // ==========================================================
     const tabButtons = Array.from(document.querySelectorAll('.tab-btn'));
@@ -2574,12 +2605,6 @@
       protectedCards.forEach(card => {
         card.classList.toggle('locked', !unlocked);
         card.setAttribute('aria-disabled', String(!unlocked));
-        // Only keep card itself in tab order while locked; otherwise let the inner link focus instead
-        if (unlocked) {
-          card.removeAttribute('tabindex');
-        } else {
-          card.setAttribute('tabindex', '0');
-        }
       });
     }
 
@@ -2588,7 +2613,8 @@
       errorEl.textContent = '';
       input.value = '';
       modal.classList.add('open');
-      setTimeout(() => input.focus(), 30);
+      // 60ms beats iOS focus race with keyboard-opening transitions.
+      setTimeout(() => input.focus(), 60);
     }
 
     function closeModal() {
@@ -2607,18 +2633,12 @@
       }
     }
 
-    protectedCards.forEach(card => {
-      card.addEventListener('click', (e) => {
-        if (card.classList.contains('locked')) {
-          e.preventDefault();
-          openModal();
-        }
-      });
-      card.addEventListener('keydown', (e) => {
-        if ((e.key === 'Enter' || e.key === ' ') && card.classList.contains('locked')) {
-          e.preventDefault();
-          openModal();
-        }
+    // Lock-button inside each protected card's overlay is the sole unlock trigger —
+    // semantic <button> beats an <article> masquerading as one.
+    document.querySelectorAll('.project-card.protected .lock-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal();
       });
     });
 

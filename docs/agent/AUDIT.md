@@ -1,7 +1,44 @@
 # AUDIT — thomasnendick.com
 
-**Generated:** 2026-04-20
-**Pass:** Pre-Max-Downgrade Hardening
+**Generated:** 2026-04-20 (hardening)
+**Updated:** 2026-04-21 (design-audit pass — Phases 1–3)
+**Pass:** Pre-Max-Downgrade Hardening + Design-Audit Refinement
+
+## 2026-04-21 — Design-audit pass summary
+
+Seven visual/behavioral fixes landed on top of the hardening baseline.
+Every change ships in `index.html`; validator still returns PASS with
+zero issues across 50 links, 15 ids, 7 classes, 562 tags, 13 assets.
+
+| Phase | Change | Reference |
+|-------|--------|-----------|
+| 1.1 | Odd-singleton card centering scoped to `:not(.protected)` | D-008 |
+| 1.2 | Card stagger gated to first-load only | D-009 |
+| 1.3 | `color-scheme` meta set to `light dark` (dual-theme supported) | — |
+| 1.4 | Protected unlock stays on semantic `<button>`, role-button skipped | D-010 |
+| 1.5 | Em-dashes pruned from hero byline + sub | D-013 |
+| 2.1 | `.amp` ornament span removed; plain period in headline | D-014 |
+| 2.2 | Company-wall logo strip removed from About tab | D-015 |
+| 2.3 | `.project-number` serif italic → mono for metadata consistency | D-016 |
+| 2.4 | Inline action-icon stroke-width normalized 1.8 → 1.6 | D-017 |
+| 2.7 | Status + tag font-size bumped 0.64 → 0.7rem | D-018 |
+| 3.3 | Modal error color extracted to `--danger` token | D-019 |
+| 3.4 | Modal focus timeout bumped 30 → 60ms for iOS | D-020 |
+| 3.5 | About-tab entrance fades in on activation | D-012 |
+| 3.7 | "Technical Jargon" → "Architecture" across all 9 cards + CSS comment | D-011 |
+
+Skipped intentionally: tag separator (already clean), icon desaturation
+(would drop the signature rust-accent across the grid), hero
+padding-bottom (24px bottom + 48px next-section top = 72px rhythm, not
+loose).
+
+Orphans noted: removing the company wall left four horizontal SVG
+logos (`ey.svg`, `accenture.svg`, `clearsulting.svg`, `deloitte.svg`)
+plus assorted `*-mark.svg` and `usc.*` files unreferenced in
+`assets/logos/`. Not deleted — low-cost disk footprint, may be useful
+later. Clean up on a future asset pass.
+
+---
 
 The site is one static HTML file plus a small set of architecture pages and
 assets. There is no backend, no build step, and no runtime Claude
