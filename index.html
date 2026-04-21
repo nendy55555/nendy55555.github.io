@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thomas Nendick — Projects</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #F6F1EB;
+      --bg-card: #FFFDF9;
+      --text: #2C2825;
+      --text-secondary: #6B6462;
+      --accent: #C2613A;
+      --accent-hover: #A8512F;
+      --border: #DDD5CB;
+      --tag-bg: #EDE7DF;
+      --serif: 'Instrument Serif', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    /* --- Grain overlay for texture --- */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 256px 256px;
+    }
+
+    /* --- Header --- */
+    header {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 80px 32px 48px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(2.8rem, 6vw, 4.2rem);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: var(--text);
+    }
+
+    header h1 em {
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    header p {
+      margin-top: 20px;
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.7;
+    }
+
+    .divider {
+      width: 48px;
+      height: 1px;
+      background: var(--accent);
+      margin: 48px auto 0;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 32px 30px 28px;
+      display: flex;
+      flex-direction: column;
+      aspect-ratio: 1 / 1;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--accent);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(44, 40, 37, 0.08);
+    }
+
+    .project-card:hover::before {
+      opacity: 1;
+    }
+
+    /* Let the 5th (odd) card span center */
+    .project-card:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+      max-width: calc(50% - 10px);
+      justify-self: center;
+    }
+
+    .project-info {
+      min-width: 0;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-number {
+      font-family: var(--serif);
+      font-size: 0.82rem;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .project-name {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+
+    .project-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: auto;
+      padding-top: 16px;
+    }
+
+    .tag {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      background: var(--tag-bg);
+      border-radius: 100px;
+      color: var(--text-secondary);
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--accent);
+      text-decoration: none;
+      padding: 10px 20px;
+      border: 1px solid var(--accent);
+      border-radius: 100px;
+      white-space: nowrap;
+      transition: background 0.2s ease, color 0.2s ease;
+      align-self: flex-start;
+      margin-top: 16px;
+    }
+
+    .project-link:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .project-link svg {
+      width: 14px;
+      height: 14px;
+      transition: transform 0.2s ease;
+    }
+
+    .project-link:hover svg {
+      transform: translateX(3px);
+    }
+
+    .project-coming-soon {
+      display: inline-flex;
+      align-items: center;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      padding: 10px 20px;
+      border: 1px dashed var(--border);
+      border-radius: 100px;
+      align-self: flex-start;
+      margin-top: 16px;
+      letter-spacing: 0.01em;
+    }
+
+    /* --- Tabs --- */
+    .tabs-wrapper {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    .tab-bar {
+      display: flex;
+      gap: 4px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tab-btn {
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      background: none;
+      border: none;
+      padding: 12px 20px;
+      cursor: pointer;
+      position: relative;
+      transition: color 0.2s ease;
+    }
+
+    .tab-btn::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transition: transform 0.2s ease;
+    }
+
+    .tab-btn:hover { color: var(--text); }
+
+    .tab-btn.active {
+      color: var(--text);
+    }
+
+    .tab-btn.active::after {
+      transform: scaleX(1);
+    }
+
+    .tab-count {
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--accent);
+      background: var(--tag-bg);
+      padding: 1px 7px;
+      border-radius: 100px;
+      margin-left: 6px;
+      vertical-align: 1px;
+    }
+
+    .tab-panel {
+      display: none;
+    }
+
+    .tab-panel.active {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 32px 96px;
+    }
+
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 80px 32px;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .empty-state span {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      display: block;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    /* --- Footer --- */
+    footer {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 32px 64px;
+      text-align: center;
+    }
+
+    footer .footer-line {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 32px;
+    }
+
+    footer p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 720px) {
+      header { padding: 56px 24px 36px; }
+      .tabs-wrapper { padding: 0 20px; }
+      .tab-panel.active {
+        padding: 24px 20px 72px;
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .project-card {
+        aspect-ratio: auto;
+        padding: 24px 22px 22px;
+      }
+      .project-card:last-child:nth-child(odd) {
+        max-width: 100%;
+      }
+    }
+
+    /* --- Protected (locked) cards --- */
+    .project-card.protected.locked {
+      cursor: pointer;
+    }
+
+    .project-card.protected.locked .project-info,
+    .project-card.protected.locked .project-link {
+      filter: blur(6px);
+      opacity: 0.55;
+      user-select: none;
+      pointer-events: none;
+      transition: filter 0.25s ease, opacity 0.25s ease;
+    }
+
+    .project-card.protected.locked::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,253,249,0.35) 0%, rgba(255,253,249,0.75) 100%);
+      pointer-events: none;
+    }
+
+    .lock-overlay {
+      display: none;
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .project-card.protected.locked .lock-overlay {
+      display: flex;
+    }
+
+    .lock-overlay svg {
+      width: 28px;
+      height: 28px;
+      color: var(--accent);
+    }
+
+    .lock-overlay .lock-label {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      color: var(--text);
+    }
+
+    .lock-overlay .lock-sub {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      max-width: 220px;
+      line-height: 1.5;
+    }
+
+    .lock-overlay .lock-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: #fff;
+      background: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 8px 16px;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+      font-family: var(--sans);
+      margin-top: 4px;
+    }
+
+    .lock-overlay .lock-btn:hover {
+      background: var(--accent-hover);
+    }
+
+    /* --- Password modal --- */
+    .pw-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      background: rgba(44, 40, 37, 0.45);
+      backdrop-filter: blur(4px);
+      padding: 24px;
+    }
+
+    .pw-modal.open { display: flex; }
+
+    .pw-modal-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px 28px 24px;
+      max-width: 360px;
+      width: 100%;
+      text-align: center;
+      animation: fadeUp 0.25s ease both;
+    }
+
+    .pw-modal-card h3 {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-bottom: 8px;
+    }
+
+    .pw-modal-card p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 18px;
+    }
+
+    .pw-modal-card input {
+      width: 100%;
+      padding: 11px 14px;
+      font-size: 0.95rem;
+      font-family: var(--sans);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .pw-modal-card input:focus {
+      border-color: var(--accent);
+    }
+
+    .pw-modal-card .pw-error {
+      color: #B33A1F;
+      font-size: 0.78rem;
+      margin-top: 10px;
+      min-height: 1em;
+    }
+
+    .pw-modal-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 14px;
+    }
+
+    .pw-modal-actions button {
+      font-family: var(--sans);
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 9px 18px;
+      border-radius: 100px;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-secondary);
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .pw-modal-actions button.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .pw-modal-actions button.primary:hover {
+      background: var(--accent-hover);
+    }
+
+    .pw-modal-actions button:not(.primary):hover {
+      color: var(--text);
+      border-color: var(--text);
+    }
+
+    /* --- Entrance animation --- */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    header { animation: fadeUp 0.6s ease both; }
+    .project-card:nth-child(1) { animation: fadeUp 0.5s ease 0.15s both; }
+    .project-card:nth-child(2) { animation: fadeUp 0.5s ease 0.25s both; }
+    .project-card:nth-child(3) { animation: fadeUp 0.5s ease 0.35s both; }
+    .project-card:nth-child(4) { animation: fadeUp 0.5s ease 0.45s both; }
+    .project-card:nth-child(5) { animation: fadeUp 0.5s ease 0.55s both; }
+    .project-card:nth-child(6) { animation: fadeUp 0.5s ease 0.65s both; }
+    .project-card:nth-child(7) { animation: fadeUp 0.5s ease 0.75s both; }
+    .project-card:nth-child(8) { animation: fadeUp 0.5s ease 0.85s both; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Things I've <em>Built</em></h1>
+    <p>A collection of tools and apps — from grocery runs to concert nights. Each one scratches a different itch.</p>
+    <div class="divider"></div>
+  </header>
+
+  <main>
+    <nav class="tabs-wrapper">
+      <div class="tab-bar">
+        <button class="tab-btn active" data-tab="active">Active <span class="tab-count">8</span></button>
+        <button class="tab-btn" data-tab="old">Old Projects <span class="tab-count">1</span></button>
+      </div>
+    </nav>
+
+    <!-- ===== ACTIVE PROJECTS ===== -->
+    <section class="tab-panel active" id="tab-active">
+
+      <article class="project-card">
+        <div class="project-info">
+          <span class="project-number">01</span>
+          <h2 class="project-name">Grocery Shopper Assistant</h2>
+          <p class="project-desc">Streamlines your grocery runs. Build lists, compare prices, and plan meals without the mental overhead of figuring out what you need each week.</p>
+          <div class="project-tags">
+            <span class="tag">Productivity</span>
+            <span class="tag">Utility</span>
+          </div>
+        </div>
+        <a href="https://thomass-cookbook.fly.dev/" class="project-link" target="_blank" rel="noopener">
+          Open <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/></svg>
+        </a>
+      </article>
+
+      <article class="project-card">
+        <div class="project-info">
+          <span class="project-number">02</span>
+          <h2 class="project-name">Concert Finder</h2>
+          <p class="project-desc">Surfaces live shows near you based on artists you care about. Stop missing gigs because you didn't check the right site at the right time.</p>
+          <div class="project-tags">
+            <span class="tag">Music</span>
+            <span class="tag">Discovery</span>
+          </div>
+        </div>
+        <a href="#" class="project-link" target="_blank" rel="noopener">
+          Open <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/></svg>
+        </a>
+      </article>
+
+      <article class="project-card">
+        <div class="project-info">
+          <span class="project-number">03</span>
+          <h2 class="project-name">Rideshare Comp</h2>
+          <p class="project-desc">Compares Uber and Lyft fares side-by-side before you book. Pick the cheaper ride, skip the app-switching tax, and see which service consistently wins on your routes.</p>
+          <div class="project-tags">
+            <span class="tag">Transportation</span>
+            <span class="tag">Utility</span>
+          </div>
+        </div>
+        <a href="#" class="project-link" target="_blank" rel="noopener">
+          Open <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/></svg>
+        </a>
+      </article>
+
+      <article class="project-card">
+        <div class="project-info">
+          <span class="project-number">04</span>
+          <h2 class="project-name">Dynasty Fantasy Football</h2>
+          <p class="project-desc">Tools and analysis for dynasty fantasy football leagues. Evaluate trades, track player values, and build rosters that win over seasons, not just weeks.</p>
+          <div class="project-tags">
+            <span class="tag">Fantasy Sports</span>
+            <span class="tag">Analytics</span>
+          </div>
+        </div>
+        <a href="https://nendy55555.github.io/DynastyFF/" class="project-link" target="_blank" rel="noopener">
+          Open <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/></svg>
+        </a>
+      </article>
+
+      <article class="project-card">
+        <div class="project-info">
+          <span class="project-number">05</span>
+          <h2 class="project-name">Housing Finder</h2>
+          <p class="project-desc">Aggregates listings and surfaces the ones worth your time. Filters, alerts, and scoring so you spend less energy hunting and more time deciding.</p>
+          <div class="project-tags">
+            <span class="tag">Real Estate</span>
+            <span class="tag">Search</span>
+          </div>
+        </div>
+        <span class="project-coming-soon">Coming soon...</span>
+      </article>
+
+      <article class="project-card">
+        <div class="project-info">
+          <span class="project-number">06</span>
+          <h2 class="project-name">Honeymoon Bot</h2>
+          <p class="project-desc">Plans the trip of a lifetime without the spreadsheet spiral. Flights, stays, and itineraries tuned to the vibe you want, not the ten tabs you don't have time to open.</p>
+          <div class="project-tags">
+            <span class="tag">Travel</span>
+            <span class="tag">Planning</span>
+          </div>
+        </div>
+        <span class="project-coming-soon">Coming soon...</span>
+      </article>
+
+      <article class="project-card protected" data-protected="true">
+        <div class="project-info">
+          <span class="project-number">07</span>
+          <h2 class="project-name">Betting Tracker</h2>
+          <p class="project-desc">Logs every wager, tracks your P&L over time, and shows where your edge actually is — or isn't. The honest scoreboard for your bets.</p>
+          <div class="project-tags">
+            <span class="tag">Sports</span>
+            <span class="tag">Analytics</span>
+          </div>
+        </div>
+        <a href="#" class="project-link" target="_blank" rel="noopener">
+          Open <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/></svg>
+        </a>
+        <div class="lock-overlay">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"/></svg>
+          <div class="lock-label">Protected Project</div>
+          <div class="lock-sub">This one's private. Enter the password to view.</div>
+          <button type="button" class="lock-btn">Unlock</button>
+        </div>
+      </article>
+
+      <article class="project-card protected" data-protected="true">
+        <div class="project-info">
+          <span class="project-number">08</span>
+          <h2 class="project-name">Betting Model</h2>
+          <p class="project-desc">Crunches the numbers behind the lines. A probability model that finds value where the market misprices outcomes, so you bet with data instead of gut.</p>
+          <div class="project-tags">
+            <span class="tag">Machine Learning</span>
+            <span class="tag">Sports</span>
+          </div>
+        </div>
+        <a href="#" class="project-link" target="_blank" rel="noopener">
+          Open <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/></svg>
+        </a>
+        <div class="lock-overlay">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"/></svg>
+          <div class="lock-label">Protected Project</div>
+          <div class="lock-sub">This one's private. Enter the password to view.</div>
+          <button type="button" class="lock-btn">Unlock</button>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- ===== OLD PROJECTS ===== -->
+    <section class="tab-panel" id="tab-old">
+
+      <article class="project-card">
+        <div class="project-info">
+          <span class="project-number">01</span>
+          <h2 class="project-name">March Madness Dashboard 2026</h2>
+          <p class="project-desc">Interactive bracket and game tracker for the 2026 NCAA tournament. Visualized matchups, scores, and upsets as the madness unfolded.</p>
+          <div class="project-tags">
+            <span class="tag">Sports</span>
+            <span class="tag">Dashboard</span>
+          </div>
+        </div>
+        <a href="https://nendy55555.github.io/MMD-2026/" class="project-link" target="_blank" rel="noopener">
+          Open <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/></svg>
+        </a>
+      </article>
+
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-line"></div>
+    <p>Thomas Nendick — 2026</p>
+  </footer>
+
+  <!-- Password modal for protected projects -->
+  <div class="pw-modal" id="pwModal" role="dialog" aria-modal="true" aria-labelledby="pwTitle">
+    <div class="pw-modal-card">
+      <h3 id="pwTitle">Protected</h3>
+      <p>Enter the password to view betting projects.</p>
+      <input type="password" id="pwInput" placeholder="Password" autocomplete="off" />
+      <div class="pw-error" id="pwError"></div>
+      <div class="pw-modal-actions">
+        <button type="button" id="pwCancel">Cancel</button>
+        <button type="button" class="primary" id="pwSubmit">Unlock</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ---- CONFIG: change this to set the unlock password ----
+    const PROTECTED_PASSWORD = 'nendick';
+    // --------------------------------------------------------
+
+    // Tabs
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+      });
+    });
+
+    // Protected cards
+    const protectedCards = document.querySelectorAll('.project-card.protected');
+    const modal = document.getElementById('pwModal');
+    const input = document.getElementById('pwInput');
+    const errorEl = document.getElementById('pwError');
+    const submitBtn = document.getElementById('pwSubmit');
+    const cancelBtn = document.getElementById('pwCancel');
+
+    function isUnlocked() {
+      try { return sessionStorage.getItem('bettingUnlocked') === 'true'; }
+      catch (e) { return false; }
+    }
+
+    function applyLockState() {
+      const unlocked = isUnlocked();
+      protectedCards.forEach(card => {
+        card.classList.toggle('locked', !unlocked);
+      });
+    }
+
+    function openModal() {
+      errorEl.textContent = '';
+      input.value = '';
+      modal.classList.add('open');
+      setTimeout(() => input.focus(), 30);
+    }
+
+    function closeModal() {
+      modal.classList.remove('open');
+    }
+
+    function attemptUnlock() {
+      if (input.value === PROTECTED_PASSWORD) {
+        try { sessionStorage.setItem('bettingUnlocked', 'true'); } catch (e) {}
+        applyLockState();
+        closeModal();
+      } else {
+        errorEl.textContent = 'Incorrect password';
+        input.select();
+      }
+    }
+
+    // Click a locked card (or its unlock button) to trigger modal
+    protectedCards.forEach(card => {
+      card.addEventListener('click', (e) => {
+        if (card.classList.contains('locked')) {
+          e.preventDefault();
+          openModal();
+        }
+      });
+    });
+
+    submitBtn.addEventListener('click', attemptUnlock);
+    cancelBtn.addEventListener('click', closeModal);
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') attemptUnlock();
+      if (e.key === 'Escape') closeModal();
+    });
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    applyLockState();
+  </script>
+</body>
+</html>
