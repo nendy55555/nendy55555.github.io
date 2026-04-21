@@ -762,7 +762,7 @@
       width: 72px;
       height: 72px;
       border-radius: 12px;
-      background: var(--bg-card);
+      background: #fff;
       border: 1px solid var(--rule);
       display: flex;
       align-items: center;
@@ -770,13 +770,20 @@
       overflow: hidden;
       position: relative;
     }
-    .exp-logo img {
-      max-width: 78%;
-      max-height: 78%;
+    .exp-logo img,
+    .edu-logo img {
+      display: block;
+      height: auto;
       object-fit: contain;
-      /* Dark-mode invert for dark SVG logos */
       filter: none;
     }
+    /* Per-logo optical sizing — each logo's aspect ratio is different,
+       so width is tuned individually to keep visual weight consistent. */
+    .exp-logo img[src*="deloitte"]     { width: 56%; }  /* 1:1 square */
+    .exp-logo img[src*="accenture"]    { width: 82%; }  /* 1.79:1 */
+    .exp-logo img[src*="clearsulting"] { width: 86%; }  /* 2.84:1 (widest) */
+    .exp-logo img[src*="EY"]           { width: 64%; }  /* 1.2:1 */
+    .edu-logo img[src*="usc"]          { width: 80%; }  /* 1.79:1 */
 
     /* expanded body */
     .exp-detail {
@@ -839,14 +846,13 @@
       width: 72px;
       height: 72px;
       border-radius: 12px;
-      background: #EBE2D3;
+      background: #fff;
       border: 1px solid var(--rule);
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
     }
-    .edu-logo img { max-width: 64%; max-height: 64%; object-fit: contain; filter: none; }
     .edu-body { display: flex; flex-direction: column; gap: 4px; }
     .edu-school {
       font-family: var(--serif);
@@ -1857,7 +1863,7 @@
     /* Color logos: give tiles a light surface in dark mode so brand colors stay legible */
     [data-theme="dark"] .exp-logo,
     [data-theme="dark"] .edu-logo {
-      background: #F6EEE2;
+      background: #fff;
       border-color: rgba(255, 255, 255, 0.12);
     }
     /* Wall wordmarks: keep grayscale in both themes, reveal color on hover (base rule applies) */
@@ -2009,26 +2015,26 @@
 
         <article class="project-card">
           <div class="project-icon" aria-hidden="true">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m0-1.5v1.5m0-1.5V9a2.25 2.25 0 0 0-2.25-2.25H4.5A2.25 2.25 0 0 0 2.25 9v7.5h4.5m6 0v-3h6.75a1.5 1.5 0 0 0 1.342-.832l1.296-2.59a1.5 1.5 0 0 0 .026-1.292l-.904-2.062a1.5 1.5 0 0 0-1.374-.898H14.25v9.675Zm5.25 1.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m9 9 10.5-3m0 6.553v3.75a2.25 2.25 0 0 1-1.632 2.163l-1.32.377a1.803 1.803 0 1 1-.99-3.467l2.31-.66a2.25 2.25 0 0 0 1.632-2.163Zm0 0V2.25L9 5.25v10.303m0 0v3.75a2.25 2.25 0 0 1-1.632 2.163l-1.32.377a1.803 1.803 0 0 1-.99-3.467l2.31-.66A2.25 2.25 0 0 0 9 15.553Z"/></svg>
           </div>
           <div class="project-meta">
             <span class="project-number">№ 02</span>
             <span class="project-status shipped">Live</span>
           </div>
           <div class="project-info">
-            <h2 class="project-name">Rideshare Comp</h2>
-            <p class="project-desc">Compares Uber and Waymo side-by-side before you book. Pick the cheaper ride, skip the app-switching tax, see which service wins your routes. Lyft coming soon.</p>
+            <h2 class="project-name">LA Concert Tracker</h2>
+            <p class="project-desc">Surfaces live shows in LA based on artists you actually listen to. Stop missing gigs because you didn't check the right site at the right time.</p>
             <div class="project-tags">
-              <span class="tag">Transportation</span>
-              <span class="tag">Utility</span>
+              <span class="tag">Music</span>
+              <span class="tag">Discovery</span>
             </div>
           </div>
           <div class="project-links">
-            <a href="https://rideshare-comps.fly.dev/" class="project-link" target="_blank" rel="noopener" aria-label="Open Rideshare Comp">
+            <a href="https://nendy55555.github.io/la-concert-tracker/" class="project-link" target="_blank" rel="noopener" aria-label="Open LA Concert Tracker">
               Open project
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M7 7h10v10"/></svg>
             </a>
-            <a href="docs/architecture/rideshare-comp.html" class="project-link secondary" aria-label="Architecture — Rideshare Comp">
+            <a href="docs/architecture/concert-finder.html" class="project-link secondary" aria-label="Architecture — LA Concert Tracker">
               Architecture
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.6" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
             </a>
@@ -2065,26 +2071,26 @@
 
         <article class="project-card">
           <div class="project-icon" aria-hidden="true">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m9 9 10.5-3m0 6.553v3.75a2.25 2.25 0 0 1-1.632 2.163l-1.32.377a1.803 1.803 0 1 1-.99-3.467l2.31-.66a2.25 2.25 0 0 0 1.632-2.163Zm0 0V2.25L9 5.25v10.303m0 0v3.75a2.25 2.25 0 0 1-1.632 2.163l-1.32.377a1.803 1.803 0 0 1-.99-3.467l2.31-.66A2.25 2.25 0 0 0 9 15.553Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m0-1.5v1.5m0-1.5V9a2.25 2.25 0 0 0-2.25-2.25H4.5A2.25 2.25 0 0 0 2.25 9v7.5h4.5m6 0v-3h6.75a1.5 1.5 0 0 0 1.342-.832l1.296-2.59a1.5 1.5 0 0 0 .026-1.292l-.904-2.062a1.5 1.5 0 0 0-1.374-.898H14.25v9.675Zm5.25 1.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0"/></svg>
           </div>
           <div class="project-meta">
             <span class="project-number">№ 04</span>
             <span class="project-status shipped">Live</span>
           </div>
           <div class="project-info">
-            <h2 class="project-name">LA Concert Tracker</h2>
-            <p class="project-desc">Surfaces live shows in LA based on artists you actually listen to. Stop missing gigs because you didn't check the right site at the right time.</p>
+            <h2 class="project-name">Rideshare Comp</h2>
+            <p class="project-desc">Compares Uber and Waymo side-by-side before you book. Pick the cheaper ride, skip the app-switching tax, see which service wins your routes. Lyft coming soon.</p>
             <div class="project-tags">
-              <span class="tag">Music</span>
-              <span class="tag">Discovery</span>
+              <span class="tag">Transportation</span>
+              <span class="tag">Utility</span>
             </div>
           </div>
           <div class="project-links">
-            <a href="https://nendy55555.github.io/la-concert-tracker/" class="project-link" target="_blank" rel="noopener" aria-label="Open LA Concert Tracker">
+            <a href="https://rideshare-comps.fly.dev/" class="project-link" target="_blank" rel="noopener" aria-label="Open Rideshare Comp">
               Open project
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M7 7h10v10"/></svg>
             </a>
-            <a href="docs/architecture/concert-finder.html" class="project-link secondary" aria-label="Architecture — LA Concert Tracker">
+            <a href="docs/architecture/rideshare-comp.html" class="project-link secondary" aria-label="Architecture — Rideshare Comp">
               Architecture
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.6" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
             </a>
@@ -2239,9 +2245,7 @@
         <!-- Bio block -->
         <div class="about-tab-hero">
           <figure class="about-tab-portrait">
-            <span class="portrait-corner pc-tl">Fig. 01</span>
             <img src="assets/leahsofiaphoto-11416.jpg" alt="Thomas Nendick professional portrait" width="800" height="1000" loading="lazy" decoding="async">
-            <span class="portrait-corner pc-br">MMXXVI</span>
           </figure>
 
           <div class="about-tab-body">
@@ -2286,7 +2290,7 @@
                   <div class="exp-summary-meta">
                     <span class="co">Deloitte Consulting</span>
                     <span class="sep">·</span>
-                    <span>Tech, AI &amp; Data Strategy</span>
+                    <span>Media &amp; Technology</span>
                     <span class="sep">·</span>
                     <span class="dates">Apr 2026 — Present</span>
                   </div>
