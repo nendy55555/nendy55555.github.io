@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynasty Fantasy Football — Technical Jargon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="_shared.css">
+</head>
+<body>
+
+  <div class="ambient" aria-hidden="true"></div>
+
+  <div class="masthead">
+    <a class="back-link" href="../../index.html">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"/></svg>
+      Back to Index
+    </a>
+    <div class="masthead-right">
+      <span>Vol. 01</span>
+      <span>Tech Doc</span>
+      <span>№ 03</span>
+    </div>
+  </div>
+
+  <header class="doc-hero">
+    <div class="doc-kicker">Technical Jargon · Project № 03</div>
+    <h1 class="doc-title">Dynasty Fantasy <em>Football</em></h1>
+    <p class="doc-lede">An NFL scout with a spreadsheet brain. Grades every player, every trade, and every roster move over the long horizon — not just this Sunday.</p>
+  </header>
+
+  <div class="doc-rule"></div>
+
+  <article class="doc">
+
+    <section>
+      <div class="section-label">The Analogy</div>
+      <h2 class="section-head">The scout who <em>plays the long game.</em></h2>
+      <p>Regular fantasy football is a one-night stand: draft, win, reset. Dynasty is a marriage. You keep your roster for years. Every decision compounds. Trading a 29-year-old star for a 22-year-old rookie isn't a gut call — it's a portfolio move.</p>
+      <p>Most managers still make those moves on instinct. This tool replaces instinct with math. It assigns every player a long-horizon value, grades every trade, and shows you whether your roster is aging into a championship window or out of one.</p>
+      <div class="pull">The score you win with in 2026 was usually built by a trade you made in 2024.</div>
+    </section>
+
+    <section>
+      <div class="section-label">How It Works</div>
+      <h2 class="section-head">Value, <em>trade,</em> roster.</h2>
+
+      <div class="flow">
+        <div class="flow-step">
+          <div class="flow-kicker">Input</div>
+          <div class="flow-title">It reads the league.</div>
+          <div class="flow-body">Player stats, ages, draft capital, injury history, and your league's specific scoring settings all flow in as raw material.</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-kicker">Transform</div>
+          <div class="flow-title">It builds a value model.</div>
+          <div class="flow-body">Each player gets a dynasty value — a number that captures both current production and future upside, priced against their age curve.</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-kicker">Output</div>
+          <div class="flow-title">You get the answers.</div>
+          <div class="flow-body">Player rankings, trade analyzer (fair / lopsided / steal), and roster grades. Instant second opinions on every decision.</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-label">Under the Hood</div>
+      <h2 class="section-head">What's actually <em>running</em>.</h2>
+
+      <div class="tech-grid">
+        <div class="tech-row">
+          <span class="tech-label">Front Door</span>
+          <span class="tech-value">Static Web App</span>
+          <span class="tech-plain">Runs entirely in your browser. No backend to crash, no database to maintain, no login to forget.</span>
+        </div>
+        <div class="tech-row">
+          <span class="tech-label">Data Layer</span>
+          <span class="tech-value">Structured Datasets</span>
+          <span class="tech-plain">Player stats and value projections baked into the site as ready-to-use data files. Updated on refresh.</span>
+        </div>
+        <div class="tech-row">
+          <span class="tech-label">Logic</span>
+          <span class="tech-value">JavaScript Model</span>
+          <span class="tech-plain">All the value math — age curves, position weights, trade calculations — runs live in the browser as you click.</span>
+        </div>
+        <div class="tech-row">
+          <span class="tech-label">Home</span>
+          <span class="tech-value">GitHub Pages</span>
+          <span class="tech-plain">Hosted as a static site. Free, fast, always up. Deploy is just a commit.</span>
+        </div>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">Why it's built this way</div>
+        <p>Dynasty analysis doesn't need a live server — the data changes weekly, not by the second. A static architecture means zero hosting cost, instant page loads, and privacy by default. Every trade calculation runs on your machine, not someone else's.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-label">Why It Matters</div>
+      <h2 class="section-head">The money is in <em>discipline,</em> not hot takes.</h2>
+      <p>Most league-mates trade on emotion: who they like, who they drafted, who just had a big game. The manager with a model has an edge that doesn't depend on luck. Over ten seasons, that edge compounds into championships.</p>
+      <p>The architecture is deliberately lightweight because the value isn't in the plumbing — it's in the model. Keep the infrastructure boring, and let the thinking do the work.</p>
+    </section>
+
+  </article>
+
+  <footer>
+    <div class="footer-rule"></div>
+    <div class="footer-grid">
+      <div>© Thomas Nendick · 2026</div>
+      <div><a href="../../index.html">← Return to Index</a></div>
+    </div>
+  </footer>
+
+</body>
+</html>

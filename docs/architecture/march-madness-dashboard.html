@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>March Madness Dashboard 2026 — Technical Jargon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="_shared.css">
+</head>
+<body>
+
+  <div class="ambient" aria-hidden="true"></div>
+
+  <div class="masthead">
+    <a class="back-link" href="../../index.html">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"/></svg>
+      Back to Index
+    </a>
+    <div class="masthead-right">
+      <span>Vol. 01</span>
+      <span>Tech Doc</span>
+      <span>Archive № 01</span>
+    </div>
+  </div>
+
+  <header class="doc-hero">
+    <div class="doc-kicker">Technical Jargon · Archive № 01</div>
+    <h1 class="doc-title">March Madness <em>Dashboard 2026</em></h1>
+    <p class="doc-lede">A scoreboard and a bracket fused into one page. Every game, every upset, every bust — tracked live as the tournament unfolded.</p>
+  </header>
+
+  <div class="doc-rule"></div>
+
+  <article class="doc">
+
+    <section>
+      <div class="section-label">The Analogy</div>
+      <h2 class="section-head">The <em>war room</em> for three weeks of basketball.</h2>
+      <p>March Madness overwhelms people. Sixty-eight teams, four regions, sixty-seven games in three weeks, and brackets that lose ten percent of their viability in the first hour. Most dashboards drown you in data. The best ones act like a war room — one wall for the bracket, one wall for live scores, and every room connected.</p>
+      <p>This was that war room, built for the 2026 tournament. Bracket state on one side, live scores on the other, upsets flagged the moment they happened, busts tallied in real time.</p>
+      <div class="pull">The tournament is chaos. The job of the dashboard is to make the chaos legible.</div>
+    </section>
+
+    <section>
+      <div class="section-label">How It Works</div>
+      <h2 class="section-head">Pull. <em>Render.</em> Update.</h2>
+
+      <div class="flow">
+        <div class="flow-step">
+          <div class="flow-kicker">Input</div>
+          <div class="flow-title">It pulls the tournament.</div>
+          <div class="flow-body">Bracket structure, team seeds, game schedule, and live scores — all pulled on a short polling loop during tournament days.</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-kicker">Transform</div>
+          <div class="flow-title">It keeps the state.</div>
+          <div class="flow-body">Advances winners, flags upsets by seed gap, recalculates bracket pool standings, and surfaces the most-watched games.</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-kicker">Output</div>
+          <div class="flow-title">You see everything, at a glance.</div>
+          <div class="flow-body">Interactive bracket, live score ticker, upset feed, and stat panels. One page, three weeks of action.</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-label">Under the Hood</div>
+      <h2 class="section-head">What was <em>running</em>.</h2>
+
+      <div class="tech-grid">
+        <div class="tech-row">
+          <span class="tech-label">Surface</span>
+          <span class="tech-value">Static Web App</span>
+          <span class="tech-plain">Runs in the browser. No login, no backend, no app store — just a URL you could share with the group chat.</span>
+        </div>
+        <div class="tech-row">
+          <span class="tech-label">Live Data</span>
+          <span class="tech-value">Sports Score Feed</span>
+          <span class="tech-plain">Polled live scoreboards during games. Short refresh intervals during the day, paused overnight.</span>
+        </div>
+        <div class="tech-row">
+          <span class="tech-label">Logic</span>
+          <span class="tech-value">In-Browser State</span>
+          <span class="tech-plain">All bracket logic and upset detection ran on the client. Fast, private, and no infrastructure cost.</span>
+        </div>
+        <div class="tech-row">
+          <span class="tech-label">Home</span>
+          <span class="tech-value">GitHub Pages</span>
+          <span class="tech-plain">Free static hosting. Deploys in seconds. Survives a Final Four traffic spike without sweating.</span>
+        </div>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">Why it was built this way</div>
+        <p>A single-use seasonal tool needs to be cheap to run and cheap to ship. A static site with a live data feed hits both: zero cost to host, zero ops burden, and fast enough to update between possessions. The right architecture for a three-week lifespan.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-label">Why It Mattered</div>
+      <h2 class="section-head">Not every project has to <em>live forever.</em></h2>
+      <p>This was an archive project by design. It served its purpose for the 2026 tournament and then went into the vault. The lesson stayed: build light, ship early, let the tool die when the moment passes.</p>
+      <p>Some of the best software is the kind that solves one real problem for one real window of time, and then gets out of the way.</p>
+    </section>
+
+  </article>
+
+  <footer>
+    <div class="footer-rule"></div>
+    <div class="footer-grid">
+      <div>© Thomas Nendick · 2026</div>
+      <div><a href="../../index.html">← Return to Index</a></div>
+    </div>
+  </footer>
+
+</body>
+</html>

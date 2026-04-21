@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Betting Tracker — Technical Jargon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="_shared.css">
+</head>
+<body>
+
+  <div class="ambient" aria-hidden="true"></div>
+
+  <div class="masthead">
+    <a class="back-link" href="../../index.html">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"/></svg>
+      Back to Index
+    </a>
+    <div class="masthead-right">
+      <span>Vol. 01</span>
+      <span>Tech Doc</span>
+      <span>№ 05</span>
+    </div>
+  </div>
+
+  <header class="doc-hero">
+    <div class="doc-kicker">Technical Jargon · Project № 05</div>
+    <h1 class="doc-title">Betting <em>Tracker</em></h1>
+    <p class="doc-lede">A brutally honest accountant for your wagers. Logs every bet, shows the real scoreboard, and tells you where your edge actually lives.</p>
+  </header>
+
+  <div class="doc-rule"></div>
+
+  <article class="doc">
+
+    <section>
+      <div class="section-label">The Analogy</div>
+      <h2 class="section-head">The <em>accountant</em> who doesn't round up.</h2>
+      <p>Memory lies. Every bettor remembers the big wins and quietly forgets the slow drip of losing Monday night props. That selective memory is what keeps losing bettors convinced they're winning, and winning bettors convinced they're breaking even.</p>
+      <p>This tool is the honest ledger. Every bet goes in. Every result comes out. The dashboard shows you your real profit, your real ROI, and which bet types you actually beat the market on — not which ones you feel good about.</p>
+      <div class="pull">You can't fix what you don't measure. You can't measure what you won't log.</div>
+    </section>
+
+    <section>
+      <div class="section-label">How It Works</div>
+      <h2 class="section-head">Log. <em>Aggregate.</em> Reveal.</h2>
+
+      <div class="flow">
+        <div class="flow-step">
+          <div class="flow-kicker">Input</div>
+          <div class="flow-title">Every bet gets logged.</div>
+          <div class="flow-body">Wager, odds at bet time, market, sport, book, stake. Either typed in or pulled from a sportsbook export.</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-kicker">Transform</div>
+          <div class="flow-title">The numbers get crunched.</div>
+          <div class="flow-body">Calculates P&amp;L, ROI, hit rate, and closing line value — the real measure of whether you beat the market or just got lucky.</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-kicker">Output</div>
+          <div class="flow-title">You see the truth.</div>
+          <div class="flow-body">Dashboards sliced by sport, market, bet type, and sportsbook. Where you're crushing it. Where you're bleeding.</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-label">Under the Hood</div>
+      <h2 class="section-head">What's actually <em>running</em>.</h2>
+
+      <div class="tech-grid">
+        <div class="tech-row">
+          <span class="tech-label">Ledger</span>
+          <span class="tech-value">Bet Database</span>
+          <span class="tech-plain">Stores every wager — the source of truth. Structured so slicing by any dimension is a trivial query.</span>
+        </div>
+        <div class="tech-row">
+          <span class="tech-label">Calculator</span>
+          <span class="tech-value">P&amp;L Engine</span>
+          <span class="tech-plain">Runs the math — unit size, variance, closing line value — the metrics that separate real signal from noise.</span>
+        </div>
+        <div class="tech-row">
+          <span class="tech-label">View Layer</span>
+          <span class="tech-value">Interactive Dashboard</span>
+          <span class="tech-plain">Charts and filters that let you zoom into any segment — one sport, one book, one bet type — in a click.</span>
+        </div>
+        <div class="tech-row">
+          <span class="tech-label">Privacy</span>
+          <span class="tech-value">Private by Default</span>
+          <span class="tech-plain">Lives behind a password gate. The data is personal, and the tool is built to keep it that way.</span>
+        </div>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">Why it's built this way</div>
+        <p>The value of a tracker is proportional to how easily you can ask a hard question of it. "Am I actually good at NBA player props?" should take five seconds to answer, not an afternoon of spreadsheet wrangling. Structure the data once, and every question becomes cheap.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-label">Why It Matters</div>
+      <h2 class="section-head">Betting is a <em>business</em> if you want it to be.</h2>
+      <p>Serious bettors run their action like a portfolio: tracked, analyzed, pruned. Casual bettors run theirs on vibes. The gap between those two ways of operating is the gap between a hobby that pays and a hobby that bleeds.</p>
+      <p>This tool exists to close that gap. It's not trying to pick winners — that's a different tool (see Project № 06). It's trying to tell you, with zero ego, where you're actually winning.</p>
+    </section>
+
+  </article>
+
+  <footer>
+    <div class="footer-rule"></div>
+    <div class="footer-grid">
+      <div>© Thomas Nendick · 2026</div>
+      <div><a href="../../index.html">← Return to Index</a></div>
+    </div>
+  </footer>
+
+</body>
+</html>

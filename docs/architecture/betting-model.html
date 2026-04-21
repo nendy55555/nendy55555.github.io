@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Betting Model — Technical Jargon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="_shared.css">
+</head>
+<body>
+
+  <div class="ambient" aria-hidden="true"></div>
+
+  <div class="masthead">
+    <a class="back-link" href="../../index.html">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"/></svg>
+      Back to Index
+    </a>
+    <div class="masthead-right">
+      <span>Vol. 01</span>
+      <span>Tech Doc</span>
+      <span>№ 06</span>
+    </div>
+  </div>
+
+  <header class="doc-hero">
+    <div class="doc-kicker">Technical Jargon · Project № 06</div>
+    <h1 class="doc-title">Betting <em>Model</em></h1>
+    <p class="doc-lede">A quantitative trader for sports. Builds its own probability for every game, compares it to the market, and only flags bets with real mathematical edge.</p>
+  </header>
+
+  <div class="doc-rule"></div>
+
+  <article class="doc">
+
+    <section>
+      <div class="section-label">The Analogy</div>
+      <h2 class="section-head">A <em>quant desk,</em> pointed at sports.</h2>
+      <p>Wall Street traders don't buy a stock because they like the CEO. They build a model, get a fair price, and buy only when the market is trading below it. The edge isn't in opinions — it's in the gap between their number and the market's number.</p>
+      <p>Sports betting works the same way, if you treat it that way. This model does. It builds its own probability for every game from stats, context, and history. Then it compares that probability to the odds on the board. If the model says 58% and the market is selling it at 52%, that's a bet. If they agree, there's no edge — so no bet.</p>
+      <div class="pull">You don't need to pick more winners. You need to pick only the ones the market got wrong.</div>
+    </section>
+
+    <section>
+      <div class="section-label">How It Works</div>
+      <h2 class="section-head">Model. <em>Compare.</em> Act.</h2>
+
+      <div class="flow">
+        <div class="flow-step">
+          <div class="flow-kicker">Input</div>
+          <div class="flow-title">It ingests the context.</div>
+          <div class="flow-body">Historical stats, injuries, rest days, weather, pace, matchup data — every factor that historically moves a game's outcome.</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-kicker">Transform</div>
+          <div class="flow-title">It generates a probability.</div>
+          <div class="flow-body">A machine learning model turns that context into a fair probability for each outcome — the model's honest view of what should happen.</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-kicker">Output</div>
+          <div class="flow-title">It flags the edge.</div>
+          <div class="flow-body">Compares the model's number to live market odds. Only surfaces bets where the gap is wide enough to bet with confidence.</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-label">Under the Hood</div>
+      <h2 class="section-head">What's actually <em>running</em>.</h2>
+
+      <div class="tech-grid">
+        <div class="tech-row">
+          <span class="tech-label">Data Pipeline</span>
+          <span class="tech-value">Stats Ingestion</span>
+          <span class="tech-plain">Pulls historical and live game data from sports APIs. Cleans it, normalizes it, and feeds it to the model.</span>
+        </div>
+        <div class="tech-row">
+          <span class="tech-label">Brain</span>
+          <span class="tech-value">ML Model</span>
+          <span class="tech-plain">A probability model trained on years of outcomes. Continuously retrained as new games resolve.</span>
+        </div>
+        <div class="tech-row">
+          <span class="tech-label">Market Feed</span>
+          <span class="tech-value">Odds API</span>
+          <span class="tech-plain">Live odds from multiple sportsbooks. The market's view, needed so the model has something to price against.</span>
+        </div>
+        <div class="tech-row">
+          <span class="tech-label">Edge Detector</span>
+          <span class="tech-value">Expected Value Engine</span>
+          <span class="tech-plain">The final filter — only returns bets where the math says you'll profit long-run. Everything else is noise.</span>
+        </div>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">Why it's built this way</div>
+        <p>The model is useless without live odds, and the odds are useless without a model. The architecture treats them as two halves of the same trade: build your number in one pipeline, pull the market's number in another, and let a third system do the comparison. Separating concerns keeps each piece defensible on its own merits.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-label">Why It Matters</div>
+      <h2 class="section-head">The market is <em>mostly efficient.</em> Mostly.</h2>
+      <p>Sportsbooks are smart. They set lines that are right 99% of the time, which means 99% of bets have no real edge. The model isn't trying to beat the market on every game — it's trying to find the 1% of spots where a mispricing is large enough to exploit, and ignore everything else.</p>
+      <p>Patience is the architecture's point. Most days the model says "no bet." That discipline — systematized into software — is the difference between investors and gamblers.</p>
+    </section>
+
+  </article>
+
+  <footer>
+    <div class="footer-rule"></div>
+    <div class="footer-grid">
+      <div>© Thomas Nendick · 2026</div>
+      <div><a href="../../index.html">← Return to Index</a></div>
+    </div>
+  </footer>
+
+</body>
+</html>

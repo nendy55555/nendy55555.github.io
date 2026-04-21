@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Concert Finder — Technical Jargon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="_shared.css">
+</head>
+<body>
+
+  <div class="ambient" aria-hidden="true"></div>
+
+  <div class="masthead">
+    <a class="back-link" href="../../index.html">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"/></svg>
+      Back to Index
+    </a>
+    <div class="masthead-right">
+      <span>Vol. 01</span>
+      <span>Tech Doc</span>
+      <span>№ 04</span>
+    </div>
+  </div>
+
+  <header class="doc-hero">
+    <div class="doc-kicker">Technical Jargon · Project № 04</div>
+    <h1 class="doc-title">Concert <em>Finder</em></h1>
+    <p class="doc-lede">A friend who works at every venue in town, remembers every band you like, and texts you the second tickets drop.</p>
+  </header>
+
+  <div class="doc-rule"></div>
+
+  <article class="doc">
+
+    <section>
+      <div class="section-label">The Analogy</div>
+      <h2 class="section-head">The <em>plugged-in friend</em> you wish you had.</h2>
+      <p>You've missed shows. Everyone has. The band you loved came through in March, played a 300-cap room, and you found out in April when a friend posted a photo. By then, the tour was two cities away.</p>
+      <p>The problem isn't that you don't care. It's that tour calendars live in fifteen different places — venue sites, ticket platforms, artist socials — and none of them know what you actually listen to. This tool fuses the two halves: what you play on repeat, and who's playing in your zip code this month.</p>
+      <div class="pull">The best shows aren't the ones you find. They're the ones that find you, early enough to matter.</div>
+    </section>
+
+    <section>
+      <div class="section-label">How It Works</div>
+      <h2 class="section-head">Taste meets <em>geography.</em></h2>
+
+      <div class="flow">
+        <div class="flow-step">
+          <div class="flow-kicker">Input</div>
+          <div class="flow-title">It reads your taste.</div>
+          <div class="flow-body">Pulls your top artists from Spotify (or wherever you listen) plus any you've marked as must-see. That's your signal.</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-kicker">Transform</div>
+          <div class="flow-title">It checks the calendar.</div>
+          <div class="flow-body">Cross-references tour data from ticket and venue APIs against your city, your range, and your date window.</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-kicker">Output</div>
+          <div class="flow-title">You get a show feed.</div>
+          <div class="flow-body">A ranked list of gigs worth going to, with direct ticket links and an early alert when an artist you love announces a date.</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-label">Under the Hood</div>
+      <h2 class="section-head">What's actually <em>running</em>.</h2>
+
+      <div class="tech-grid">
+        <div class="tech-row">
+          <span class="tech-label">Taste Source</span>
+          <span class="tech-value">Spotify API</span>
+          <span class="tech-plain">Pulls your listening history and top artists — the input that makes this feed personal instead of generic.</span>
+        </div>
+        <div class="tech-row">
+          <span class="tech-label">Show Source</span>
+          <span class="tech-value">Ticket APIs</span>
+          <span class="tech-plain">Tour data from Ticketmaster, Songkick, and similar. Covers tens of thousands of active artists and venues.</span>
+        </div>
+        <div class="tech-row">
+          <span class="tech-label">Matcher</span>
+          <span class="tech-value">Overlap Engine</span>
+          <span class="tech-plain">The logic that crosses your taste with the calendar, filters by distance, and ranks by how badly you'd regret missing it.</span>
+        </div>
+        <div class="tech-row">
+          <span class="tech-label">Messenger</span>
+          <span class="tech-value">Alerts</span>
+          <span class="tech-plain">Push or email notifications when a must-see artist drops a new date in your range. Early warning, not a weekly digest.</span>
+        </div>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">Why it's built this way</div>
+        <p>The real engineering isn't in any one piece — it's in keeping the pipes unblocked. Spotify's API changes. Ticket vendors rotate. Venues add and drop listings. The system is built so each source can be swapped or added without breaking the rest.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-label">Why It Matters</div>
+      <h2 class="section-head">Live music is <em>time-sensitive.</em></h2>
+      <p>Tickets for the best rooms sell out in minutes. Headline tours get announced months in advance. The gap between "knowing about a show" and "getting into it" is often measured in hours, not days.</p>
+      <p>Closing that gap, for a small personal list of artists you actually care about, turns into better nights out, smaller venues, and concerts you'll remember. The tech is a means to that — nothing more.</p>
+    </section>
+
+  </article>
+
+  <footer>
+    <div class="footer-rule"></div>
+    <div class="footer-grid">
+      <div>© Thomas Nendick · 2026</div>
+      <div><a href="../../index.html">← Return to Index</a></div>
+    </div>
+  </footer>
+
+</body>
+</html>

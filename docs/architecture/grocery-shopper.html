@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grocery Shopper Assistant — Technical Jargon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="_shared.css">
+</head>
+<body>
+
+  <div class="ambient" aria-hidden="true"></div>
+
+  <div class="masthead">
+    <a class="back-link" href="../../index.html">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"/></svg>
+      Back to Index
+    </a>
+    <div class="masthead-right">
+      <span>Vol. 01</span>
+      <span>Tech Doc</span>
+      <span>№ 01</span>
+    </div>
+  </div>
+
+  <header class="doc-hero">
+    <div class="doc-kicker">Technical Jargon · Project № 01</div>
+    <h1 class="doc-title">Grocery Shopper <em>Assistant</em></h1>
+    <p class="doc-lede">A quiet sous chef who keeps the list, remembers what's in the pantry, and tells you exactly what to grab on the way home.</p>
+  </header>
+
+  <div class="doc-rule"></div>
+
+  <article class="doc">
+
+    <section>
+      <div class="section-label">The Analogy</div>
+      <h2 class="section-head">Your <em>sous chef</em> with a clipboard.</h2>
+      <p>Picture the best line cook you've ever worked with. They don't just cook. They know the walk-in, they know the prep list, they know what's about to spoil, and they know what Tuesday's menu looks like. When the delivery truck pulls up, they already have the order dialed.</p>
+      <p>This app is that person, for your kitchen. It tracks what recipes you like, what's sitting in your pantry, and what you're trying to eat this week. Then it builds one consolidated grocery list — no duplicate items, no forgotten staples, no aimless wandering through the bread aisle.</p>
+      <div class="pull">Stop asking "what's for dinner." Start asking "what's already in the fridge, and what's one stop away."</div>
+    </section>
+
+    <section>
+      <div class="section-label">How It Works</div>
+      <h2 class="section-head">Three moves, <em>start to list.</em></h2>
+
+      <div class="flow">
+        <div class="flow-step">
+          <div class="flow-kicker">Input</div>
+          <div class="flow-title">You tell it what you like.</div>
+          <div class="flow-body">Recipes you save, dietary preferences, what's in the pantry already. Once set, the app remembers — you don't enter it twice.</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-kicker">Transform</div>
+          <div class="flow-title">It does the math.</div>
+          <div class="flow-body">Matches recipes to your week, cross-references the pantry, merges ingredients across meals so one bag of onions covers three dinners.</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-kicker">Output</div>
+          <div class="flow-title">You get one clean list.</div>
+          <div class="flow-body">Grouped by store aisle. Sized to what you actually need. Shareable with whoever's doing the run.</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-label">Under the Hood</div>
+      <h2 class="section-head">What's actually <em>running</em>.</h2>
+
+      <div class="tech-grid">
+        <div class="tech-row">
+          <span class="tech-label">Front Door</span>
+          <span class="tech-value">Web App</span>
+          <span class="tech-plain">A browser-based interface — nothing to install. Works on phone and laptop.</span>
+        </div>
+        <div class="tech-row">
+          <span class="tech-label">Brain</span>
+          <span class="tech-value">Python Backend</span>
+          <span class="tech-plain">Handles the recipe matching, pantry logic, and list building. The decision engine.</span>
+        </div>
+        <div class="tech-row">
+          <span class="tech-label">Memory</span>
+          <span class="tech-value">Database</span>
+          <span class="tech-plain">Stores your recipes, pantry state, and shopping history so nothing resets between sessions.</span>
+        </div>
+        <div class="tech-row">
+          <span class="tech-label">Home</span>
+          <span class="tech-value">Fly.io Cloud</span>
+          <span class="tech-plain">Hosted in a lightweight cloud platform — always on, reachable from any device.</span>
+        </div>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">Why it's built this way</div>
+        <p>A web app means no app store approvals, no device-specific code. The same tool works on a spouse's phone, a roommate's laptop, and a tablet on the fridge. One source of truth, zero friction to share.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-label">Why It Matters</div>
+      <h2 class="section-head">The point isn't <em>groceries.</em></h2>
+      <p>It's reclaiming the thirty minutes a week you lose to meal-planning guesswork, and the forty dollars a month you waste on double-buying things you already had. Small decisions, made on autopilot, compound into real time and money.</p>
+      <p>The architecture reflects that philosophy: keep it simple, keep it always-on, keep the decision layer close to the data. Nothing fancy. Just useful.</p>
+    </section>
+
+  </article>
+
+  <footer>
+    <div class="footer-rule"></div>
+    <div class="footer-grid">
+      <div>© Thomas Nendick · 2026</div>
+      <div><a href="../../index.html">← Return to Index</a></div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Housing Finder — Technical Jargon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="_shared.css">
+</head>
+<body>
+
+  <div class="ambient" aria-hidden="true"></div>
+
+  <div class="masthead">
+    <a class="back-link" href="../../index.html">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"/></svg>
+      Back to Index
+    </a>
+    <div class="masthead-right">
+      <span>Vol. 01</span>
+      <span>Tech Doc</span>
+      <span>№ 02</span>
+    </div>
+  </div>
+
+  <header class="doc-hero">
+    <div class="doc-kicker">Technical Jargon · Project № 02</div>
+    <h1 class="doc-title">Housing <em>Finder</em></h1>
+    <p class="doc-lede">A realtor who reads every new listing the moment it hits the market, ignores the noise, and only pings you on the ones worth a tour.</p>
+  </header>
+
+  <div class="doc-rule"></div>
+
+  <article class="doc">
+
+    <section>
+      <div class="section-label">The Analogy</div>
+      <h2 class="section-head">The realtor who <em>never sleeps.</em></h2>
+      <p>Every serious house hunter hits the same wall: listings are scattered across six sites, half of them are stale, and the genuinely good ones go under contract before you finish your morning coffee. The market moves faster than a human can refresh a browser tab.</p>
+      <p>This tool replaces the refresh-and-pray routine with a patient assistant. It reads every new listing across every source, runs your criteria against each one, and only surfaces the ones that clear your bar. You spend your time touring homes, not hunting for them.</p>
+      <div class="pull">The best listings don't last. The fix isn't looking harder — it's looking first.</div>
+    </section>
+
+    <section>
+      <div class="section-label">How It Works</div>
+      <h2 class="section-head">Scrape. <em>Score.</em> Alert.</h2>
+
+      <div class="flow">
+        <div class="flow-step">
+          <div class="flow-kicker">Input</div>
+          <div class="flow-title">It watches the market.</div>
+          <div class="flow-body">A scheduled crawler pulls new listings from Zillow, Redfin, and MLS feeds every few minutes, all day.</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-kicker">Transform</div>
+          <div class="flow-title">It judges each one.</div>
+          <div class="flow-body">Scores every listing against your criteria — price, size, neighborhood, commute, must-haves — and kills the duplicates and stale posts.</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-kicker">Output</div>
+          <div class="flow-title">You get a shortlist.</div>
+          <div class="flow-body">A ranked daily feed plus push alerts on the best matches. Open, skim, tour. Done.</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-label">Under the Hood</div>
+      <h2 class="section-head">What's actually <em>running</em>.</h2>
+
+      <div class="tech-grid">
+        <div class="tech-row">
+          <span class="tech-label">Scout</span>
+          <span class="tech-value">Scheduled Scraper</span>
+          <span class="tech-plain">Runs on a timer. Pulls fresh listings from public real estate sources without you lifting a finger.</span>
+        </div>
+        <div class="tech-row">
+          <span class="tech-label">Judge</span>
+          <span class="tech-value">Scoring Engine</span>
+          <span class="tech-plain">A weighted rules engine: each listing gets a score based on how well it fits. The higher the score, the louder the ping.</span>
+        </div>
+        <div class="tech-row">
+          <span class="tech-label">Memory</span>
+          <span class="tech-value">Listing Database</span>
+          <span class="tech-plain">Stores every listing seen, so the tool knows what's new, what's stale, and what's already been dismissed.</span>
+        </div>
+        <div class="tech-row">
+          <span class="tech-label">Messenger</span>
+          <span class="tech-value">Alert System</span>
+          <span class="tech-plain">Email or push notifications on high-scoring matches. Only the ones worth your attention.</span>
+        </div>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">Why it's built this way</div>
+        <p>Three systems, each doing one thing well. The scraper doesn't care about scoring. The scorer doesn't care about notifications. That separation means each piece can be improved without breaking the others — and new sources can be added without rewriting the whole stack.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-label">Why It Matters</div>
+      <h2 class="section-head">Houses are <em>too consequential</em> to browse lazily.</h2>
+      <p>A bad house purchase is a five-year mistake. A good one is a five-year compound win. The difference often comes down to who sees the best listing first — and whether they act before someone else does.</p>
+      <p>This system is built to tilt that race. Automate the watching. Score the signal. Reserve human attention for the decisions that actually matter.</p>
+    </section>
+
+  </article>
+
+  <footer>
+    <div class="footer-rule"></div>
+    <div class="footer-grid">
+      <div>© Thomas Nendick · 2026</div>
+      <div><a href="../../index.html">← Return to Index</a></div>
+    </div>
+  </footer>
+
+</body>
+</html>

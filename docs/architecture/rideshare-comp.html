@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rideshare Comp — Technical Jargon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="_shared.css">
+</head>
+<body>
+
+  <div class="ambient" aria-hidden="true"></div>
+
+  <div class="masthead">
+    <a class="back-link" href="../../index.html">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"/></svg>
+      Back to Index
+    </a>
+    <div class="masthead-right">
+      <span>Vol. 01</span>
+      <span>Tech Doc</span>
+      <span>№ 07</span>
+    </div>
+  </div>
+
+  <header class="doc-hero">
+    <div class="doc-kicker">Technical Jargon · Project № 07</div>
+    <h1 class="doc-title">Rideshare <em>Comp</em></h1>
+    <p class="doc-lede">A price scanner for rides. Pulls Uber and Lyft quotes at the same moment so you never overpay just because you opened the wrong app first.</p>
+  </header>
+
+  <div class="doc-rule"></div>
+
+  <article class="doc">
+
+    <section>
+      <div class="section-label">The Analogy</div>
+      <h2 class="section-head">The <em>checkout scanner</em> for your ride.</h2>
+      <p>Grocery stores figured this out decades ago. Scan the barcode, see the price, done. No sales pitch, no negotiation, no mystery. Yet every day, millions of people pay ten dollars more for a ride because they defaulted to whichever app happened to be open.</p>
+      <p>Uber and Lyft know you'll do this. Their prices diverge constantly. One is cheaper on short hops in your city, the other wins on airport runs, and both surge at the worst possible moments. This tool ends the guesswork — one screen, both quotes, side by side.</p>
+      <div class="pull">The cheapest ride isn't always the same ride. Defaulting costs money.</div>
+    </section>
+
+    <section>
+      <div class="section-label">How It Works</div>
+      <h2 class="section-head">Ask <em>both.</em> Show both.</h2>
+
+      <div class="flow">
+        <div class="flow-step">
+          <div class="flow-kicker">Input</div>
+          <div class="flow-title">You enter the trip.</div>
+          <div class="flow-body">Where you are, where you're going. That's the whole brief.</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-kicker">Transform</div>
+          <div class="flow-title">It queries both services.</div>
+          <div class="flow-body">Sends parallel price requests to Uber and Lyft at the same instant, so the comparison is fair — same minute, same surge conditions.</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-kicker">Output</div>
+          <div class="flow-title">You see both fares.</div>
+          <div class="flow-body">A clean side-by-side comparison with fare, tier, and ETA. Tap the cheaper one, book the ride, move on.</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-label">Under the Hood</div>
+      <h2 class="section-head">What's actually <em>running</em>.</h2>
+
+      <div class="tech-grid">
+        <div class="tech-row">
+          <span class="tech-label">Front Door</span>
+          <span class="tech-value">Web App</span>
+          <span class="tech-plain">Works in any browser. Enter origin and destination, hit go. No install, no signup.</span>
+        </div>
+        <div class="tech-row">
+          <span class="tech-label">Brain</span>
+          <span class="tech-value">Python Backend</span>
+          <span class="tech-plain">Receives your trip request, triggers the parallel calls to the two services, and formats the answer.</span>
+        </div>
+        <div class="tech-row">
+          <span class="tech-label">Connectors</span>
+          <span class="tech-value">Rideshare APIs</span>
+          <span class="tech-plain">Talks directly to Uber and Lyft's price estimate endpoints. Same data the apps use — just both at once.</span>
+        </div>
+        <div class="tech-row">
+          <span class="tech-label">Home</span>
+          <span class="tech-value">Fly.io Cloud</span>
+          <span class="tech-plain">Hosted in the cloud, close to you, so the quote round-trip stays fast enough that the prices don't shift before you book.</span>
+        </div>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">Why it's built this way</div>
+        <p>Speed is the whole product. If the comparison takes ten seconds, the prices will have moved. The architecture is optimized for one thing: get both quotes back and rendered before the user loses patience. Everything else is secondary.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-label">Why It Matters</div>
+      <h2 class="section-head">Small leaks <em>sink ships.</em></h2>
+      <p>A three-dollar overpayment on a ride you take four times a week is six hundred dollars a year. Compounded across all the small defaults we never audit — the cheaper coffee, the cheaper flight, the cheaper delivery service — the leak gets serious.</p>
+      <p>This tool closes one of those leaks with a two-second workflow. Small fix, real money, zero friction. The best kind of utility.</p>
+    </section>
+
+  </article>
+
+  <footer>
+    <div class="footer-rule"></div>
+    <div class="footer-grid">
+      <div>© Thomas Nendick · 2026</div>
+      <div><a href="../../index.html">← Return to Index</a></div>
+    </div>
+  </footer>
+
+</body>
+</html>
