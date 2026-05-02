@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NBA Playoff Bracket 2026 — Tech Jargon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="_shared.css">
+  <script src="_shared.js" defer></script>
+</head>
+<body>
+
+  <div class="ambient" aria-hidden="true"></div>
+
+  <div class="masthead">
+    <a class="back-link" href="../../index.html">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"/></svg>
+      Back to Index
+    </a>
+    <div class="masthead-right">
+      <span>Vol. 01</span>
+      <span>Tech Jargon</span>
+      <span>Archive № 06</span>
+    </div>
+  </div>
+
+  <header class="doc-hero">
+    <div class="doc-kicker">Tech Jargon · Archive № 06</div>
+    <h1 class="doc-title">NBA Playoff <em>Bracket 2026</em></h1>
+    <p class="doc-lede">Sixteen teams, four rounds, one page. Pick your winners, watch the rounds collapse, see whose bracket survived contact with reality.</p>
+  </header>
+
+  <div class="doc-rule"></div>
+
+  <article class="doc">
+
+    <section>
+      <div class="section-label">The Analogy</div>
+      <h2 class="section-head">A <em>game show board</em> for two months of basketball.</h2>
+      <p>March Madness gets the bracket spotlight, but the NBA playoffs are the longer, weirder cousin. Two months of best-of-sevens, sweeps that should not happen, Game 7s that rewrite the offseason. Most bracket sites focus on the regular season or fall apart once the matchups firm up.</p>
+      <p>This was built like a game show board. Pick a winner, the slot lights up. Round ends, the bracket collapses to the next stage. Easy to read across a room, easy to update on a phone, easy to share in the group chat.</p>
+      <div class="pull">A bracket is a prediction frozen in time. The fun is watching it survive — or not.</div>
+    </section>
+
+    <section>
+      <div class="section-label">How It Works</div>
+      <h2 class="section-head">Pick. <em>Lock.</em> Advance.</h2>
+
+      <div class="flow">
+        <div class="flow-step">
+          <div class="flow-kicker">Input</div>
+          <div class="flow-title">You pick the winners.</div>
+          <div class="flow-body">Sixteen teams seeded by conference. Tap a side, the winner advances. Picks save in the browser so a refresh does not nuke your work.</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-kicker">Transform</div>
+          <div class="flow-title">The bracket holds the state.</div>
+          <div class="flow-body">Each round feeds the next. Change a pick, the downstream rounds reset cleanly so you never end up with a ghost matchup.</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-kicker">Output</div>
+          <div class="flow-title">A clean bracket you can share.</div>
+          <div class="flow-body">Renders crisp on desktop and mobile. One URL, no login, no app — drop it in iMessage and the group fills out their picks.</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-label">Under the Hood<button type="button" class="jargon-info" aria-label="What is this section?" tabindex="0"><span aria-hidden="true">i</span><span class="jargon-tip" role="tooltip">A plain-language read of the tech architecture. Business perspective, no engineering jargon required.</span></button></div>
+      <h2 class="section-head">What is <em>running</em>.</h2>
+
+      <div class="tech-grid">
+        <div class="tech-row">
+          <span class="tech-label">Surface</span>
+          <span class="tech-value">Static Web App</span>
+          <span class="tech-plain">Runs in the browser. No login, no backend, no app store — just a URL you share with the group.</span>
+        </div>
+        <div class="tech-row">
+          <span class="tech-label">Picks</span>
+          <span class="tech-value">Local Browser Storage</span>
+          <span class="tech-plain">Your picks live on your device. Refresh-proof, private, and zero infrastructure on my side.</span>
+        </div>
+        <div class="tech-row">
+          <span class="tech-label">Logic</span>
+          <span class="tech-value">In-Browser State</span>
+          <span class="tech-plain">Bracket advancement, reset cascades, round transitions — all client-side. Fast, no server round-trips.</span>
+        </div>
+        <div class="tech-row">
+          <span class="tech-label">Home</span>
+          <span class="tech-value">Static Hosting</span>
+          <span class="tech-plain">Deploys in seconds. Free to run. Survives a Game 7 traffic spike without a sweat.</span>
+        </div>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">Why it was built this way</div>
+        <p>A seasonal bracket tool needs to be cheap to run and dead simple to share. A static site with browser-side state hits both: no hosting bill, no login wall, no friction between seeing the link and making picks. The right shape for a two-month lifespan.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-label">Why It Matters</div>
+      <h2 class="section-head">Brackets are <em>conversations.</em></h2>
+      <p>The point of a playoff bracket is not really the picks. It is the texts after a Game 6 upset, the running joke about whoever still has the Lakers in the Finals, the screenshot in the group chat the morning after a sweep.</p>
+      <p>Build the tool light enough that those conversations happen around it, not in spite of it.</p>
+    </section>
+
+  </article>
+
+  <footer>
+    <div class="footer-rule"></div>
+    <div class="footer-grid">
+      <div>© Thomas Nendick · 2026</div>
+      <div><a href="../../index.html">← Return to Index</a></div>
+    </div>
+  </footer>
+
+</body>
+</html>
