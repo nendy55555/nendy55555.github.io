@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shared Calendar — Tech Jargon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="_shared.css">
+  <script src="_shared.js" defer></script>
+</head>
+<body>
+
+  <div class="ambient" aria-hidden="true"></div>
+
+  <div class="masthead">
+    <a class="back-link" href="../../index.html">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"/></svg>
+      Back to Index
+    </a>
+    <div class="masthead-right">
+      <span>Vol. 01</span>
+      <span>Tech Jargon</span>
+      <span>№ 13</span>
+    </div>
+  </div>
+
+  <header class="doc-hero">
+    <div class="doc-kicker">Tech Jargon · Project № 13</div>
+    <h1 class="doc-title">Shared <em>Calendar</em></h1>
+    <p class="doc-lede">Two phones, two ecosystems, one source of truth. The day Mariah and I stopped double-booking each other.</p>
+  </header>
+
+  <div class="doc-rule"></div>
+
+  <article class="doc">
+
+    <section>
+      <div class="section-label">The Analogy</div>
+      <h2 class="section-head">The fridge-door calendar, <em>upgraded.</em></h2>
+      <p>Every couple ends up with the same artifact. A paper calendar on the fridge. Hand-written, half-legible, the one surface where both lives are visible. It works because it's shared by being in one place. Once you leave the kitchen, it stops existing.</p>
+      <p>This is that fridge, on our phones, that writes itself. Forward a flight confirmation. Drop a screenshot of a wedding invite. Tell it the dog has the vet at four. It files the event, tags whose calendar it lives on, and shows it in a weekly grid we both check.</p>
+      <div class="pull">One view we both check. No more "didn't see it on yours."</div>
+    </section>
+
+    <section>
+      <div class="section-label">How It Works</div>
+      <h2 class="section-head">Capture. <em>Compose.</em> Commit.</h2>
+
+      <div class="flow">
+        <div class="flow-step">
+          <div class="flow-kicker">Input</div>
+          <div class="flow-title">It listens for events.</div>
+          <div class="flow-body">Forwarded emails, screenshots, parsed bookings, manual entries. Anything we send to the inbox lands here, with the original message kept on file.</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-kicker">Transform</div>
+          <div class="flow-title">It assigns who, when, where.</div>
+          <div class="flow-body">Categorizes by type (trip, dinner, dog, household), tags which of us owns it, normalizes the time zone, and ties the event back to the message that spawned it.</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-kicker">Output</div>
+          <div class="flow-title">It renders one weekly view.</div>
+          <div class="flow-body">A PWA that lives on both home screens. Mirrors finalized events into Google Calendar so push notifications and iCloud subscribers stay in sync.</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-label">Under the Hood<button type="button" class="jargon-info" aria-label="What is this section?" tabindex="0"><span aria-hidden="true">i</span><span class="jargon-tip" role="tooltip">A plain-language read of the tech architecture. Business perspective, no engineering jargon required.</span></button></div>
+      <h2 class="section-head">What's actually <em>running</em>.</h2>
+
+      <div class="tech-grid">
+        <div class="tech-row">
+          <span class="tech-label">Front Door</span>
+          <span class="tech-value">Next.js PWA</span>
+          <span class="tech-plain">A web app you install to the home screen. No app store. Updates the moment we push.</span>
+        </div>
+        <div class="tech-row">
+          <span class="tech-label">Brain</span>
+          <span class="tech-value">Inbox Parser</span>
+          <span class="tech-plain">Reads forwarded confirmations and screenshots, extracts the event, sorts by who and what.</span>
+        </div>
+        <div class="tech-row">
+          <span class="tech-label">Memory</span>
+          <span class="tech-value">Supabase Postgres</span>
+          <span class="tech-plain">The canonical calendar and inbox. Both phones read from one source. No reconciling two truths.</span>
+        </div>
+        <div class="tech-row">
+          <span class="tech-label">Bridge</span>
+          <span class="tech-value">Google Calendar Sync</span>
+          <span class="tech-plain">Pushes finalized events upstream. Apple Calendar subscribers, push notifications, and dog-walker invites stay current automatically.</span>
+        </div>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">Why it's built this way</div>
+        <p>Two-person calendar sharing collapses when each person lives in a different ecosystem. Apple won't render Google reliably. Google won't return the favor. Shared calendars are an afterthought in both. The fix is a third place we own, written into both phones, that each ecosystem already trusts through its native client.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-label">Why It Matters</div>
+      <h2 class="section-head">We stop double-booking <em>each other.</em></h2>
+      <p>Trips stop colliding with anniversaries. The inbox stops being the index of who's flying where. The dog stops getting two dinners.</p>
+      <p>The household runs on one calendar instead of two. The minute spent forwarding an email replaces the hour spent untangling a missed plan.</p>
+    </section>
+
+  </article>
+
+  <footer>
+    <div class="footer-rule"></div>
+    <div class="footer-grid">
+      <div>© Thomas Nendick · 2026</div>
+      <div><a href="../../index.html">← Return to Index</a></div>
+    </div>
+  </footer>
+
+</body>
+</html>
