@@ -371,3 +371,110 @@ ornament, not structure.
 **Why:** 30ms was a desktop-tuned guess. 60ms is the smallest value that reliably clears the iOS animation schedule. No noticeable latency on desktop.
 
 **Reference:** `index.html` line ~2522.
+
+---
+
+## D-021 · Palette swapped to navy-ink + brass + hunter-green ("Ralph Lauren × Apple")
+
+**Date:** 2026-07-08
+**Context:** Thomas felt the site "looked really Claude coded" and asked
+for a redesign leaning on Ralph Lauren's color/style sensibility while
+keeping Apple-level simplicity. Two forks existed with more than two
+materially different outcomes each (overall tone, accent hue), so both
+were confirmed with Thomas before any CSS changed rather than guessed:
+cream-forward background (kept) vs. navy-forward vs. two-tone split;
+hunter-green+brass accent vs. oxblood+brass vs. navy-monochrome+camel.
+Thomas picked cream-forward + hunter-green/brass.
+
+**Decision:** Every color in the site already routed through CSS custom
+properties in `:root` and `[data-theme="dark"]` (`--text`, `--accent`
+scale, `--live`, `--bg`, etc.), confirmed by grepping for hardcoded hex
+values outside the token blocks (found only the `<meta theme-color>`
+tag and one JS constant, both intentionally mirroring `--bg`). Swapped
+token values only:
+- `--text` (light): warm near-black `#1E1A16` → deep navy ink `#12192B`
+- `--accent` / `--accent-deep` / `--accent-ink` (light): terracotta-rust
+  scale (`#C2613A`/`#8B3F21`/`#7A361B`) → muted brass scale
+  (`#A9812E`/`#7C5D1F`/`#644B18`)
+- `--live` (light): forest `#3E6B4B` → hunter green `#2F5233`
+- `--bg` (dark theme): warm near-black `#14110D` → deep navy `#0B1220`,
+  with `--bg-deep`, the ambient gradient stops, and the JS
+  `theme-color` swap value updated to match
+- `--accent` scale + `--live` (dark theme): brightened rust/forest →
+  brightened brass/hunter-green, same lightness targets so contrast
+  ratios hold
+- `--danger` and `--rule`/`--rule-soft` deliberately **left alone** —
+  functional/neutral colors, not brand-decorative ones, so touching
+  them was out of scope and risked an accessibility regression for a
+  color nobody would consciously notice matched "the brand."
+
+Verified every new pair against WCAG AA with a small contrast-ratio
+script before committing to the values (all pass; ratios noted in the
+inline comments next to each token). Could not get a rendered
+screenshot — this sandbox has no Chromium and no sudo to install one —
+so the change is unverified visually pending Thomas's own look.
+
+**Why:** The token architecture made this a low-risk, single-pass edit
+— exactly the kind of "identify inputs → transformation → outputs"
+change that's cheap to redo if Thomas wants a different accent later.
+Ralph Lauren doesn't publish one official palette beyond black/white,
+so "RL-inspired" was synthesized from the brand's well-known heritage
+cues (navy, cream, brass, hunter green) rather than sourced from a
+single canonical reference — worth knowing if a future session tries
+to "match the RL site exactly."
+
+**Reference:** `index.html` lines ~39–64 (`:root`), ~1863–1896
+(`[data-theme="dark"]`), ~2952 (JS `theme-color` swap).
+
+---
+
+## D-022 · Shield/monogram logo cropped programmatically, wired as favicon + fixed brand mark
+
+**Date:** 2026-07-08
+**Context:** Thomas supplied a shield crest (navy "N" monogram, laurel
+detail) on a dotted-cream canvas and asked for it cropped and added to
+the site. The file had to land in `assets/` manually (Downloads →
+Finder drag) — inline-pasted chat images in this environment don't
+reliably produce a file the sandbox can read; see feedback memory
+`sandbox_no_browser_rendering`-adjacent lesson, worth a dedicated
+memory entry if this recurs.
+
+**Decision:**
+- Cropped via a Python/PIL/numpy script, not a design tool: sampled the
+  outer dotted-cream background color, flood-filled it to transparent
+  from the image edges (8-connectivity, so it couldn't leak past the
+  navy outline into the shield's interior fill), then cropped to the
+  non-transparent bounding box with 6px padding. Source of truth
+  variants produced: `assets/shield-logo.png` (tight crop, transparent,
+  used inline), `assets/shield-logo-square.png` (padded square,
+  intermediate), `assets/favicon.png` (128×128, transparent),
+  `assets/apple-touch-icon.png` (180×180, opaque `--bg` cream fill —
+  iOS renders transparent touch icons oddly, so this one needed a
+  solid backing color).
+- Wired favicon + apple-touch-icon `<link>` tags into `<head>` (the
+  site had neither before).
+- Added a new `.brand-mark` fixed-position element, top-left, mirroring
+  `.theme-toggle`'s top-right fixed positioning and mobile safe-area
+  handling. Links to `#top`. Chose this over inserting it into the hero
+  grid because the hero layout (headline / byline / CTA / portrait) is
+  otherwise untouched by this session and a fixed corner mark is
+  additive — zero risk of reflowing existing content that couldn't be
+  screenshot-verified anyway.
+- Original upload preserved as `assets/.shield-logo.original.png`
+  (gitignored dotfile, same convention as D-003's portrait original).
+  Two working debug PNGs from the crop process couldn't be deleted
+  (sandbox bind-mount permission issue, same class as D-002) — renamed
+  to the `._*` macOS-ignore pattern instead of leaving them untracked
+  clutter.
+
+**Why:** No design tool was available in-session; PIL + connected-
+component flood fill is a deterministic, inspectable way to do a clean
+alpha cutout without eyeballing a magic-wand tolerance in an image
+editor. The favicon/apple-touch-icon gap was a pre-existing omission,
+not something Thomas asked for directly, but shipping a crest without
+a favicon would've left the most visible placement (the browser tab)
+un-done.
+
+**Reference:** `index.html` lines ~15–16 (favicon links), ~1972–2005
+(`.brand-mark` CSS), ~2278–2280 (markup). `assets/shield-logo.png`,
+`assets/favicon.png`, `assets/apple-touch-icon.png`.

@@ -24,3 +24,5 @@ One-line summaries. Full reasoning in `DECISIONS.md`.
 | D-018 | 2026-04-21 | `.project-status` and `.tag` font-size bumped 0.64→0.7rem for readability; mobile `.tag` 0.66→0.68rem | Accepted |
 | D-019 | 2026-04-21 | Modal error color extracted to `--danger` token; single source of truth for destructive UI signals | Accepted |
 | D-020 | 2026-04-21 | Modal input focus timeout bumped 30→60ms to clear iOS keyboard race | Accepted |
+| D-021 | 2026-07-08 | Palette swapped to navy-ink/brass/hunter-green ("RL × Apple"), token-only edit, confirmed tone+accent with Thomas first | Accepted |
+| D-022 | 2026-07-08 | Shield logo cropped via PIL flood-fill, wired as favicon/apple-touch-icon + new fixed `.brand-mark` (top-left, mirrors theme-toggle) | Accepted |

@@ -12,6 +12,9 @@
   <meta name="mobile-web-app-capable" content="yes">
   <title>Thomas Nendick — Deploying My Agentic Army</title>
 
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -43,22 +46,22 @@
       --bg-card:         #FBF7EF;
       --bg-card-hover:   #FFFBF3;
 
-      /* Ink — all pass WCAG AA on paper bg */
-      --text:            #1E1A16;   /* AA 13.6:1 */
-      --text-secondary:  #574E47;   /* AA 6.94:1 — body prose */
-      --text-muted:      #6E6459;   /* AA 4.60:1 — small mono metadata */
+      /* Ink — deep navy, all pass WCAG AA on paper bg */
+      --text:            #12192B;   /* AA 14.9:1 */
+      --text-secondary:  #46506B;   /* AA 6.83:1 — body prose */
+      --text-muted:      #5A6478;   /* AA 5.07:1 — small mono metadata */
 
-      /* Accent — scale by role */
-      --accent:          #C2613A;   /* display only, passes AA large 3:1 */
-      --accent-deep:     #8B3F21;   /* body emphasis, AA 6.3:1 */
-      --accent-ink:      #7A361B;   /* densest small type, AA 7.4:1 */
-      --accent-teal:     #3E6B4B;   /* kept for var refs */
-      --accent-rgb:      194, 97, 58; /* base accent as RGB so rgba() can re-theme */
-      --accent-wash:     rgba(194, 97, 58, 0.08);
-      --accent-ring:     rgba(194, 97, 58, 0.28);
+      /* Accent — muted brass, scale by role */
+      --accent:          #A9812E;   /* display only, passes AA large 3:1 */
+      --accent-deep:     #7C5D1F;   /* body emphasis, AA 5.2:1 */
+      --accent-ink:      #644B18;   /* densest small type, AA 7.0:1 */
+      --accent-teal:     #2F5233;   /* hunter green, kept for var refs */
+      --accent-rgb:      169, 129, 46; /* base accent as RGB so rgba() can re-theme */
+      --accent-wash:     rgba(169, 129, 46, 0.08);
+      --accent-ring:     rgba(169, 129, 46, 0.28);
 
       /* Signals */
-      --live:            #3E6B4B;   /* tightened forest for AA */
+      --live:            #2F5233;   /* hunter green, AA 7.5:1 */
       --danger:          #FF6D8A;   /* modal error on dark glass — AA 4.6:1 */
       --rule:            #D9CFC1;
       --rule-soft:       #E6DED0;
@@ -1861,27 +1864,27 @@
        DARK MODE — token overrides (default palette is warm/paper)
        ============================================================ */
     [data-theme="dark"] {
-      /* Warm near-black: paper after dusk. Same hue family as light #F3ECE0, inverted. */
-      --bg:              #14110D;
-      --bg-deep:         #1A1612;
-      --bg-card:         rgba(255, 245, 230, 0.04);
-      --bg-card-hover:   rgba(255, 245, 230, 0.07);
+      /* Deep navy: club-tie ink after dusk. */
+      --bg:              #0B1220;
+      --bg-deep:         #10192B;
+      --bg-card:         rgba(226, 231, 240, 0.045);
+      --bg-card-hover:   rgba(226, 231, 240, 0.075);
 
       /* Ink flips to paper on dark. All pass WCAG AA. */
-      --text:            #F3ECE0;   /* 16.5:1 */
-      --text-secondary:  #C5B9A8;   /* 10.8:1 body prose */
-      --text-muted:      #948878;   /* 5.8:1 small mono metadata */
+      --text:            #F3ECE0;   /* 16.0:1 */
+      --text-secondary:  #C5B9A8;   /* 9.7:1 body prose */
+      --text-muted:      #948878;   /* 5.4:1 small mono metadata */
 
-      /* Single accent — warm rust tuned brighter for dark bg. Same hue family as light. */
-      --accent:          #E8944D;   /* display, 7.8:1 */
-      --accent-deep:     #F0A668;   /* body emphasis, 9.6:1 */
-      --accent-ink:      #F5B47E;   /* densest small type, 11:1 */
-      --accent-teal:     #7AB891;   /* forest green brightened for dark — spine + live signal */
-      --accent-rgb:      232, 148, 77;
-      --accent-wash:     rgba(232, 148, 77, 0.10);
-      --accent-ring:     rgba(232, 148, 77, 0.35);
+      /* Brass accent, tuned brighter for dark bg. Same family as light. */
+      --accent:          #D4A94F;   /* display, 8.6:1 */
+      --accent-deep:     #DEBB6C;   /* body emphasis, 10.2:1 */
+      --accent-ink:      #E6C883;   /* densest small type, 11.6:1 */
+      --accent-teal:     #6FA876;   /* hunter green brightened for dark — spine + live signal */
+      --accent-rgb:      212, 169, 79;
+      --accent-wash:     rgba(212, 169, 79, 0.10);
+      --accent-ring:     rgba(212, 169, 79, 0.35);
 
-      --live:            #7AB891;
+      --live:            #6FA876;
       --rule:            rgba(243, 236, 224, 0.09);
       --rule-soft:       rgba(243, 236, 224, 0.05);
 
@@ -1889,11 +1892,11 @@
     }
     [data-theme="dark"] body {
       background:
-        radial-gradient(ellipse 80% 50% at 70% -10%, rgba(232, 148, 77, 0.12), transparent 60%),
-        radial-gradient(ellipse 90% 60% at 0% 110%, rgba(122, 184, 145, 0.08), transparent 55%),
-        linear-gradient(180deg, #14110D 0%, #1A1612 55%, #14110D 100%);
+        radial-gradient(ellipse 80% 50% at 70% -10%, rgba(212, 169, 79, 0.12), transparent 60%),
+        radial-gradient(ellipse 90% 60% at 0% 110%, rgba(111, 168, 118, 0.08), transparent 55%),
+        linear-gradient(180deg, #0B1220 0%, #10192B 55%, #0B1220 100%);
       background-attachment: fixed;
-      -webkit-tap-highlight-color: rgba(232, 148, 77, 0.22);
+      -webkit-tap-highlight-color: rgba(212, 169, 79, 0.22);
     }
     [data-theme="dark"] a,
     [data-theme="dark"] button,
@@ -1902,7 +1905,7 @@
     [data-theme="dark"] input,
     [data-theme="dark"] select,
     [data-theme="dark"] textarea {
-      -webkit-tap-highlight-color: rgba(232, 148, 77, 0.22);
+      -webkit-tap-highlight-color: rgba(212, 169, 79, 0.22);
     }
     /* Color logos: give tiles a light surface in dark mode so brand colors stay legible */
     [data-theme="dark"] .exp-logo,
@@ -1964,6 +1967,41 @@
         height: 38px;
       }
       .theme-toggle svg { width: 16px; height: 16px; }
+    }
+
+    /* ============================================================
+       BRAND MARK — crest, mirrors theme-toggle positioning
+       ============================================================ */
+    .brand-mark {
+      position: fixed;
+      top: 14px;
+      left: 18px;
+      z-index: 200;
+      display: inline-flex;
+      line-height: 0;
+      border-radius: 6px;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+    .brand-mark img {
+      display: block;
+      height: 44px;
+      width: auto;
+      filter: drop-shadow(0 2px 8px rgba(18, 25, 43, 0.16));
+    }
+    .brand-mark:hover { transform: translateY(-1px); }
+    .brand-mark:focus-visible {
+      outline: 2px solid var(--accent-ring);
+      outline-offset: 4px;
+    }
+    [data-theme="dark"] .brand-mark img {
+      filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.45));
+    }
+    @media (max-width: 640px) {
+      .brand-mark {
+        top: max(10px, env(safe-area-inset-top));
+        left: max(12px, env(safe-area-inset-left));
+      }
+      .brand-mark img { height: 34px; }
     }
 
     /* ============================================================
@@ -2236,6 +2274,11 @@
     </div>
   </template>
 
+  <!-- Brand mark -->
+  <a href="#top" class="brand-mark" aria-label="Thomas Nendick — back to top">
+    <img src="assets/shield-logo.png" alt="" width="188" height="247" loading="eager" decoding="async">
+  </a>
+
   <!-- Theme toggle -->
   <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode" title="Toggle theme">
     <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true">
@@ -2286,7 +2329,7 @@
 
       <nav class="tabs-wrapper" aria-label="Sections">
         <div class="tab-bar" role="tablist" aria-label="Switch section">
-          <button class="tab-btn" role="tab" aria-selected="true" aria-controls="tab-active" id="tabbtn-active" data-tab="active">Army <span class="tab-count">(12)</span></button>
+          <button class="tab-btn" role="tab" aria-selected="true" aria-controls="tab-active" id="tabbtn-active" data-tab="active">Army <span class="tab-count">(14)</span></button>
           <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-about" id="tabbtn-about" data-tab="about" tabindex="-1">About</button>
         </div>
       </nav>
@@ -2311,7 +2354,7 @@
             </div>
           </div>
           <div class="project-links">
-            <a href="https://thomass-cookbook.fly.dev/" class="project-link" target="_blank" rel="noopener" aria-label="Open Grocery Shopper Assistant">
+            <a href="https://cookbook.thomasnendick.com/" class="project-link" target="_blank" rel="noopener" aria-label="Open Grocery Shopper Assistant">
               Open project
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M7 7h10v10"/></svg>
             </a>
@@ -2339,7 +2382,7 @@
             </div>
           </div>
           <div class="project-links">
-            <a href="https://thomasnendick.com/la-concert-tracker/" class="project-link" target="_blank" rel="noopener" aria-label="Open LA Concert Tracker">
+            <a href="https://concerts.thomasnendick.com/" class="project-link" target="_blank" rel="noopener" aria-label="Open LA Concert Tracker">
               Open project
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M7 7h10v10"/></svg>
             </a>
@@ -2352,10 +2395,34 @@
 
         <article class="project-card">
           <div class="project-icon" aria-hidden="true">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 0 1 3 3h-15a3 3 0 0 1 3-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 0 1-.982-3.172M9.497 14.25a7.454 7.454 0 0 0 .981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 0 0 7.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 0 0 2.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 0 1 2.916.52 6.003 6.003 0 0 1-5.395 4.972m0 0a6.726 6.726 0 0 1-2.749 1.35m0 0a6.772 6.772 0 0 1-3.044 0"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418"/></svg>
           </div>
           <div class="project-meta">
             <span class="project-number">№ 03</span>
+            <span class="project-status shipped gloss" data-gloss="status-live">Live</span>
+          </div>
+          <div class="project-info">
+            <h2 class="project-name">World Cup Boyz</h2>
+            <p class="project-desc">Snake-draft tracker for our FIFA World Cup 2026 pool. Live group standings, bracket progress, and each squad's path to the final as nations advance.</p>
+            <div class="project-tags">
+              <span class="tag">Sports</span>
+              <span class="tag">Bracket</span>
+            </div>
+          </div>
+          <div class="project-links">
+            <a href="https://worldcup.thomasnendick.com/" class="project-link" target="_blank" rel="noopener" aria-label="Open World Cup Boyz">
+              Open project
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M7 7h10v10"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 0 1 3 3h-15a3 3 0 0 1 3-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 0 1-.982-3.172M9.497 14.25a7.454 7.454 0 0 0 .981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 0 0 7.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 0 0 2.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 0 1 2.916.52 6.003 6.003 0 0 1-5.395 4.972m0 0a6.726 6.726 0 0 1-2.749 1.35m0 0a6.772 6.772 0 0 1-3.044 0"/></svg>
+          </div>
+          <div class="project-meta">
+            <span class="project-number">№ 04</span>
             <span class="project-status shipped gloss" data-gloss="status-live">Live</span>
           </div>
           <div class="project-info">
@@ -2367,7 +2434,7 @@
             </div>
           </div>
           <div class="project-links">
-            <a href="https://thomasnendick.com/DynastyFF/" class="project-link" target="_blank" rel="noopener" aria-label="Open Dynasty Fantasy Football">
+            <a href="https://dynasty.thomasnendick.com/" class="project-link" target="_blank" rel="noopener" aria-label="Open Dynasty Fantasy Football">
               Open project
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M7 7h10v10"/></svg>
             </a>
@@ -2383,7 +2450,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m0-1.5v1.5m0-1.5V9a2.25 2.25 0 0 0-2.25-2.25H4.5A2.25 2.25 0 0 0 2.25 9v7.5h4.5m6 0v-3h6.75a1.5 1.5 0 0 0 1.342-.832l1.296-2.59a1.5 1.5 0 0 0 .026-1.292l-.904-2.062a1.5 1.5 0 0 0-1.374-.898H14.25v9.675Zm5.25 1.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0"/></svg>
           </div>
           <div class="project-meta">
-            <span class="project-number">№ 04</span>
+            <span class="project-number">№ 05</span>
             <span class="project-status shipped gloss" data-gloss="status-live">Live</span>
           </div>
           <div class="project-info">
@@ -2395,7 +2462,7 @@
             </div>
           </div>
           <div class="project-links">
-            <a href="https://rideshare-comps.fly.dev/" class="project-link" target="_blank" rel="noopener" aria-label="Open Rideshare Comp">
+            <a href="https://rideshare.thomasnendick.com/" class="project-link" target="_blank" rel="noopener" aria-label="Open Rideshare Comp">
               Open project
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M7 7h10v10"/></svg>
             </a>
@@ -2411,7 +2478,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z"/></svg>
           </div>
           <div class="project-meta">
-            <span class="project-number">№ 05</span>
+            <span class="project-number">№ 06</span>
             <span class="project-status gloss" data-gloss="status-archived">Archived</span>
           </div>
           <div class="project-info">
@@ -2423,7 +2490,7 @@
             </div>
           </div>
           <div class="project-links">
-            <a href="https://thomasnendick.com/MMD-2026/" class="project-link" target="_blank" rel="noopener" aria-label="Open March Madness Dashboard 2026">
+            <a href="https://marchmadness.thomasnendick.com/" class="project-link" target="_blank" rel="noopener" aria-label="Open March Madness Dashboard 2026">
               Open project
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M7 7h10v10"/></svg>
             </a>
@@ -2439,7 +2506,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 4.5h16.5v15H3.75v-15Zm0 7.5h16.5M12 4.5v15"/><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 8.25h4.5m-4.5 7.5h4.5m7.5-7.5h4.5m-4.5 7.5h4.5"/></svg>
           </div>
           <div class="project-meta">
-            <span class="project-number">№ 06</span>
+            <span class="project-number">№ 07</span>
             <span class="project-status shipped gloss" data-gloss="status-live">Live</span>
           </div>
           <div class="project-info">
@@ -2451,7 +2518,7 @@
             </div>
           </div>
           <div class="project-links">
-            <a href="https://thomasnendick.com/nbabracket/" class="project-link" target="_blank" rel="noopener" aria-label="Open NBA Playoff Bracket 2026">
+            <a href="https://nba.thomasnendick.com/" class="project-link" target="_blank" rel="noopener" aria-label="Open NBA Playoff Bracket 2026">
               Open project
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M7 7h10v10"/></svg>
             </a>
@@ -2467,7 +2534,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>
           </div>
           <div class="project-meta">
-            <span class="project-number">№ 07</span>
+            <span class="project-number">№ 08</span>
             <span class="project-status wip gloss" data-gloss="status-build">In Build</span>
           </div>
           <div class="project-info">
@@ -2492,7 +2559,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/></svg>
           </div>
           <div class="project-meta">
-            <span class="project-number">№ 08</span>
+            <span class="project-number">№ 09</span>
             <span class="project-status wip gloss" data-gloss="status-build">In Build</span>
           </div>
           <div class="project-info">
@@ -2517,7 +2584,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 0 1 0 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 0 1 0-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375Z"/></svg>
           </div>
           <div class="project-meta">
-            <span class="project-number">№ 09</span>
+            <span class="project-number">№ 10</span>
             <span class="project-status wip gloss" data-gloss="status-build">In Build</span>
           </div>
           <div class="project-info">
@@ -2542,7 +2609,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"/></svg>
           </div>
           <div class="project-meta">
-            <span class="project-number">№ 10</span>
+            <span class="project-number">№ 11</span>
             <span class="project-status">Private</span>
           </div>
           <div class="project-info">
@@ -2573,7 +2640,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Zm.75-12h9v9h-9v-9Z"/></svg>
           </div>
           <div class="project-meta">
-            <span class="project-number">№ 11</span>
+            <span class="project-number">№ 12</span>
             <span class="project-status">Private</span>
           </div>
           <div class="project-info">
@@ -2604,7 +2671,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3-3.75h.008v.008H18V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-12 5.25h.008v.008H6V13.5Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/></svg>
           </div>
           <div class="project-meta">
-            <span class="project-number">№ 12</span>
+            <span class="project-number">№ 13</span>
             <span class="project-status">Private</span>
           </div>
           <div class="project-info">
@@ -2635,7 +2702,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg>
           </div>
           <div class="project-meta">
-            <span class="project-number">№ 13</span>
+            <span class="project-number">№ 14</span>
             <span class="project-status shipped gloss" data-gloss="status-live">Live</span>
           </div>
           <div class="project-info">
@@ -2647,7 +2714,7 @@
             </div>
           </div>
           <div class="project-links">
-            <a href="https://thomasnendick.com/calendar/" class="project-link" target="_blank" rel="noopener" aria-label="Open Shared Calendar">
+            <a href="https://calendar.thomasnendick.com/" class="project-link" target="_blank" rel="noopener" aria-label="Open Shared Calendar">
               Open project
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M7 7h10v10"/></svg>
             </a>
@@ -2925,7 +2992,7 @@
       const btn = document.querySelector('[data-theme-toggle]');
       if (!btn) return;
       const metaThemeColor = document.querySelector('meta[name="theme-color"]');
-      const colors = { light: '#F3ECE0', dark: '#14110D' };
+      const colors = { light: '#F3ECE0', dark: '#0B1220' };
 
       function sync() {
         const t = root.getAttribute('data-theme') || 'light';
