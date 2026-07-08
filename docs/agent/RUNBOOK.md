@@ -174,6 +174,20 @@ git push origin main
 
 Commit messages: explain **why**, not **what**. The diff is the what.
 
+**If `git commit` or `git push` fails with `fatal: Unable to create
+'.git/<something>.lock': File exists`:** a Claude session touched this
+repo's `.git/` directory first. The sandbox's bind-mount can't unlink
+files inside `.git/` (see D-002), so it leaves stale lock files behind
+— and they show up one at a time, a different file each retry
+(`index.lock`, then `refs/heads/main.lock`, then `HEAD.lock` have all
+been seen in the wild). Don't remove them one by one. Run this first,
+then commit/push normally — regular `rm`, no `sudo` or `chflags`
+needed, this is a plain stale-file issue, not a permissions one:
+
+```bash
+find .git -name "*.lock" -delete
+```
+
 ---
 
 ## When something breaks on production

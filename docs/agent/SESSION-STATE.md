@@ -76,14 +76,27 @@ session — it should always describe "where we left off," not a history.
   Renamed to `._debug_transparent*.png` so the existing `._*` gitignore
   rule picks them up instead of leaving stray untracked files.
 
-## Pending — next thing to do
+## Pushed
 
-- **Push to GitHub Pages.** Thomas asked to push these changes (World
-  Cup Boyz card, RL palette redesign, logo/favicon) live. Not yet done
-  as of this note — follow `RUNBOOK.md`'s deploy steps: run the
-  validator, `git add -A`, commit with a why-focused message, push to
-  `main`. Still unverified visually (see caveat above) — worth a fast
-  visual sanity check before or right after push if at all possible.
+- **Live as of commit `7bd3721`**, pushed to `origin/main`
+  (`faeb789..7bd3721`). Confirmed on GitHub's remote ref via `git
+  fetch`. `thomasnendick.com` was still serving the old build a few
+  seconds after push (GitHub Pages build lag, ~30-60s typical) — worth
+  a re-check next session if not already confirmed live by Thomas.
+- **This took four attempts from the host terminal**, not one. Every
+  attempt hit a *different* stale `.git/*.lock` file left by earlier
+  sandbox-side git operations this same session
+  (`index.lock`, then `refs/heads/main.lock`, then `HEAD.lock`). What
+  finally worked: `find .git -name "*.lock" -delete` before commit —
+  sweep all lock files at once instead of removing them one at a time
+  as each new one surfaces. **Add this as a documented step in
+  `RUNBOOK.md`'s deploy section** if this recurs — D-002 already
+  documents the root cause (sandbox bind-mount can't unlink inside
+  `.git/`), but the "just run it from the host terminal" mitigation
+  isn't sufficient by itself when the sandbox has already left behind
+  multiple different lock files in the same session. The host terminal
+  CAN delete them (regular `rm -f`, no `chflags` needed) — the earlier
+  guess that this might be a permission/immutable-flag issue was wrong.
 
 ## Known inconsistency (not fixed, flagged only)
 
